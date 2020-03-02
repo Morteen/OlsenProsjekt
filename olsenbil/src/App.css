@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+.navbar {
+  background-color: blue;
+}
+
+.minNav {
+  margin-bottom: 40px;
+  margin-top: 5px;
+}
+
+.navList li {
+  display: inline;
+}

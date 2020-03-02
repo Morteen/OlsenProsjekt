@@ -7,8 +7,9 @@ import routes from "./Client/routes";
 
 function App() {
   return (
-    <div className="App">
+    <div className="container">
       <NavigationBar />
+      {this.props.children}
     </div>
   );
 }

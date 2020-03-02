@@ -1,12 +1,17 @@
 import React from "react";
 import { Route, IndexRoute } from "react-router";
-import App from "../App";
-//import Greeting from "./Greeting";
-//import SignupPage from "./component/signup/SignupPage";
+import app from "./components/app";
+import Greeting from "../Client/components/Greeting";
+import signupPage from "./components/signup/signupPage";
 //import LoginPage from "./component/login/LoginPage";
 
-export default <Route path="/" component={App}></Route>;
-/**<IndexRoute component={Greeting}/>
-        <Route path="signup" component={SignupPage}/>
-        <Route path="Login" component={LoginPage}/>
+export default (
+  <Route path="/" component={app}>
+    <IndexRoute component={Greeting} />;
+    <Route path="signup" component={signupPage} />
+  </Route>
+);
+/*
+        
+         <Route path="Login" component={LoginPage}/>
         <Route path="Overtid" component={OvertidPage}/> */
