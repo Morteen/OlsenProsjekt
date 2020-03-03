@@ -4,20 +4,17 @@ import { Link } from "react-router";
 
 export default () => {
   return (
-    <Navbar>
-      <Navbar.Brand href="#">
-        {" "}
-        <Link to="/">BilRapport</Link>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-
-      <Navbar.Collapse className="justify-content-end">
-        <Navbar.Text>
+    <nav className="minNav navbar navbar-dark bg-primary">
+      <div className="container-fluid">
+        <div className="navbar-header">
+          <Link to="/" className="navbar-brand">
+            Sharkpool
+          </Link>
           <Link to="/signup">Register deg</Link>
-          <a href="#">Login</a>
-        </Navbar.Text>
-      </Navbar.Collapse>
-    </Navbar>
+        </div>
+        <div></div>
+      </div>
+    </nav>
   );
 };
 /**
@@ -41,13 +38,16 @@ export default () => {
  */
 
 /**
-  *  <Navbar>
-      <Navbar.Brand href="#">Bilrapport</Navbar.Brand>
+  *   <Navbar>
+      <Navbar.Brand href="#">
+        {" "}
+        <Link to="/">BilRapport</Link>
+      </Navbar.Brand>
       <Navbar.Toggle />
 
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
-          <a href="#">Login</a>
+          <Link to="/signup">Register deg</Link>
         </Navbar.Text>
       </Navbar.Collapse>
     </Navbar>
