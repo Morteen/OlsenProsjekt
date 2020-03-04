@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { userSignupReq } from "../../actions/signupActions";
 
-export default class extends Component {
+class SignupForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +30,10 @@ export default class extends Component {
       regnumber: this.state.regnumber,
       postalNumber: this.state.postalNumber
     };
-    console.log(this.state);
+    /*console.log(
+      "Dette er user objektet fra onSubmitForm " + this.state.username
+    );*/
+    this.props.userSignupReq(user);
   }
 
   ////////////
@@ -94,3 +100,10 @@ export default class extends Component {
     );
   }
 }
+SignupForm.propTypes = {
+  userSignupReq: PropTypes.func
+};
+const mapStateToProps = state => ({
+  user: state.user
+});
+export default connect(mapStateToProps, { userSignupReq })(SignupForm);

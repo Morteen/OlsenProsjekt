@@ -8,11 +8,12 @@ export default () => {
       <div className="container-fluid">
         <div className="navbar-header">
           <Link to="/" className="navbar-brand">
-            Sharkpool
+            Bilrapport
           </Link>
+        </div>
+        <div className="navbar-header">
           <Link to="/signup">Register deg</Link>
         </div>
-        <div></div>
       </div>
     </nav>
   );
