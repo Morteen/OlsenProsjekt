@@ -11,8 +11,16 @@ export default () => {
             Bilrapport
           </Link>
         </div>
+
         <div className="navbar-header">
-          <Link to="/signup">Register deg</Link>
+          <Link to="/Login" className="navbar-brand">
+            Logg inn
+          </Link>
+        </div>
+        <div className="navbar-header">
+          <Link to="/signup" className="navbar-brand">
+            Register deg
+          </Link>
         </div>
       </div>
     </nav>
