@@ -3,7 +3,7 @@ export function userLoginReq(userData) {
   // console.log("Log fra signupActions " + userData);
   return dispatch => {
     return axios
-      .post("http://bilrapport.no/api/v1.0/Authentication", {
+      .post("https://bilrapport.no/checklogin.php", {
         username: userData.userName,
         password: userData.password
       })
