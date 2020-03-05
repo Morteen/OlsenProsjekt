@@ -30,9 +30,7 @@ class SignupForm extends Component {
       regnumber: this.state.regnumber,
       postalNumber: this.state.postalNumber
     };
-    /*console.log(
-      "Dette er user objektet fra onSubmitForm " + this.state.username
-    );*/
+
     this.props.userSignupReq(user);
   }
 

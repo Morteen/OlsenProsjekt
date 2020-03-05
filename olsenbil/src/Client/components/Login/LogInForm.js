@@ -25,12 +25,14 @@ class LogInForm extends Component {
       userName: this.state.username,
       password: md5(this.state.password)
     };
+
     this.props.userLoginReq(userCredential);
-    console.log("login knappen svarer med " + userCredential);
+    //console.log("login knappen svarer med " + userCredential);
   }
   toggleShow() {
     this.setState({ hidden: !this.state.hidden });
   }
+  l;
 
   /////
 
@@ -61,8 +63,8 @@ class LogInForm extends Component {
             name="password"
             className="form-control"
           />
-          <div class="input-group-append">
-            <span class="input-group-text" id="basic-addon2">
+          <div className="input-group-append">
+            <span className="input-group-text" id="basic-addon2">
               <div onClick={this.toggleShow}>Vis passord</div>
             </span>
           </div>
