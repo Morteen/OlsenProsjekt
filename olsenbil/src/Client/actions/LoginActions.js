@@ -1,15 +1,13 @@
-import axios from "axios";
 export function userLoginReq(userData) {
   fetch(`http://bilrapport.no/api/v1.0/Authentication`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData)
-  })
-    //.then(res => res.json())
-    .then(data =>
+  }).then(res => res.json());
+  /*.then(data =>
       //console.log("Log fra LoginAction " + data.access_token)
       localStorage.setItem("token", data.access_token)
-    );
+    );*/
 }
 
 /**return dispatch => {

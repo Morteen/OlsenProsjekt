@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, isValidElement } from "react";
+import isValidalidInputLogin from "../../../server/shared/Login";
 
 class LogInForm extends Component {
   constructor(props) {
@@ -13,26 +14,38 @@ class LogInForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
   }
+  componentDidMount() {
+    console.log("componentDidMount virker");
+  }
 
   /////
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+  isValid() {
+    const { errors, isValid } = isValidalidInputLogin(this.state);
+    if (!this.isValid) {
+      this.setState({ errors });
+    }
+    console.log("Log fra isValid funksjonen " + isValid);
+    return isValid;
+  }
   onSubmit(e) {
     e.preventDefault();
-    var md5 = require("md5");
-    const userCredential = {
-      userName: this.state.username,
-      password: md5(this.state.password)
-    };
+    if (this.isValid()) {
+      var md5 = require("md5");
+      const userCredential = {
+        userName: this.state.username,
+        password: md5(this.state.password)
+      };
 
-    this.props.userLoginReq(userCredential);
-    //console.log("login knappen svarer med " + userCredential);
+      this.props.userLoginReq(userCredential);
+      //console.log("login knappen svarer med " + userCredential);
+    }
   }
   toggleShow() {
     this.setState({ hidden: !this.state.hidden });
   }
-  l;
 
   /////
 

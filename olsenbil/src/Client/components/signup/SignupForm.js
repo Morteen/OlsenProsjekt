@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { userSignupReq } from "../../actions/signupActions";
+import isValidalidInputReguser from "../../../server/shared/validations/signup";
 
 class SignupForm extends Component {
   constructor(props) {
@@ -18,20 +19,31 @@ class SignupForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /////////////
+
+  isValid() {
+    const { errors, isValid } = isValidalidInputReguser(this.state);
+    if (!this.isValid) {
+      this.setState({ errors });
+    }
+    console.log("Log fra isValid funksjonen i reg user " + isValid);
+    return isValid;
+  }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
   onSubmit(e) {
     e.preventDefault();
-    const user = {
-      userName: this.state.username,
-      password: this.state.password,
-      email: this.state.email,
-      regnumber: this.state.regnumber,
-      postalNumber: this.state.postalNumber
-    };
+    if (this.isValid()) {
+      const user = {
+        userName: this.state.username,
+        password: this.state.password,
+        email: this.state.email,
+        regnumber: this.state.regnumber,
+        postalNumber: this.state.postalNumber
+      };
 
-    this.props.userSignupReq(user);
+      this.props.userSignupReq(user);
+    }
   }
 
   ////////////
