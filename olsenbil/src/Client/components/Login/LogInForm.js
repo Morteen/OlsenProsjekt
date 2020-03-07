@@ -8,8 +8,9 @@ class LogInForm extends Component {
     this.state = {
       username: "",
       password: "",
-      hidden: true
-      //errors: {}
+      hidden: true,
+      errors: {},
+      isLoading: false
     };
 
     this.onChange = this.onChange.bind(this);
@@ -26,21 +27,26 @@ class LogInForm extends Component {
   }
   isValid() {
     const { errors, isValid } = isValidalidInputLogin(this.state);
-    if (!this.isValid) {
-      this.setState({ errors });
+    console.log("IsValid fra isValid funks:", isValid);
+    if (!isValid) {
+      this.setState({ errors, isValid });
+      console.log(
+        "Log fra etter setState:",
+        errors.username + " isValid" + isValid
+      );
     }
-    console.log("Log fra isValid funksjonen " + isValid);
     return isValid;
   }
   onSubmit(e) {
     e.preventDefault();
+    //this.setState({ errors: {}, isLoading: true });
     if (this.isValid()) {
       var md5 = require("md5");
       const userCredential = {
         userName: this.state.username,
         password: md5(this.state.password)
       };
-
+      this.setState({ isLoading: false }); //her skal man vent på server reponse
       this.props.userLoginReq(userCredential);
       //console.log("login knappen svarer med " + userCredential);
     }
@@ -52,6 +58,7 @@ class LogInForm extends Component {
   /////
 
   render() {
+    const { errors } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <h2>Login</h2>
@@ -61,7 +68,7 @@ class LogInForm extends Component {
           field="username"
           value={this.state.username}
           label="Brukernavn"
-          //error={this.errors.username}
+          error={errors.username}
           placeholder="Telefonnummer"
           onChange={this.onChange}
         />
@@ -70,7 +77,7 @@ class LogInForm extends Component {
           field="password"
           value={this.state.password}
           label="Passord"
-          //error={this.errors.username}
+          error={errors.password}
           placeholder="Passord"
           onChange={this.onChange}
         />
@@ -81,42 +88,15 @@ class LogInForm extends Component {
         </div>
 
         <div className="form-group">
-          <button className="btn btn-primary btn-lg">Login</button>
+          <button
+            disabled={this.state.isLoading}
+            className="btn btn-primary btn-lg"
+          >
+            Login
+          </button>
         </div>
       </form>
     );
   }
 }
 export default LogInForm;
-
-/**<div className="form-group">
-          <label className="control-label">UserName</label>
-          <input
-            placeholder="Telefonnummer"
-            type="text"
-            value={this.state.username}
-            onChange={this.onChange}
-            name="username"
-            className="form-control"
-          />
-        </div>
-
-<div className="form-group">
-  <label className="control-label">Passord</label>
-  <input
-    placeholder="Passord"
-    aria-label="Username"
-    aria-describedby="basic-addon1"
-    type={this.state.hidden ? "password" : "text"}
-    value={this.state.password}
-    onChange={this.onChange}
-    name="password"
-    className="form-control"
-  />
-  <div className="input-group-append">
-    <span className="input-group-text" id="basic-addon2">
-      <div onClick={this.toggleShow}>Vis passord</div>
-    </span>
-  </div>
-</div>;
- */

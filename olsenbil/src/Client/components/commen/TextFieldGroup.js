@@ -22,7 +22,11 @@ const TextFieldGroup = ({
         name={field} //dette er name
         className="form-control"
       />
-      {error && <span className="help-block">{error}</span>}
+      {error && (
+        <span id="formVarning" className="help-block">
+          {error}
+        </span>
+      )}
     </div>
   );
 };
