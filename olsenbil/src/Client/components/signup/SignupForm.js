@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { userSignupReq } from "../../actions/signupActions";
 import isValidalidInputReguser from "../../../server/shared/validations/signup";
+import TextFieldGroup from "../commen/TextFieldGroup";
 
 class SignupForm extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class SignupForm extends Component {
       password: "",
       email: "",
       regnumber: "",
-      postalNumber: ""
+      postalNumber: "",
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -22,12 +24,17 @@ class SignupForm extends Component {
 
   isValid() {
     const { errors, isValid } = isValidalidInputReguser(this.state);
-    if (!this.isValid) {
-      this.setState({ errors });
+    console.log("IsValid fra isValid funks:", isValid);
+    if (!isValid) {
+      this.setState({ errors, isValid });
+      console.log(
+        "Log fra etter setState:",
+        errors.username + " isValid" + isValid
+      );
     }
-    console.log("Log fra isValid funksjonen i reg user " + isValid);
     return isValid;
   }
+
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -48,60 +55,60 @@ class SignupForm extends Component {
 
   ////////////
   render() {
+    const { errors } = this.state;
     return (
       <form onSubmit={this.onSubmit}>
         <h3>Registrer deg her</h3>
-        <div className="form-group">
-          <label className="control-label">UserName</label>
-          <input
-            type="text"
-            value={this.state.username}
-            onChange={this.onChange}
-            name="username"
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label className="control-label">Passord</label>
-          <input
-            type="password"
-            value={this.state.password}
-            onChange={this.onChange}
-            name="password"
-            className="form-control"
-          />
-        </div>
 
-        <div className="form-group">
-          <label className="control-label">Email</label>
-          <input
-            type="email"
-            value={this.state.email}
-            onChange={this.onChange}
-            name="email"
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label className="control-label">Reg Nummer</label>
-          <input
-            type="text"
-            value={this.state.regnumber}
-            onChange={this.onChange}
-            name="regnumber"
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label className="control-label">Postnummer</label>
-          <input
-            type="text"
-            value={this.state.postalNumber}
-            onChange={this.onChange}
-            name="postalNumber"
-            className="form-control"
-          />
-        </div>
+        <TextFieldGroup
+          type="Text"
+          field="username"
+          value={this.state.username}
+          label="Brukernavn"
+          error={errors.username}
+          placeholder="Telefonnummer"
+          onChange={this.onChange}
+        />
+
+        <TextFieldGroup
+          type="password"
+          field="password"
+          value={this.state.password}
+          label="Passord"
+          error={errors.password}
+          placeholder="Passord"
+          onChange={this.onChange}
+        />
+
+        <TextFieldGroup
+          type="email"
+          field="email"
+          value={this.state.email}
+          label="Email"
+          error={errors.email}
+          placeholder="Email"
+          onChange={this.onChange}
+        />
+
+        <TextFieldGroup
+          type="text"
+          field="regnumber"
+          value={this.state.regnumber}
+          label="Reg Nummer"
+          error={errors.regnumber}
+          placeholder=""
+          onChange={this.onChange}
+        />
+
+        <TextFieldGroup
+          type="text"
+          field="postalNumber"
+          value={this.state.postalNumber}
+          label="Postnummer"
+          error={errors.postalNumber}
+          placeholder=""
+          onChange={this.onChange}
+        />
 
         <div className="form-group">
           <button className="btn btn-primary btn-lg">Register</button>
