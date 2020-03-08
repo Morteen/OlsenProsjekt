@@ -1,54 +1,59 @@
-export function userLoginReq(userData) {
-  fetch(`http://bilrapport.no/api/v1.0/Authentication`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData)
-  })
-    .then(response => {
-      return response.json();
-      localStorage.setItem("token", response.access_token);
+import { LOGIN } from "./types";
+
+export const userLoginReq = userData => dispatch => {
+  return (
+    fetch(`http://bilrapport.no/api/v1.0/Authentication`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData)
     })
-    .then(data => {
-      console.log("Logger data fra Action " + data.access_token);
+      .then(res => res.json())
+      //.then(data => localStorage.setItem("token", data.access_token))
+      .then(data =>
+        dispatch({
+          type: LOGIN,
+          payload: data
+        })
+      )
+  );
+};
+
+/*export const userLoginReq = userData => dispatch => {
+  try {
+    const response = fetch(`http://bilrapport.no/api/v1.0/Authentication`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData)
     });
-}
-
-/*
-export function userLoginReq(userData) {
-  return dispatch => {
-    try {
-      const response = fetch(`http://bilrapport.no/api/v1.0/Authentication`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData)
-      });
-      if (response.ok) {
-        // Request success
-
-        response.json().then(result => {
-          if (result.access_token) {
-            // Authentication success
-            //setResult(result.access_token);
-            localStorage.setItem("token", result.access_token);
-            console.log("Authentication success");
-            //setIsAuthenticated(true);
-          } else {
-            response.json();
-            // Authentication failed
-            console.log("Authentication failed");
-          }
-        });
-      } else {
-        if (response.status === 401) {
-          response.text().then(value => {
-            //setResult(`401 - ${value}`);
-            console.log("401 !!!");
-          });
+    if (response.ok) {
+      // Request success
+      response.json().then(result => {
+        if (result.access_token) {
+          // Authentication success
+          //setResult(result.access_token);
+          //localStorage.setItem("token", result.access_token);
+          //setIsAuthenticated(true);
+        } else {
+          response.json();
+          // Authentication failed
+          //setResult("Failed!");
         }
+      });
+    } else {
+      if (response.status === 401) {
+        response.text().then(value => {
+          //setResult(`401 - ${value}`);
+        });
       }
-      return response.json();
-    } catch (error) {
-      console.log(error);
     }
-  };
-}*/
+    response.json().then(data =>
+      dispatch({
+        type: LOGIN,
+        payload: data
+      })
+    );
+  } catch (error) {
+    //setResult(error);
+  }
+};
+*/

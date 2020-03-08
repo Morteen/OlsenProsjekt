@@ -1,8 +1,18 @@
-import React, { Component, isValidElement } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import isValidalidInputLogin from "../../../server/shared/Login";
 import TextFieldGroup from "../commen/TextFieldGroup";
+import { userLoginReq } from "../../actions/LoginActions";
 
 class LogInForm extends Component {
+  componentWillUpdate(nextProps) {
+    console.log("Nextprops log " + JSON.stringify(nextProps));
+    if (nextProps.accessToken) {
+      console.log("Hurra");
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,9 +27,6 @@ class LogInForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
   }
-  componentDidMount() {
-    console.log("componentDidMount virker");
-  }
 
   /////
   onChange(e) {
@@ -27,7 +34,7 @@ class LogInForm extends Component {
   }
   isValid() {
     const { errors, isValid } = isValidalidInputLogin(this.state);
-    console.log("IsValid fra isValid funks:", isValid);
+
     if (!isValid) {
       this.setState({ errors, isValid });
       console.log(
@@ -47,10 +54,11 @@ class LogInForm extends Component {
         password: md5(this.state.password)
       };
       this.setState({ isLoading: false }); //her skal man vent på server reponse
-      this.props.userLoginReq(userCredential).then(res => {
-        console.log("Promise virker vi kommer hit");
-      });
-      //console.log("login knappen svarer med " + userCredential);
+      this.props.userLoginReq(userCredential).then(
+        res => localStorage.setItem("token", res.access_token),
+        res => localStorage.setItem("expires_in", res.expires_in),
+        res => localStorage.setItem("refresh_token", res.refresh_token)
+      );
     }
   }
   toggleShow() {
@@ -61,6 +69,7 @@ class LogInForm extends Component {
 
   render() {
     const { errors } = this.state;
+    const { userLoginReq, accessToken } = this.props;
     return (
       <form onSubmit={this.onSubmit}>
         <h2>Login</h2>
@@ -101,4 +110,27 @@ class LogInForm extends Component {
     );
   }
 }
-export default LogInForm;
+LogInForm.propTypes = {
+  userLoginReq: PropTypes.func,
+  accessToken: PropTypes.object
+};
+const mapStateToprops = state => ({
+  accessToken: state.accessToken
+});
+
+export default connect(mapStateToprops, { userLoginReq })(LogInForm);
+
+/**res=>{
+                let errors = this.state.errors;
+               let  invalid;
+                console.log(res.data.results.length)
+                if(res.data.results.length>=1){
+                
+                    errors[field]="Dette brukernavnet er opptatt "
+                    invalid=true
+                }else if(res.data.results.length===0){ 
+                    errors[field]="";
+                    invalid=false;
+                }
+                this.setState({errors,invalid})
+                console.log("Errors i checkuser",errors) */
