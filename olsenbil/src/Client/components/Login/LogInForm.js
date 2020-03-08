@@ -47,7 +47,9 @@ class LogInForm extends Component {
         password: md5(this.state.password)
       };
       this.setState({ isLoading: false }); //her skal man vent på server reponse
-      this.props.userLoginReq(userCredential);
+      this.props.userLoginReq(userCredential).then(res => {
+        console.log("Promise virker vi kommer hit");
+      });
       //console.log("login knappen svarer med " + userCredential);
     }
   }
