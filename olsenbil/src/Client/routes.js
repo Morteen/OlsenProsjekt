@@ -5,6 +5,7 @@ import Greeting from "../Client/components/Greeting";
 import signupPage from "./components/signup/signupPage";
 import LoginPage from "./components/Login/LoginPage";
 import About from "./components/About";
+import Fylling from "./components/Fylling";
 
 export default (
   <Route path="/" component={app}>
@@ -12,9 +13,6 @@ export default (
     <Route path="signup" component={signupPage} />
     <Route path="Login" component={LoginPage} />
     <Route path="About" component={About} />
+    <Route path="Fylling" component={Fylling} />
   </Route>
 );
-/*
-        
-         <Route path="Login" component={LoginPage}/>
-        <Route path="Overtid" component={OvertidPage}/> */

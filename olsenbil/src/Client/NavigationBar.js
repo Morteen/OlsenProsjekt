@@ -27,6 +27,11 @@ export default () => {
             Om oss
           </Link>
         </div>
+        <div className="navbar-header">
+          <Link to="/Fylling" className="navbar-brand">
+            Fylling
+          </Link>
+        </div>
       </div>
     </nav>
   );
