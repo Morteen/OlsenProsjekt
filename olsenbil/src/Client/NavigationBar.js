@@ -22,6 +22,11 @@ export default () => {
             Register deg
           </Link>
         </div>
+        <div className="navbar-header">
+          <Link to="/About" className="navbar-brand">
+            Om oss
+          </Link>
+        </div>
       </div>
     </nav>
   );

@@ -1,7 +1,5 @@
 import { LOGIN } from "../Client/actions/types";
-const initialState = {
-  accessToken: {}
-};
+const initialState = {};
 export default function(state = initialState, action) {
   console.log(
     "Log fra loginReducer: " +
@@ -15,9 +13,9 @@ export default function(state = initialState, action) {
         ...state,
         accessToken: action.payload
       };
-      break;
 
     default:
       return state;
   }
+  console.log("Log av aceessToken i reduser: " + state.accessToken);
 }

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import isValidalidInputLogin from "../../../server/shared/Login";
 import TextFieldGroup from "../commen/TextFieldGroup";
 import { userLoginReq } from "../../actions/LoginActions";
+import { LOGIN } from "../../actions/types";
 
 class LogInForm extends Component {
   componentWillUpdate(nextProps) {
@@ -54,11 +55,20 @@ class LogInForm extends Component {
         password: md5(this.state.password)
       };
       this.setState({ isLoading: false }); //her skal man vent på server reponse
-      this.props.userLoginReq(userCredential).then(
-        res => localStorage.setItem("token", res.access_token),
-        res => localStorage.setItem("expires_in", res.expires_in),
-        res => localStorage.setItem("refresh_token", res.refresh_token)
-      );
+      this.props
+        .userLoginReq(userCredential)
+
+        .then(
+          data =>
+            console.log(
+              "Dette er fra regform:" +
+                JSON.stringify(data.payload.access_token)
+            ),
+          data => localStorage.setItem("token", data.payload.access_token),
+          data => localStorage.setItem("expires_in", data.payload.expires_in),
+          data =>
+            localStorage.setItem("refresh_token", data.payload.refresh_token)
+        );
     }
   }
   toggleShow() {
