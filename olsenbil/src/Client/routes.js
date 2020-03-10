@@ -6,6 +6,7 @@ import signupPage from "./components/signup/signupPage";
 import LoginPage from "./components/Login/LoginPage";
 import About from "./components/About";
 import Fylling from "./components/Fylling/Fylling";
+import Timeliste from "./components/Timeliste/Timeliste";
 
 export default (
   <Route path="/" component={app}>
@@ -14,5 +15,6 @@ export default (
     <Route path="Login" component={LoginPage} />
     <Route path="About" component={About} />
     <Route path="Fylling" component={Fylling} />
+    <Route path="Timeliste" component={Timeliste} />
   </Route>
 );

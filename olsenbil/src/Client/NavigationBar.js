@@ -21,19 +21,15 @@ export default () => {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            Dropdown button
+            Våre tjenester
           </button>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <Link to="/Timeliste" className="dropdown-item">
+              Timeliste
+            </Link>
             <Link to="/Fylling" className="dropdown-item">
               Fylling
             </Link>
-
-            <a className="dropdown-item" href="#">
-              Another action
-            </a>
-            <a class="dropdown-item" href="#">
-              Something else here
-            </a>
           </div>
         </div>
 

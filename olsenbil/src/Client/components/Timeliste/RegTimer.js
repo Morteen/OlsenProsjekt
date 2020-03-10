@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 
-export default class test2 extends Component {
+class RegTimer extends Component {
   render() {
     return (
       <div>
-        <h1>Hei hei fra 222222222</h1>
+        <h2> Her mine regtimer komponent</h2>
       </div>
     );
   }
 }
+export default RegTimer;
