@@ -5,7 +5,7 @@ import Greeting from "../Client/components/Greeting";
 import signupPage from "./components/signup/signupPage";
 import LoginPage from "./components/Login/LoginPage";
 import About from "./components/About";
-import Fylling from "./components/Fylling";
+import Fylling from "./components/Fylling/Fylling";
 
 export default (
   <Route path="/" component={app}>

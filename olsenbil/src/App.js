@@ -4,6 +4,7 @@ import "./App.css";
 import NavigationBar from "./Client/NavigationBar";
 import { Router } from "react-router";
 import routes from "./Client/routes";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
