@@ -40,7 +40,7 @@ export default class Timeforing extends Component {
             </a>
           </li>
         </ul>
-        <div id="test">{this._renderSubComp()}</div>
+        <div className="container-fluid">{this._renderSubComp()}</div>
       </div>
     );
   }

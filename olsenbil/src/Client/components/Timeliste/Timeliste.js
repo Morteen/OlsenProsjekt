@@ -44,7 +44,7 @@ class Timeliste extends Component {
           </div>
         </div>
 
-        <body id="test">{this._renderSubComp()}</body>
+        <body className="container-fluid">{this._renderSubComp()}</body>
       </div>
     );
   }

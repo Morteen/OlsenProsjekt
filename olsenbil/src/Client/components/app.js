@@ -5,7 +5,7 @@ import NavigationBar from "../NavigationBar";
 export default class app extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <NavigationBar />
         {this.props.children}
       </div>
