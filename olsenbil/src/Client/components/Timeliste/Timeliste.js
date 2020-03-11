@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Timeforing from "./Timeforing";
 import MineTimer from "./MineTimer";
 class Timeliste extends Component {
@@ -20,6 +21,9 @@ class Timeliste extends Component {
         return <MineTimer />;
     }
   }
+  increment = () => {
+    this.props.dispatch({ type: "INCREMENT" });
+  };
 
   render() {
     return (
@@ -40,6 +44,7 @@ class Timeliste extends Component {
               className="list-group-item list-group-item-action bg-light"
             >
               Mine timer
+              <button onClick={this.increment}>Click Me!!</button>
             </a>
           </div>
         </div>
@@ -50,4 +55,4 @@ class Timeliste extends Component {
   }
 }
 
-export default Timeliste;
+export default connect(null)(Timeliste);
