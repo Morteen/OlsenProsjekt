@@ -5,13 +5,17 @@ import NavigationBar from "./Client/NavigationBar";
 import { Router } from "react-router";
 import routes from "./Client/routes";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
   return (
-    <div className="container">
-      <NavigationBar />
-      {this.props.children}
-    </div>
+    <Provider store={store}>
+      <div className="container">
+        <NavigationBar />
+        {this.props.children}
+      </div>
+    </Provider>
   );
 }
 

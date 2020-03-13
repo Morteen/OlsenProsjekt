@@ -23,6 +23,7 @@ class Timeliste extends Component {
   }
   increment = () => {
     this.props.dispatch({ type: "INCREMENT" });
+    console.log("Inkrement knapp virker");
   };
 
   render() {

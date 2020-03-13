@@ -1,5 +1,7 @@
 import { LOGIN } from "../Client/actions/types";
-const initialState = {};
+const initialState = {
+  accessCredentials: {}
+};
 export default function(state = initialState, action) {
   console.log(
     "Log fra loginReducer: " +
@@ -11,11 +13,13 @@ export default function(state = initialState, action) {
     case LOGIN:
       return {
         ...state,
-        accessToken: action.payload
+        accessCredentials: action.payload
       };
 
     default:
       return state;
   }
-  console.log("Log av aceessToken i reduser: " + state.accessToken);
+  console.log(
+    "Log av aceessToken i reduser: " + state.accessCredentials.accessToken
+  );
 }

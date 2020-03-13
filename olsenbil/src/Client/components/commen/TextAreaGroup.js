@@ -2,24 +2,20 @@ import PropTypes from "prop-types";
 import classnames from "classnames";
 import React from "react";
 
-const TextFieldGroup = ({
+const TextAreaGroup = ({
   field,
-  type,
   value,
   label,
   error,
   placeholder,
-  onChange,
-  min,
-  max
+  onChange
 }) => {
   return (
     <div className={classnames("form-group", { "has-error": error })}>
       <label className="control-label">{label}</label>
-      <input
+      <textarea
         placeholder={placeholder}
-        type={type} //feks'Text'
-        value={value} //this.state.username
+        value={value} //this.state.description
         onChange={onChange} //this.state.onChange
         name={field} //dette er name
         className="form-control"
@@ -33,16 +29,14 @@ const TextFieldGroup = ({
   );
 };
 
-TextFieldGroup.propTypes = {
+TextAreaGroup.propTypes = {
   field: PropTypes.string,
   value: PropTypes.string,
   label: PropTypes.string,
   error: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
-  type: PropTypes.string,
-  min: PropTypes.string,
-  max: PropTypes.string
+  type: PropTypes.string
 };
 
-export default TextFieldGroup;
+export default TextAreaGroup;

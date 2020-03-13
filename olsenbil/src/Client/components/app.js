@@ -2,13 +2,17 @@ import React from "react";
 import { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "../NavigationBar";
+import { Provider } from "react-redux";
+import store from "../../store";
 export default class app extends Component {
   render() {
     return (
-      <div className="container-fluid">
-        <NavigationBar />
-        {this.props.children}
-      </div>
+      <Provider store={store}>
+        <div className="container-fluid">
+          <NavigationBar />
+          {this.props.children}
+        </div>
+      </Provider>
     );
   }
 }

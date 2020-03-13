@@ -16,7 +16,7 @@ export const userLoginReq = userData => dispatch => {
       .then(data =>
         dispatch({
           type: LOGIN,
-          payload: (data.payload = { access_token: " Serveren sier 401" })
+          payload: data
         })
       )
   );

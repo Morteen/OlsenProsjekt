@@ -6,15 +6,15 @@ import { userLoginReq } from "../../actions/LoginActions";
 
 class LoginPage extends Component {
   componentWillUpdate() {
-    this.props.fetch();
+    // this.props.fetch();
   }
   render() {
-    const { userLoginReq, accessToken } = this.props;
+    const { userLoginReq, accessCredentials } = this.props;
     console.log("Logger props i Loginpage: " + this.props);
 
     return (
       <div>
-        <LoginForm userLoginReq={(userLoginReq, accessToken)} />
+        <LoginForm userLoginReq={(userLoginReq, accessCredentials)} />
       </div>
     );
   }
@@ -22,10 +22,10 @@ class LoginPage extends Component {
 
 LoginPage.propTypes = {
   userLoginReq: PropTypes.func,
-  accessToken: PropTypes.object
+  accessCredentials: PropTypes.object
 };
 const mapStateToprops = state => ({
-  accessToken: state.accessToken
+  accessCredentials: state.loginReducer.accessCredentials
 });
 
 export default connect(mapStateToprops, { userLoginReq })(LoginPage);
