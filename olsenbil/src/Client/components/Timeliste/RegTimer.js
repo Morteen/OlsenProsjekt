@@ -1,15 +1,22 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
 import TextAreaGroup from "../commen/TextAreaGroup";
 import isValidalidInputRegTimer from "../../../server/shared/validations/RegTimerValidation";
+import { RegNyeTimer } from "../../actions/TimelisteAction";
 
 class RegTimer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       date: "",
+      timeDeparture: "",
+      timeArrival: "",
       Description: "",
-      Departure: "",
+      HourCount: "",
+      outlayPayment: "",
 
       errors: {}
     };
@@ -37,6 +44,16 @@ class RegTimer extends Component {
     e.preventDefault();
     if (this.isValid()) {
       alert("Regtimer og valideringe virker knappen virker !!");
+      const newRegTime = {
+        date: this.state.date,
+        Description: this.state.Description,
+        timeDeparture: this.state.timeDeparture,
+        timeArrival: this.state.timeArrival,
+        HourCount: this.state.HourCount,
+        outlayPayment: this.state.outlayPayment
+      };
+      this.props.RegNyeTimer(newRegTime);
+      console.log(newRegTime.Descriptiony);
     }
   }
 
@@ -56,8 +73,8 @@ class RegTimer extends Component {
           />
           <TextFieldGroup
             type="Time"
-            field="Departure"
-            value={this.state.Departure}
+            field="timeDeparture"
+            value={this.state.timeDeparture}
             label="Avreise tidspunkt"
             error={this.state.errors.Departure}
             placeholder="Avreise tid"
@@ -68,8 +85,8 @@ class RegTimer extends Component {
 
           <TextFieldGroup
             type="Time"
-            field="Arrival"
-            value={this.state.Arrival}
+            field=" timeArrival"
+            value={this.state.timeArrival}
             label="Hjemkomst"
             error={this.state.errors.Arrival}
             placeholder="Tidspunkt for hjemkomst"
@@ -79,17 +96,17 @@ class RegTimer extends Component {
           />
           <TextFieldGroup
             type="number"
-            field="sumHour"
-            value={this.state.sumHour}
+            field="HourCount"
+            value={this.state.HourCount}
             label="Timeforbruk"
-            error={this.state.errors.sumHour}
+            error={this.state.errors.HourCount}
             placeholder="Antall timer forbrukt"
             onChange={this.onChange}
           />
           <TextFieldGroup
             type="number"
-            field="sumPayment"
-            value={this.state.sumPayment}
+            field="outlayPayment"
+            value={this.state.outlayPayment}
             label="Mine utlegg"
             error={this.state.errors.sumPayment}
             placeholder="Sum av utlegg"
@@ -112,16 +129,11 @@ class RegTimer extends Component {
     );
   }
 }
-export default RegTimer;
-
-/* <form onSubmit={this.onSubmit}>
-          <TextFieldGroup
-            type="Text"
-            field="km"
-            value={this.state.km}
-            label="Kilometer"
-            error={errors.km}
-            placeholder="Kilometer"
-            onChange={this.onChange}
-          />
-        </form>'*/
+RegTimer.propType = {
+  RegNyeTimer: PropTypes.func.isRequired,
+  Timer: PropTypes.array
+};
+const mapStateToProps = state => ({
+  Timer: state.Timelistereducer.Timer
+});
+export default connect(null, { RegNyeTimer })(RegTimer);

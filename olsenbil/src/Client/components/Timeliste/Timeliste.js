@@ -21,10 +21,6 @@ class Timeliste extends Component {
         return <MineTimer />;
     }
   }
-  increment = () => {
-    this.props.dispatch({ type: "INCREMENT" });
-    console.log("Inkrement knapp virker");
-  };
 
   render() {
     return (
@@ -45,12 +41,11 @@ class Timeliste extends Component {
               className="list-group-item list-group-item-action bg-light"
             >
               Mine timer
-              <button onClick={this.increment}>Click Me!!</button>
             </a>
           </div>
         </div>
 
-        <body className="container-fluid">{this._renderSubComp()}</body>
+        <div className="container-fluid">{this._renderSubComp()}</div>
       </div>
     );
   }

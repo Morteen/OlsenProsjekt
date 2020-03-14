@@ -11,9 +11,9 @@ export default () => {
             Bilrapport
           </Link>
         </div>
-        <div class="dropdown">
+        <div className="dropdown">
           <button
-            class="btn btn-primary dropdown-toggle"
+            className="btn btn-primary dropdown-toggle"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"

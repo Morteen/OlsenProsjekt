@@ -10,21 +10,36 @@ class MineTimer extends Component {
   }
   componentDidMount() {
     this.props.fetchMineTimer();
+    console.log(" log av fetchMinetimer:" + this.props.fetchMineTimer());
   }
-  //const TimerItem = <th scope="row">{5}</th>;
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.nyTime) {
+      console.log("NextProps verdi i loggen" + nextProps.nyTime);
+      this.props.posts.unshift(nextProps.nyTime);
+      console.log(
+        "props.post innhold i  componentWillReceiveProps " + this.props.Timer
+      );
+    }
+  }
+
   render() {
     console.log("Test log" + JSON.stringify(store.getState()));
-    console.log("Test log id: " + this.props.Timer[0].id);
-    const TimerItem = this.props.Timer.map(posts => (
-      <div key={posts.id}>
-        <h3>{posts.date}</h3>
-      </div>
+    console.log("Test log Timer-length: " + this.props.Timer.length);
+    const TimerItem = this.props.Timer.map(timer => (
+      <tr key={timer.id}>
+        <th scope="row">{timer.date}</th>
+        <td>{timer.timeDeparture}</td>
+        <td>{timer.timeArrival}</td>
+        <td>{timer.Description}</td>
+        <td>{timer.HourCount}</td>
+        <td>{timer.outlayPayment}</td>
+      </tr>
     ));
-
+    console.log("Log av TimerItem:" + TimerItem);
     //console.log("Test log av Timer item" + TimerItem);=
 
     return (
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">Dato</th>
@@ -35,31 +50,23 @@ class MineTimer extends Component {
             <th scope="col">Utlegg</th>
           </tr>
         </thead>
-        <tbody>
-          <tr key={this.props.Timer[0].id}>
-            <td>{this.props.Timer[0].date}</td>
-            <td>{this.props.Timer[0].timeDeparture}</td>
-            <td>{this.props.Timer[0].timeArrival}</td>
-            <td>{this.props.Timer[0].Description}</td>
-            <td>{this.props.Timer[0].HourCount}</td>
-            <td>{this.props.Timer[0].outlayPayment}</td>
-          </tr>
-        </tbody>
+        <tbody>{TimerItem}</tbody>
       </table>
     );
   }
 }
 
 MineTimer.propTypes = {
-  Timer: PropTypes.array.isRequired,
-  fetchMineTimer: PropTypes.func.isRequired
-  //Timer: PropTypes.array.isRequired,
-  // newTime: PropTypes.object
+  Timer: PropTypes.array,
+  fetchMineTimer: PropTypes.func.isRequired,
+
+  newRegtime: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
     Timer: state.Timelistereducer.Timer
+    // newRegtime: state.Timer.item
   };
 }
 export default connect(mapStateToProps, { fetchMineTimer })(MineTimer);
@@ -90,4 +97,14 @@ export default connect(mapStateToProps, { fetchMineTimer })(MineTimer);
 <tbody>
   <TimerItem />
 </tbody>
-</table>*/
+</table>
+
+
+<tr key={this.props.Timer[0].id}>
+<td>{this.props.Timer[1].date}</td>
+<td>{this.props.Timer[1].timeDeparture}</td>
+<td>{this.props.Timer[1].timeArrival}</td>
+<td>{this.props.Timer[1].Description}</td>
+<td>{this.props.Timer[1].HourCount}</td>
+<td>{this.props.Timer[1].outlayPayment}</td>
+</tr> */

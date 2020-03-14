@@ -1,7 +1,6 @@
 import { FETCH_MINE_TIMER } from "../../src/Client/actions/types";
-/*const initialState = {
-  Timer: []
-};*/
+import { REG_NYE_TIMER } from "../../src/Client/actions/types";
+
 const initialState = {
   Timer: [
     {
@@ -12,19 +11,36 @@ const initialState = {
       Description: "Partytur med Egil",
       HourCount: 1,
       outlayPayment: 1000
+    },
+    {
+      id: 1,
+      date: "21.01.2020",
+      timeDeparture: "14.30",
+      timeArrival: "15.30",
+      Description: "Kjørte svigemor til barnehagen",
+      HourCount: 1,
+      outlayPayment: 1000
     }
-  ]
+  ],
+  nyTime: {}
 };
 
 export default function(state = initialState, action) {
-  console.log("TimelisteReducer", state, action);
+  console.log("TimelisteReducer initialstate: ", state, action);
   switch (action.type) {
     case FETCH_MINE_TIMER:
       return {
+        //HTTP call
         ...state,
         Timer: action.payload
       };
-      console.log("TimelisteReducer", state, action);
+    case REG_NYE_TIMER:
+      return {
+        //HTTP call
+        ...state,
+        nyTime: action.payload
+      };
+      console.log("TimelisteReducer state.lengde ", state.Timer.length, action);
     default:
       return {
         Timer: state.Timer
