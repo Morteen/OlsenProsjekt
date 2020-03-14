@@ -43,8 +43,8 @@ class RegTimer extends Component {
   onSubmit(e) {
     e.preventDefault();
     if (this.isValid()) {
-      alert("Regtimer og valideringe virker knappen virker !!");
       const newRegTime = {
+        id: 3,
         date: this.state.date,
         Description: this.state.Description,
         timeDeparture: this.state.timeDeparture,
@@ -53,7 +53,6 @@ class RegTimer extends Component {
         outlayPayment: this.state.outlayPayment
       };
       this.props.RegNyeTimer(newRegTime);
-      console.log(newRegTime.Descriptiony);
     }
   }
 
@@ -76,7 +75,7 @@ class RegTimer extends Component {
             field="timeDeparture"
             value={this.state.timeDeparture}
             label="Avreise tidspunkt"
-            error={this.state.errors.Departure}
+            error={this.state.errors.timeDeparture}
             placeholder="Avreise tid"
             onChange={this.onChange}
             min="00:00"
@@ -85,10 +84,10 @@ class RegTimer extends Component {
 
           <TextFieldGroup
             type="Time"
-            field=" timeArrival"
+            field="timeArrival"
             value={this.state.timeArrival}
             label="Hjemkomst"
-            error={this.state.errors.Arrival}
+            error={this.state.errors.timeArrival}
             placeholder="Tidspunkt for hjemkomst"
             onChange={this.onChange}
             min="00:00"
@@ -108,7 +107,7 @@ class RegTimer extends Component {
             field="outlayPayment"
             value={this.state.outlayPayment}
             label="Mine utlegg"
-            error={this.state.errors.sumPayment}
+            error={this.state.errors.outlayPayment}
             placeholder="Sum av utlegg"
             onChange={this.onChange}
           />

@@ -4,12 +4,11 @@ import PropTypes from "prop-types";
 import isValidalidInputLogin from "../../../server/shared/Login";
 import TextFieldGroup from "../commen/TextFieldGroup";
 import { userLoginReq } from "../../actions/LoginActions";
-import { LOGIN } from "../../actions/types";
 
 class LogInForm extends Component {
   componentWillUpdate(nextProps) {
     console.log("Nextprops log " + JSON.stringify(nextProps));
-    if (nextProps.accessToken) {
+    if (nextProps.accessCredentials) {
       console.log("Hurra");
     }
   }
@@ -79,7 +78,7 @@ class LogInForm extends Component {
 
   render() {
     const { errors } = this.state;
-    const { userLoginReq, accessToken } = this.props;
+    const { userLoginReq, accessCredentials } = this.props;
     return (
       <form onSubmit={this.onSubmit}>
         <h2>Login</h2>
@@ -122,10 +121,10 @@ class LogInForm extends Component {
 }
 LogInForm.propTypes = {
   userLoginReq: PropTypes.func,
-  accessToken: PropTypes.object
+  accessCredentials: PropTypes.object
 };
 const mapStateToprops = state => ({
-  accessToken: state.accessToken
+  accessCredentials: state.accessCredentials
 });
 
 export default connect(mapStateToprops, { userLoginReq })(LogInForm);

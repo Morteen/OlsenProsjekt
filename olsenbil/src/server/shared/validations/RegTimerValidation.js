@@ -8,25 +8,25 @@ export default function isValidalidInputRegTimer(data) {
     errors.date = "Dato feltet er obligatorisk";
   }
 
-  if (isEmpty(data.Departure)) {
-    errors.Departure = "Avreise feltet er obligatorisk";
+  if (isEmpty(data.timeDeparture)) {
+    errors.timeDeparture = "Avreise feltet er obligatorisk";
     console.log(
       "Sjekk av isEmpty fra regvalidering " + isEmpty(data.Departure)
     );
   }
 
-  if (isEmpty(data.Arrival)) {
-    errors.Arrival = "Hjemkomst feltet er obligatorisk";
+  if (isEmpty(data.timeArrival)) {
+    errors.timeArrival = "Hjemkomst feltet er obligatorisk";
   }
-  if (isEmpty(data.sumHour)) {
-    errors.sumHour = "Antall timer feltet er obligatorisk";
+  if (isEmpty(data.HourCount)) {
+    errors.HourCount = "Antall timer feltet er obligatorisk";
   }
 
   if (isEmpty(data.Description)) {
     errors.Description = "Beskrivelse feltet er obligatorisk";
   }
-  if (isEmpty(data.sumPayment)) {
-    errors.sumPayment =
+  if (isEmpty(data.outlayPayment)) {
+    errors.outlayPayment =
       "Sum av utlegg er obligatorisk Sett 0 hvis du ikke har lagt ut noe";
   }
   console.log(errors);

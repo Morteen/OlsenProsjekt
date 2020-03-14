@@ -11,7 +11,8 @@ const TextFieldGroup = ({
   placeholder,
   onChange,
   min,
-  max
+  max,
+  step
 }) => {
   return (
     <div className={classnames("form-group", { "has-error": error })}>

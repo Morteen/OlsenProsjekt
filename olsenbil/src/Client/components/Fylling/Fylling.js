@@ -45,7 +45,7 @@ class Fylling extends Component {
           </div>
         </div>
 
-        <body id="test">{this._renderSubComp()}</body>
+        <div className="container-fluid">{this._renderSubComp()}</div>
       </div>
     );
   }

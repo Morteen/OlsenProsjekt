@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
+import { RegReFuling } from "../../actions/FyllingActions";
 
-export default class Fuel extends Component {
+class Fuel extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      regNumber: "",
       km: "",
       totalPrice: "",
       sumLiterFuel: "",
@@ -18,7 +22,14 @@ export default class Fuel extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    alert("Submit virker !!");
+    const newRefuling = {
+      regNumber: this.state.regNumber,
+      km: this.state.km,
+      totalPrice: this.state.totalPrice,
+      sumLiterFuel: this.state.sumLiterFuel
+    };
+    console.log("Log av refuling object: " + newRefuling);
+    this.props.RegReFuling(newRefuling);
   }
 
   render() {
@@ -36,17 +47,18 @@ export default class Fuel extends Component {
           onChange={this.onChange}
         />
         <TextFieldGroup
-          type="text"
+          type="number"
           field="totalPrice"
           value={this.state.totalPrice}
           label="Totalpris"
           error={errors.totalPrice}
           placeholder="Pris"
+          step="0.01"
           onChange={this.onChange}
         />
         <TextFieldGroup
-          type="text"
-          field="sumLiter"
+          type="Number"
+          field="sumLiterFuel"
           value={this.state.sumLiterFuel}
           label="Antall liter"
           error={errors.sumLiterFuel}
@@ -61,4 +73,13 @@ export default class Fuel extends Component {
     );
   }
 }
+Fuel.propTypes = {
+  RegReFuling: PropTypes.func,
+  myFulingRecords: PropTypes.array
+};
+const mapStateToprops = state => ({
+  myFulingRecords: state.myFulingRecords
+});
+
+export default connect(mapStateToprops, { RegReFuling })(Fuel);
 // disabled={this.state.isLoading}

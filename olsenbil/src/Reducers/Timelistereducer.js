@@ -35,12 +35,13 @@ export default function(state = initialState, action) {
         Timer: action.payload
       };
     case REG_NYE_TIMER:
+      console.log("RegNye timer " + JSON.stringify(action.payload));
+
       return {
-        //HTTP call
         ...state,
-        nyTime: action.payload
+        Timer: state.Timer.concat(action.payload)
       };
-      console.log("TimelisteReducer state.lengde ", state.Timer.length, action);
+
     default:
       return {
         Timer: state.Timer
