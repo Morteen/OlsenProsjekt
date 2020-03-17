@@ -9,6 +9,7 @@ import About from "./components/About";
 import Fylling from "./components/Fylling/Fylling";
 import Timeliste from "./components/Timeliste/Timeliste";
 import PageNotFound from "./components/PageNotFound";
+import DevelopSite from "./components/DevelopSite";
 
 export default (
   <Switch>
@@ -19,6 +20,7 @@ export default (
       <Route path="About" component={About} />
       <Route path="Fylling" component={Fylling} />
       <Route path="Timeliste" component={Timeliste} />
+      <Route path="DevelopSite" component={DevelopSite} />
       <Route component={PageNotFound} />
     </Route>
   </Switch>

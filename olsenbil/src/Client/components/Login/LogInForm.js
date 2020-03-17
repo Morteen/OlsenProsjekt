@@ -91,6 +91,7 @@ class LogInForm extends Component {
           error={errors.username}
           placeholder="Telefonnummer"
           onChange={this.onChange}
+          className="form-control form-control-sm"
         />
         <TextFieldGroup
           type={this.state.hidden ? "password" : "text"}

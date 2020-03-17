@@ -1,4 +1,8 @@
-import { REG_REFULING, REG_OILFILLING } from "../Client/actions/types";
+import {
+  REG_REFULING,
+  REG_OILFILLING,
+  REG_ADBLUEFILLING
+} from "../Client/actions/types";
 
 const initialState = {
   myFulingRecords: [
@@ -15,6 +19,14 @@ const initialState = {
       km: "",
       Oilcost: "",
       sumLiterOil: ""
+    }
+  ],
+  AdblueFilling: [
+    {
+      regNumber: "",
+      km: "",
+      AdblueCost: "",
+      sumLiterAdblue: ""
     }
   ]
 };
@@ -34,6 +46,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         OilFilling: state.OilFilling.concat(action.payload) //Legger inn i listen over fylling av olje
+      };
+    case REG_ADBLUEFILLING:
+      return {
+        ...state,
+        AdblueFilling: state.AdblueFilling.concat(action.payload) //Legger inn i listen over fylling av Adblue
       };
 
     default:

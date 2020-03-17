@@ -13,8 +13,10 @@ class LoginPage extends Component {
     console.log("Logger props i Loginpage: " + this.props);
 
     return (
-      <div>
-        <LoginForm userLoginReq={(userLoginReq, accessCredentials)} />
+      <div className="row">
+        <div className="col-md-2 col-med-offset-4">
+          <LoginForm userLoginReq={(userLoginReq, accessCredentials)} />
+        </div>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NavigationBar from "../NavigationBar";
 import { Provider } from "react-redux";
 import store from "../../store";
+
 export default class app extends Component {
   render() {
     return (

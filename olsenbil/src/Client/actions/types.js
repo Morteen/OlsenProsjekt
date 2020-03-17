@@ -5,3 +5,4 @@ export const REG_NYE_TIMER = "REG_NYE_TIMER";
 //Fylling types
 export const REG_REFULING = "REG_REFULING";
 export const REG_OILFILLING = "REG_OILFILLING";
+export const REG_ADBLUEFILLING = "REG_ADBLUEFILLING;";

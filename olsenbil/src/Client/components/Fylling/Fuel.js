@@ -35,7 +35,7 @@ class Fuel extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <form onSubmit={this.onSubmit}>
+      <form className="myForm" onSubmit={this.onSubmit}>
         <h3>Drivstoff</h3>
         <TextFieldGroup
           type="Text"

@@ -10,6 +10,7 @@ const TextFieldGroup = ({
   error,
   placeholder,
   onChange,
+  className = "form-control",
   min,
   max,
   step
@@ -23,7 +24,7 @@ const TextFieldGroup = ({
         value={value} //this.state.username
         onChange={onChange} //this.state.onChange
         name={field} //dette er name
-        className="form-control"
+        className={className}
       />
       {error && (
         <span id="formVarning" className="help-block">

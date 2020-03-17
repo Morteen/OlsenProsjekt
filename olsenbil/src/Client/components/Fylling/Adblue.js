@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
-import { RegOilFill } from "../../actions/FyllingActions";
-class Oil extends Component {
+import isValidalidInputAdblue from "../../../server/shared/validations/RegAdblueValidation";
+import { RegAdblueFill } from "../../actions/FyllingActions";
+class Adblue extends Component {
   constructor(props) {
     super(props);
     this.state = {
       regNumber: "",
       km: "",
-      Oilcost: "",
-      sumLiterOil: "",
+      AdblueCost: "",
+      sumLiterAdblue: "",
       errors: {}
     };
     this.onChange = this.onChange.bind(this);
@@ -19,15 +20,31 @@ class Oil extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
+  isValid() {
+    const { errors, isValid } = isValidalidInputAdblue(this.state);
+
+    if (!isValid) {
+      this.setState({ errors, isValid });
+      console.log(
+        "Log fra etter setState:",
+        errors.sumLiterAdblue + " isValid" + isValid
+      );
+    }
+    return isValid;
+  }
+
   onSubmit(e) {
     e.preventDefault();
-    const oilFill = {
-      regNumber: this.state.regNumber,
-      km: this.state.km,
-      Oilcost: this.state.Oilcost,
-      sumLiterOil: this.state.sumLiterOil
-    };
-    this.props.RegOilFill(oilFill);
+    if (this.isValid()) {
+      const AdblueFill = {
+        regNumber: this.state.regNumber,
+        km: this.state.km,
+        AdblueCost: this.state.AdblueCost,
+        sumLiterAdblue: this.state.sumLiterAdblue
+      };
+      this.props.RegAdblueFill(AdblueFill);
+    }
   }
 
   render() {
@@ -36,11 +53,11 @@ class Oil extends Component {
       <div className="row">
         <div className="col-md-4 col-med-offset-4">
           <form onSubmit={this.onSubmit}>
-            <h3>Olje</h3>
+            <h3>Adblue</h3>
 
             <TextFieldGroup
               type="Text"
-              field=" regNumber"
+              field="regNumber"
               value={this.state.regNumber}
               label="Registreringsnummer"
               error={errors.regNumber}
@@ -60,20 +77,20 @@ class Oil extends Component {
 
             <TextFieldGroup
               type="number"
-              field="sumLiterOil"
-              value={this.state.sumLiterOil}
-              label="Antall liter"
-              error={errors.sumLiterOil}
-              placeholder="Antall liter"
+              field="sumLiterAdblue"
+              value={this.state.sumLiterAdblue}
+              label="Antall liter Adblue"
+              error={errors.sumLiterAdblue}
+              placeholder="Antall liter Adblue"
               onChange={this.onChange}
             />
 
             <TextFieldGroup
               type="number"
-              field="Oilcost"
-              value={this.state.Oilcost}
+              field="AdblueCost"
+              value={this.state.AdblueCost}
               label="Totalt betalt"
-              error={errors.Oilcost}
+              error={errors.AdblueCost}
               placeholder="Total betalt"
               onChange={this.onChange}
             />
@@ -90,12 +107,12 @@ class Oil extends Component {
   }
 }
 
-Oil.propTypes = {
-  RegOilFill: PropTypes.func,
-  OilFilling: PropTypes.array
+Adblue.propTypes = {
+  RegAdblueFill: PropTypes.func,
+  AdblueFilling: PropTypes.array
 };
 const mapStateToprops = state => ({
-  OilFilling: state.OilFilling
+  AdblueFilling: state.AdblueFilling
 });
 
-export default connect(mapStateToprops, { RegOilFill })(Oil);
+export default connect(mapStateToprops, { RegAdblueFill })(Adblue);
