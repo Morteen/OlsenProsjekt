@@ -1,4 +1,9 @@
-import { REG_REFULING, REG_OILFILLING, REG_ADBLUEFILLING } from "./types";
+import {
+  REG_REFULING,
+  REG_OILFILLING,
+  REG_ADBLUEFILLING,
+  FETCH_STATS
+} from "./types";
 
 export const RegReFuling = RegReFulingData => dispatch => {
   console.log("ReFueling svarer: " + RegReFulingData);
@@ -32,5 +37,11 @@ export const RegAdblueFill = RegAdblueFillData => dispatch => {
   return dispatch({
     type: REG_ADBLUEFILLING,
     payload: RegAdblueFillData
+  });
+};
+export const fetchMyStats = () => dispatch => {
+  return dispatch({
+    type: FETCH_STATS,
+    payload: ""
   });
 };

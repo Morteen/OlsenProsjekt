@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
-import { RegReFuling } from "../../actions/FyllingActions";
+import { RegReFuling, fetchMyStats } from "../../actions/FyllingActions";
 
 class Fuel extends Component {
   constructor(props) {
@@ -30,6 +30,7 @@ class Fuel extends Component {
     };
     console.log("Log av refuling object: " + newRefuling);
     this.props.RegReFuling(newRefuling);
+    this.props.fetchMyStats();
   }
 
   render() {
@@ -75,11 +76,12 @@ class Fuel extends Component {
 }
 Fuel.propTypes = {
   RegReFuling: PropTypes.func,
+  fetchMyStats: PropTypes.func,
   myFulingRecords: PropTypes.array
 };
 const mapStateToprops = state => ({
   myFulingRecords: state.myFulingRecords
 });
 
-export default connect(mapStateToprops, { RegReFuling })(Fuel);
+export default connect(mapStateToprops, { RegReFuling, fetchMyStats })(Fuel);
 // disabled={this.state.isLoading}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Fuel from "./Fuel";
 import Oil from "./Oil";
 import Adblue from "./Adblue";
+import FyllingStats from "./FyllingStats";
 
 class Fylling extends Component {
   constructor() {
@@ -9,7 +10,6 @@ class Fylling extends Component {
     this.state = { render: "" };
   }
   handleClick(compName, e) {
-    console.log(compName);
     this.setState({ render: compName });
   }
   _renderSubComp() {
@@ -27,9 +27,9 @@ class Fylling extends Component {
 
   render() {
     return (
-      <div class="container-fluid">
-        <div class="row">
-          <div class=".col-">
+      <div className="container-fluid">
+        <div className="row">
+          <div className=".col-">
             <div className="d-flex" id="wrapper">
               <div className="bg-light border-right" id="sidebar-wrapper">
                 <div className="sidebar-heading">Fylling </div>
@@ -60,10 +60,10 @@ class Fylling extends Component {
             </div>
           </div>
 
-          <div class="col-sm">{this._renderSubComp()}</div>
+          <div className="col-sm">{this._renderSubComp()}</div>
 
-          <div class="col-sm">
-            <h1>Hei hei</h1>
+          <div className="col-sm">
+            <FyllingStats />
           </div>
         </div>
       </div>

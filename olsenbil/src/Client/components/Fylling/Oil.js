@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
-import { RegOilFill } from "../../actions/FyllingActions";
+import { RegOilFill, fetchMyStats } from "../../actions/FyllingActions";
+import isValidalidInputOil from "../../../server/shared/validations/Oil";
 class Oil extends Component {
   constructor(props) {
     super(props);
@@ -19,15 +20,31 @@ class Oil extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+  isValid() {
+    const { errors, isValid } = isValidalidInputOil(this.state);
+
+    if (!isValid) {
+      this.setState({ errors, isValid });
+      console.log(
+        "Log fra etter setState:",
+        errors.sumLiterAdblue + " isValid" + isValid
+      );
+    }
+    return isValid;
+  }
+
   onSubmit(e) {
     e.preventDefault();
-    const oilFill = {
-      regNumber: this.state.regNumber,
-      km: this.state.km,
-      Oilcost: this.state.Oilcost,
-      sumLiterOil: this.state.sumLiterOil
-    };
-    this.props.RegOilFill(oilFill);
+    if (this.isValid()) {
+      const oilFill = {
+        regNumber: this.state.regNumber,
+        km: this.state.km,
+        Oilcost: this.state.Oilcost,
+        sumLiterOil: this.state.sumLiterOil
+      };
+      this.props.RegOilFill(oilFill);
+      this.props.fetchMyStats();
+    }
   }
 
   render() {
@@ -40,7 +57,7 @@ class Oil extends Component {
 
             <TextFieldGroup
               type="Text"
-              field=" regNumber"
+              field="regNumber"
               value={this.state.regNumber}
               label="Registreringsnummer"
               error={errors.regNumber}
@@ -92,10 +109,11 @@ class Oil extends Component {
 
 Oil.propTypes = {
   RegOilFill: PropTypes.func,
+  fetchMyStats: PropTypes.func,
   OilFilling: PropTypes.array
 };
 const mapStateToprops = state => ({
   OilFilling: state.OilFilling
 });
 
-export default connect(mapStateToprops, { RegOilFill })(Oil);
+export default connect(mapStateToprops, { RegOilFill, fetchMyStats })(Oil);
