@@ -68,7 +68,7 @@ export default function(state = initialState, action) {
       action.payload = state.MyStats;
       return {
         ...state,
-        newStats: state.MyStats
+        newStats: state.MyStats.TotalSum
       };
     }
 

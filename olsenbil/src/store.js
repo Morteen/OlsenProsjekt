@@ -13,6 +13,6 @@ const store = createStore(
   )
 );
 store.subscribe(() => {
-  console.log("Log fra store " + JSON.stringify(store.getState()));
+  // console.log("Log fra store " + JSON.stringify(store.getState()));
 });
 export default store;

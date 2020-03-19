@@ -9,22 +9,31 @@ class FyllingStats extends Component {
     super(props);
     console.log("Log av props i constructor: " + JSON.stringify(this.props));
     this.state = {
-      myStats: props.MyStats
+      myStats: this.props.MyStats
     };
   }
-  componentWillReceiveProps(nextProps) {
+  /*componentWillReceiveProps(nextProps) {
     if (nextProps.newStat) {
       console.log(
         "NextProps verdi i loggen" + JSON.stringify(nextProps.newStat)
       );
       //this.props.posts.unshift(nextProps.newStat;
       console.log(
-        "props.post innhold i  componentWillReceiveProps " + this.props.newStat
+        "props.post innhold i  componentWillReceiveProps " +
+          JSON.stringify(this.props.MyStats.TotalSum)
       );
     }
+  }*/
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.newStat !== prevState.newStat) {
+      console.log("Tetst test test :" + { newStat: nextProps.newStat });
+      // return {newStat : nextProps.newStat};
+    } else return null;
   }
 
   render() {
+    console.log("I render metoden: " + JSON.stringify(this.state.MyStats));
     return (
       <div>
         <h1>Statestikk</h1>
