@@ -61,7 +61,9 @@ export default function(state = initialState, action) {
     case REG_ADBLUEFILLING:
       return {
         ...state,
-        AdblueFilling: state.AdblueFilling.concat(action.payload) //Legger inn i listen over fylling av Adblue
+        AdblueFilling: state.AdblueFilling.concat(action.payload), //Legger inn i listen over fylling av Adblue AdblueCost
+        TotalSum: (state.MyStats.TotalSum =
+          state.MyStats.TotalSum + parseInt(action.payload.AdblueCost))
       };
     case FETCH_STATS: {
       console.log("Log av FETCH_STATS" + JSON.stringify(state.MyStats));

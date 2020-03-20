@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
 import isValidalidInputAdblue from "../../../server/shared/validations/RegAdblueValidation";
-import { RegAdblueFill } from "../../actions/FyllingActions";
+import { RegAdblueFill, fetchMyStats } from "../../actions/FyllingActions";
 class Adblue extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +44,7 @@ class Adblue extends Component {
         sumLiterAdblue: this.state.sumLiterAdblue
       };
       this.props.RegAdblueFill(AdblueFill);
+      this.props.fetchMyStats();
     }
   }
 
@@ -109,10 +110,13 @@ class Adblue extends Component {
 
 Adblue.propTypes = {
   RegAdblueFill: PropTypes.func,
+  fetchMyStats: PropTypes.func,
   AdblueFilling: PropTypes.array
 };
 const mapStateToprops = state => ({
   AdblueFilling: state.AdblueFilling
 });
 
-export default connect(mapStateToprops, { RegAdblueFill })(Adblue);
+export default connect(mapStateToprops, { RegAdblueFill, fetchMyStats })(
+  Adblue
+);
