@@ -44,6 +44,17 @@ class LogInForm extends Component {
     }
     return isValid;
   }
+
+  clearInput() {
+    this.setState({
+      username: "",
+      password: "",
+      hidden: true,
+      errors: {},
+      isLoading: false
+    });
+  }
+
   onSubmit(e) {
     e.preventDefault();
     //this.setState({ errors: {}, isLoading: true });
@@ -68,6 +79,7 @@ class LogInForm extends Component {
           data =>
             localStorage.setItem("refresh_token", data.payload.refresh_token)
         );
+      this.clearInput();
     }
   }
   toggleShow() {

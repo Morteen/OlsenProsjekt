@@ -24,28 +24,30 @@ class Timeliste extends Component {
 
   render() {
     return (
-      <div className="d-flex" id="wrapper">
-        <div className="bg-light border-right" id="sidebar-wrapper">
-          <div className="sidebar-heading">Time registrering</div>
-          <div className="list-group list-group-flush">
-            <a
-              href="#"
-              onClick={this.handleClick.bind(this, "Timeforing")}
-              className="list-group-item list-group-item-action bg-light"
-            >
-              Timeføring
-            </a>
-            <a
-              href="#"
-              onClick={this.handleClick.bind(this, "MineTimer")}
-              className="list-group-item list-group-item-action bg-light"
-            >
-              Mine timer
-            </a>
+      <div clasName="wrappe">
+        <div className="d-flex" id="wrapper">
+          <div className="bg-light border-right" id="sidebar-wrapper">
+            <div className="sidebar-heading">Time registrering</div>
+            <div className="list-group list-group-flush">
+              <a
+                href="#"
+                onClick={this.handleClick.bind(this, "Timeforing")}
+                className="list-group-item list-group-item-action bg-light"
+              >
+                Timeføring
+              </a>
+              <a
+                href="#"
+                onClick={this.handleClick.bind(this, "MineTimer")}
+                className="list-group-item list-group-item-action bg-light"
+              >
+                Mine timer
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div className="container-fluid">{this._renderSubComp()}</div>
+          <div className="container-fluid">{this._renderSubComp()}</div>
+        </div>
       </div>
     );
   }

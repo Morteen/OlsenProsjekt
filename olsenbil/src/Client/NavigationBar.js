@@ -12,19 +12,23 @@ export default () => {
           </Link>
         </div>
         <div className="dropdown">
-          <button
-            className="btn btn-primary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
+          <span
+            className="navbar-brand"
+            //className="btn btn-primary dropdown-toggle"
+            //type="button"
+            //id="dropdownMenuButton"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
           >
             Våre tjenester
-          </button>
+          </span>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <Link to="/Timeliste" className="dropdown-item">
               Timeliste
+            </Link>
+            <Link to="/Maintenance" className="dropdown-item">
+              Vedlikehold
             </Link>
             <Link to="/Fylling" className="dropdown-item">
               Fylling
@@ -69,4 +73,7 @@ export default () => {
   <Dropdown.Divider />
   <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
 </DropdownButton>
+
+Maintenance
+
 */

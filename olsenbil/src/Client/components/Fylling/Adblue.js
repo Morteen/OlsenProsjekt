@@ -33,6 +33,15 @@ class Adblue extends Component {
     }
     return isValid;
   }
+  clearInput() {
+    this.setState({
+      regNumber: "",
+      km: "",
+      AdblueCost: "",
+      sumLiterAdblue: "",
+      errors: {}
+    });
+  }
 
   onSubmit(e) {
     e.preventDefault();
@@ -45,65 +54,62 @@ class Adblue extends Component {
       };
       this.props.RegAdblueFill(AdblueFill);
       this.props.fetchMyStats();
+      this.clearInput();
     }
   }
 
   render() {
     const { errors } = this.state;
     return (
-      <div className="row">
-        <div className="col-md-4 col-med-offset-4">
-          <form onSubmit={this.onSubmit}>
-            <h3>Adblue</h3>
+      <form className="myForm" onSubmit={this.onSubmit}>
+        <h3>Adblue</h3>
 
-            <TextFieldGroup
-              type="Text"
-              field="regNumber"
-              value={this.state.regNumber}
-              label="Registreringsnummer"
-              error={errors.regNumber}
-              placeholder="Reg nummer"
-              onChange={this.onChange}
-            />
+        <TextFieldGroup
+          type="Text"
+          field="regNumber"
+          value={this.state.regNumber}
+          label="Registreringsnummer"
+          error={errors.regNumber}
+          placeholder="Reg nummer"
+          onChange={this.onChange}
+        />
 
-            <TextFieldGroup
-              type="Text"
-              field="km"
-              value={this.state.km}
-              label="Kilometer"
-              error={errors.km}
-              placeholder="Kilometer"
-              onChange={this.onChange}
-            />
+        <TextFieldGroup
+          type="Text"
+          field="km"
+          value={this.state.km}
+          label="Kilometer"
+          error={errors.km}
+          placeholder="Kilometer"
+          onChange={this.onChange}
+        />
 
-            <TextFieldGroup
-              type="number"
-              field="sumLiterAdblue"
-              value={this.state.sumLiterAdblue}
-              label="Antall liter Adblue"
-              error={errors.sumLiterAdblue}
-              placeholder="Antall liter Adblue"
-              onChange={this.onChange}
-            />
+        <TextFieldGroup
+          type="number"
+          field="sumLiterAdblue"
+          value={this.state.sumLiterAdblue}
+          label="Antall liter Adblue"
+          error={errors.sumLiterAdblue}
+          placeholder="Antall liter Adblue"
+          onChange={this.onChange}
+        />
 
-            <TextFieldGroup
-              type="number"
-              field="AdblueCost"
-              value={this.state.AdblueCost}
-              label="Totalt betalt"
-              error={errors.AdblueCost}
-              placeholder="Total betalt"
-              onChange={this.onChange}
-            />
+        <TextFieldGroup
+          type="number"
+          field="AdblueCost"
+          value={this.state.AdblueCost}
+          label="Totalt betalt"
+          error={errors.AdblueCost}
+          placeholder="Total betalt"
+          onChange={this.onChange}
+        />
 
-            <div className="form-group">
-              <button className="btn btn-primary btn-lg">
-                Register Olje fylling
-              </button>
-            </div>
-          </form>
+        <div className="form-group">
+          <button className="btn btn-primary btn-lg">
+            Register Olje fylling
+          </button>
         </div>
-      </div>
+      </form>
     );
   }
 }

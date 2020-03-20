@@ -40,6 +40,20 @@ class RegTimer extends Component {
     return isValid;
   }
 
+  clearInput() {
+    this.setState({
+      id: "",
+      date: "",
+      timeDeparture: "",
+      timeArrival: "",
+      Description: "",
+      HourCount: "",
+      outlayPayment: "",
+
+      errors: {}
+    });
+  }
+
   onSubmit(e) {
     e.preventDefault();
     if (this.isValid()) {
@@ -53,6 +67,7 @@ class RegTimer extends Component {
         outlayPayment: this.state.outlayPayment
       };
       this.props.RegNyeTimer(newRegTime);
+      this.clearInput();
     }
   }
 

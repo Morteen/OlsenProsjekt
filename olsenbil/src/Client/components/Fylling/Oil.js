@@ -25,12 +25,17 @@ class Oil extends Component {
 
     if (!isValid) {
       this.setState({ errors, isValid });
-      console.log(
-        "Log fra etter setState:",
-        errors.sumLiterAdblue + " isValid" + isValid
-      );
     }
     return isValid;
+  }
+  clearInput() {
+    this.setState({
+      regNumber: "",
+      km: "",
+      Oilcost: "",
+      sumLiterOil: "",
+      errors: {}
+    });
   }
 
   onSubmit(e) {
@@ -44,6 +49,7 @@ class Oil extends Component {
       };
       this.props.RegOilFill(oilFill);
       this.props.fetchMyStats();
+      this.clearInput();
     }
   }
 

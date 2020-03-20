@@ -7,3 +7,5 @@ export const REG_REFULING = "REG_REFULING";
 export const REG_OILFILLING = "REG_OILFILLING";
 export const REG_ADBLUEFILLING = "REG_ADBLUEFILLING;";
 export const FETCH_STATS = "FETCH_STATS";
+//Vedlikehold
+export const REG_MAINTENANCE = "REG_MAINTENANCE";

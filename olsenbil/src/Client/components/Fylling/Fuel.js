@@ -31,6 +31,16 @@ class Fuel extends Component {
     console.log("Log av refuling object: " + newRefuling);
     this.props.RegReFuling(newRefuling);
     this.props.fetchMyStats();
+    this.clearInput();
+  }
+  clearInput() {
+    this.setState({
+      regNumber: "",
+      km: "",
+      totalPrice: "",
+      sumLiterFuel: "",
+      errors: {}
+    });
   }
 
   render() {
