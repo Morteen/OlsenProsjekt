@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Timeforing from "./Timeforing";
 import MineTimer from "./MineTimer";
+
 class Timeliste extends Component {
   constructor() {
     super();
@@ -24,7 +25,7 @@ class Timeliste extends Component {
 
   render() {
     return (
-      <div clasName="wrappe">
+      <div className="wrapper">
         <div className="d-flex" id="wrapper">
           <div className="bg-light border-right" id="sidebar-wrapper">
             <div className="sidebar-heading">Time registrering</div>

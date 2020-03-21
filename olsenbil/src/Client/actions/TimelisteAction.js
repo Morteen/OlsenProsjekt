@@ -1,4 +1,4 @@
-import { FETCH_MINE_TIMER, REG_NYE_TIMER } from "./types";
+import { FETCH_MINE_TIMER, REG_NYE_TIMER, DELETE_TIMER } from "./types";
 
 export const fetchMineTimer = () => dispatch => {
   console.log("FetchTimer svarer når siden blir lastet");
@@ -22,3 +22,17 @@ export const RegNyeTimer = RegTimerData => dispatch => {
     payload: RegTimerData
   });
 };
+
+export const handleDeleteTimer = DelTimerData => dispatch => {
+  console.log("handleDeleteTimer svarer: " + DelTimerData);
+
+  //Http call
+  //Legg inn RegTimerDate eller response i dispatch
+
+  return dispatch({
+    type: DELETE_TIMER,
+    payload: DelTimerData
+  });
+};
+
+//handleDeleteTimer

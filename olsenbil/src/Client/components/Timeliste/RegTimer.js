@@ -5,7 +5,7 @@ import TextFieldGroup from "../commen/TextFieldGroup";
 import TextAreaGroup from "../commen/TextAreaGroup";
 import isValidalidInputRegTimer from "../../../server/shared/validations/RegTimerValidation";
 import { RegNyeTimer } from "../../actions/TimelisteAction";
-
+import { fetchMineTimer } from "../../actions/TimelisteAction";
 class RegTimer extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +20,15 @@ class RegTimer extends Component {
 
       errors: {}
     };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+  componentDidMount() {
+    this.props.fetchMineTimer();
+    console.log(
+      "Log av fetchMinetimer på RegTimer siden:" + this.props.Timer.length
+    );
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -58,7 +65,7 @@ class RegTimer extends Component {
     e.preventDefault();
     if (this.isValid()) {
       const newRegTime = {
-        id: 3,
+        id: this.props.Timer.length,
         date: this.state.date,
         Description: this.state.Description,
         timeDeparture: this.state.timeDeparture,
@@ -145,9 +152,12 @@ class RegTimer extends Component {
 }
 RegTimer.propType = {
   RegNyeTimer: PropTypes.func.isRequired,
+  fetchMineTimer: PropTypes.func.isRequired,
   Timer: PropTypes.array
 };
 const mapStateToProps = state => ({
   Timer: state.Timelistereducer.Timer
 });
-export default connect(null, { RegNyeTimer })(RegTimer);
+export default connect(mapStateToProps, { RegNyeTimer, fetchMineTimer })(
+  RegTimer
+);

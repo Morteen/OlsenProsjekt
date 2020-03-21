@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { fetchMineTimer } from "../../actions/TimelisteAction";
+import {
+  fetchMineTimer,
+  handleDeleteTimer
+} from "../../actions/TimelisteAction";
 import store from "../../../store";
 
 class MineTimer extends Component {
@@ -10,21 +13,22 @@ class MineTimer extends Component {
   }
   componentDidMount() {
     this.props.fetchMineTimer();
-    console.log(" log av fetchMinetimer:" + this.props.fetchMineTimer());
+    console.log("Log av lengden på Timer Arrayen:" + this.props.Timer.length);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.nyTime) {
       console.log("NextProps verdi i loggen" + nextProps.nyTime);
-      this.props.posts.unshift(nextProps.nyTime);
+      //this.props.posts.unshift(nextProps.nyTime);
       console.log(
-        "props.post innhold i  componentWillReceiveProps " + this.props.Timer
+        "Log av lengden på Timer Arrayen i componentWillReceiveProps " +
+          this.props.Timer
       );
     }
   }
 
   render() {
     console.log("Test log" + JSON.stringify(store.getState()));
-    console.log("Test log Timer-length: " + this.props.Timer.length);
+    //console.log("Test log Timer-length: " + this.props.Timer.length);
     const TimerItem = this.props.Timer.map(timer => (
       <tr key={timer.id}>
         <th scope="row">{timer.date}</th>
@@ -33,10 +37,13 @@ class MineTimer extends Component {
         <td>{timer.Description}</td>
         <td>{timer.HourCount}</td>
         <td>{timer.outlayPayment}</td>
+        <td>
+          <a onClick={id => this.props.handleDeleteTimer(timer.id)}>
+            Delete Row
+          </a>
+        </td>
       </tr>
     ));
-    console.log("Log av TimerItem:" + TimerItem);
-    //console.log("Test log av Timer item" + TimerItem);=
 
     return (
       <table className="table">
@@ -59,6 +66,7 @@ class MineTimer extends Component {
 MineTimer.propTypes = {
   Timer: PropTypes.array,
   fetchMineTimer: PropTypes.func.isRequired,
+  handleDeleteTimer: PropTypes.func.isRequired,
 
   newRegtime: PropTypes.object
 };
@@ -66,45 +74,8 @@ MineTimer.propTypes = {
 function mapStateToProps(state) {
   return {
     Timer: state.Timelistereducer.Timer
-    // newRegtime: state.Timer.item
   };
 }
-export default connect(mapStateToProps, { fetchMineTimer })(MineTimer);
-/*
-
-<tr key={timer.id}>
-        <th scope="row">{timer.date}</th>
-        <td>{timer.timeDeparture}</td>
-        <td>{timer.timeArrival}</td>
-        <td>{timer.Description}</td>
-        <td>{timer.HourCount}</td>
-        <td>{timer.outlayPayment}</td>
-      </tr>
-
-
-
-<table class="table">
-<thead>
-  <tr>
-    <th scope="col">Dato</th>
-    <th scope="col">Avreise</th>
-    <th scope="col">Ankomst</th>
-    <th scope="col">Beskrivelse</th>
-    <th scope="col">Antall timer brukt</th>
-    <th scope="col">Utlegg</th>
-  </tr>
-</thead>
-<tbody>
-  <TimerItem />
-</tbody>
-</table>
-
-
-<tr key={this.props.Timer[0].id}>
-<td>{this.props.Timer[1].date}</td>
-<td>{this.props.Timer[1].timeDeparture}</td>
-<td>{this.props.Timer[1].timeArrival}</td>
-<td>{this.props.Timer[1].Description}</td>
-<td>{this.props.Timer[1].HourCount}</td>
-<td>{this.props.Timer[1].outlayPayment}</td>
-</tr> */
+export default connect(mapStateToProps, { fetchMineTimer, handleDeleteTimer })(
+  MineTimer
+);

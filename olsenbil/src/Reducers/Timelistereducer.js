@@ -1,5 +1,8 @@
-import { FETCH_MINE_TIMER } from "../../src/Client/actions/types";
-import { REG_NYE_TIMER } from "../../src/Client/actions/types";
+import {
+  FETCH_MINE_TIMER,
+  REG_NYE_TIMER,
+  DELETE_TIMER
+} from "../../src/Client/actions/types";
 
 const initialState = {
   Timer: [
@@ -26,7 +29,7 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  console.log("TimelisteReducer initialstate: ", state, action);
+  // console.log("TimelisteReducer initialstate: ", state, action);
   switch (action.type) {
     case FETCH_MINE_TIMER:
       return {
@@ -40,6 +43,19 @@ export default function(state = initialState, action) {
       return {
         ...state,
         Timer: state.Timer.concat(action.payload)
+      };
+    case DELETE_TIMER:
+      console.log("Deletetimer id i reducer " + JSON.stringify(action.payload));
+      let testArray = state.Timer;
+      console.log("Log av testArray i reducer" + JSON.stringify(testArray));
+      testArray.splice(action.payload, 1); //slice(0, action.payload);
+      console.log(
+        "Log av testArray i reducer etter slice" + JSON.stringify(testArray)
+      );
+
+      return {
+        ...state,
+        Timer: testArray
       };
 
     default:
