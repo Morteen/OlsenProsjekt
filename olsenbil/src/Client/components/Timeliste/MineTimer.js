@@ -10,11 +10,16 @@ import store from "../../../store";
 class MineTimer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      minTestArray: []
+    };
   }
   componentDidMount() {
     this.props.fetchMineTimer();
     console.log("Log av lengden på Timer Arrayen:" + this.props.Timer.length);
+    this.setState({ minTestArray: this.props.Timer });
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.nyTime) {
       console.log("NextProps verdi i loggen" + nextProps.nyTime);
@@ -26,10 +31,24 @@ class MineTimer extends Component {
     }
   }
 
+  /* static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.Timer !== prevState.Timer) {
+      console.log("Tetst test test :" + { Timer: nextProps.Timer });
+      return { Timer: nextProps.Timer };
+    } else return null;
+  }*/
+
+  handleDeleteRow(id) {
+    this.props.handleDeleteTimer(id);
+    this.props.fetchMineTimer();
+    console.log("Test log Timer-length: " + this.props.Timer.length);
+    this.setState({ minTestArray: this.props.Timer });
+  }
+
   render() {
     console.log("Test log" + JSON.stringify(store.getState()));
-    //console.log("Test log Timer-length: " + this.props.Timer.length);
-    const TimerItem = this.props.Timer.map(timer => (
+    console.log("Test log Timer-length: " + this.props.Timer.length);
+    const TimerItem = this.state.minTestArray.map(timer => (
       <tr key={timer.id}>
         <th scope="row">{timer.date}</th>
         <td>{timer.timeDeparture}</td>
@@ -38,9 +57,7 @@ class MineTimer extends Component {
         <td>{timer.HourCount}</td>
         <td>{timer.outlayPayment}</td>
         <td>
-          <a onClick={id => this.props.handleDeleteTimer(timer.id)}>
-            Delete Row
-          </a>
+          <a onClick={id => this.handleDeleteRow(timer.id)}>Delete Row</a>
         </td>
       </tr>
     ));
