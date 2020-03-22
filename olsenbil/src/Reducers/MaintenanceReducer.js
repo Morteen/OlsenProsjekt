@@ -1,4 +1,5 @@
 import { REG_MAINTENANCE, FETCH_MAINTENANCE } from "../Client/actions/types";
+import FyllingReducer from "./FyllingReducer";
 const initialState = {
   MaintenaceHistory: [],
   myMaintenace: {},
@@ -15,12 +16,7 @@ export default function(state = initialState, action) {
     case REG_MAINTENANCE:
       return {
         ...state,
-        MaintenaceHistory: action.payload,
-        TotalSum: (state.MyStats.TotalSum =
-          state.MyStats.TotalSum + parseInt(action.payload.price)), //Legger til vedlikeholds kostnader i totalsummen
-        totalMaintenanceCost: (state.totalMaintenanceCost += parseInt(
-          action.payload.price
-        ))
+        MaintenaceHistory: state.MaintenaceHistory.concat(action.payload)
       };
     case FETCH_MAINTENANCE: {
       console.log("Log av FETCH_MAINTENANCE" + JSON.stringify(state.MyStats));

@@ -78,8 +78,8 @@ class Maintenance extends Component {
             onChange={this.onChange}
           />
           <TextFieldGroup
-            type="Date"
-            field="Dato"
+            type="date"
+            field="date"
             value={this.state.date}
             label="Dato for reperasjon"
             error={this.state.errors.date}
