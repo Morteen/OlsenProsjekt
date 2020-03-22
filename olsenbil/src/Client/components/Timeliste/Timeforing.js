@@ -12,12 +12,12 @@ export default class Timeforing extends Component {
   }
   _renderSubComp() {
     switch (this.state.render) {
-      case "":
-        return <RegTimer />;
       case "RegTimer":
         return <RegTimer />;
       case "RegTurer":
         return <RegTurer />;
+      default:
+        return <RegTimer />;
     }
   }
 

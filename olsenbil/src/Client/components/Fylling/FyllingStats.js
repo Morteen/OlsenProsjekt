@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { fetchMyStats } from "../../actions/FyllingActions";
-import store from "../../../store";
 
 class FyllingStats extends Component {
   constructor(props) {
@@ -14,8 +13,8 @@ class FyllingStats extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    console.log("Tetst test test :" + nextProps.newStat);
     if (nextProps.newStat !== prevState.newStat) {
-      console.log("Tetst test test :" + { newStat: nextProps.newStat });
       // return {newStat : nextProps.newStat};
     } else return null;
   }

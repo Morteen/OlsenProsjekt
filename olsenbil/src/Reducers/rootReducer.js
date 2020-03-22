@@ -4,11 +4,13 @@ import { combineReducers } from "redux";
 import loginReducer from "./loginReducer";
 import Timelistereducer from "./Timelistereducer";
 import FyllingReducer from "./FyllingReducer";
+import MaintenanceReducer from "./MaintenanceReducer";
 
 export default combineReducers({
   loginReducer,
   Timelistereducer,
-  FyllingReducer
+  FyllingReducer,
+  MaintenanceReducer
 
   //flashMessages,
   //auth

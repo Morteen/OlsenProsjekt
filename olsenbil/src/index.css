@@ -62,3 +62,7 @@ code {
 #timeforingToggel li {
   display: inline;
 }
+#rowVarning {
+  color: red;
+  font-style: italic;
+}

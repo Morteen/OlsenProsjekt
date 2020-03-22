@@ -72,9 +72,9 @@ class Maintenance extends Component {
             type="Text"
             field="regNumber"
             value={this.state.regNumber}
-            label="Dato"
+            label="Registeringsnummer"
             error={this.state.errors.regNumber}
-            placeholder="Dato"
+            placeholder="Reg nummer"
             onChange={this.onChange}
           />
           <TextFieldGroup
