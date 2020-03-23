@@ -10,6 +10,7 @@ class Maintenance extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       regNumber: "",
       date: "",
       km: "",
@@ -39,6 +40,7 @@ class Maintenance extends Component {
 
   clearInput() {
     this.setState({
+      id: "",
       regNumber: "",
       date: "",
       km: "",
@@ -52,6 +54,7 @@ class Maintenance extends Component {
     e.preventDefault();
     if (this.isValid()) {
       const maintenance = {
+        id: this.props.MaintenaceHistory.length,
         date: this.state.date,
         Description: this.state.Description,
         regNumber: this.state.regNumber,
@@ -129,6 +132,6 @@ Maintenance.propType = {
   RegNewMaintenance: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
-  //Timer: state.Timelistereducer.Timer
+  MaintenaceHistory: state.MaintenanceReducer.MaintenaceHistory
 });
-export default connect(null, { RegNewMaintenance })(Maintenance);
+export default connect(mapStateToProps, { RegNewMaintenance })(Maintenance);

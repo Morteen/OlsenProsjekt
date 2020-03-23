@@ -98,16 +98,37 @@ class MaintenanceList extends Component {
       ));
     }
   }
+  showmodal() {
+    const requiredItem = this.state.requiredItem;
+    console.log("requiredItem " + requiredItem);
+    if (this.state.localMaintenaceArray.length >= 1) {
+      let modalData = this.state.localMaintenaceArray[requiredItem];
+
+      console.log("Log av ModalData.regnumber:" + JSON.stringify(modalData));
+      console.log("Log av requiredItem:" + requiredItem);
+      return (
+        <MaintenaceModal
+          id={modalData.id}
+          regNumber={modalData.regNumber}
+          date={modalData.date}
+          km={modalData.km}
+          Description={modalData.Description}
+          price={modalData.price}
+          saveModalDetails={this.saveModalDetails}
+        />
+      );
+    }
+  }
 
   render() {
-    const requiredItem = this.state.requiredItem;
-    const modalData = this.state.localMaintenaceArray[requiredItem];
+    /* const requiredItem = this.state.requiredItem;
+    let modalData = this.state.localMaintenaceArray[requiredItem];
     console.log(
       "Log av localMaintenaceArray:" +
         JSON.stringify(this.state.localMaintenaceArray[0])
     );
-    console.log("Log av ModalData:" + JSON.stringify(modalData));
-    console.log("Log av requiredItem:" + requiredItem);
+    console.log("Log av ModalData:" + modalData);
+    console.log("Log av requiredItem:" + requiredItem);*/
     return (
       <div>
         <table className="table">
@@ -124,14 +145,7 @@ class MaintenanceList extends Component {
           </thead>
           <tbody>{this.showContent()}</tbody>
         </table>
-        <MaintenaceModal
-          regNumber="" //{modalData.regNumber}
-          date="20.03.2020" //{modalData.date}
-          km="9999" //{modalData.km}
-          Description="test" //{modalData.Description}
-          price="3333" //{modalData.price}
-          saveModalDetails={this.saveModalDetails}
-        />
+        {this.showmodal()}
       </div>
     );
   }
