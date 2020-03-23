@@ -27,7 +27,7 @@ export default () => {
             <Link to="/Timeliste" className="dropdown-item">
               Timeliste
             </Link>
-            <Link to="/Maintenance" className="dropdown-item">
+            <Link to="/MaintenancePage" className="dropdown-item">
               Vedlikehold
             </Link>
             <Link to="/Fylling" className="dropdown-item">

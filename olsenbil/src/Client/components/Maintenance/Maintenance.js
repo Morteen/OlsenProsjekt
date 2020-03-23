@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import TextFieldGroup from "./commen/TextFieldGroup";
-import TextAreaGroup from "./commen/TextAreaGroup";
-import isValidalidInputRegMaintenance from "../../server/shared/validations/RegMaintenanceValidations";
-import { RegNewMaintenance } from "../actions/MaintenanceActions";
+import TextFieldGroup from "../commen/TextFieldGroup";
+import TextAreaGroup from "../commen/TextAreaGroup";
+import isValidalidInputRegMaintenance from "../../../server/shared/validations/RegMaintenanceValidations";
+import { RegNewMaintenance } from "../../actions/MaintenanceActions";
 
 class Maintenance extends Component {
   constructor(props) {
