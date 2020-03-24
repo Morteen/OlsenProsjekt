@@ -40,7 +40,6 @@ class Maintenance extends Component {
 
   clearInput() {
     this.setState({
-      id: "",
       regNumber: "",
       date: "",
       km: "",

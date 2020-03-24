@@ -5,6 +5,7 @@ class MaintenaceModal extends Component {
     super(props);
     this.handleSave = this.handleSave.bind(this);
     this.state = {
+      id: "",
       regNumber: "",
       date: "",
       km: "",
@@ -15,6 +16,7 @@ class MaintenaceModal extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
+      id: nextProps.id,
       regNumber: nextProps.regNumber,
       date: nextProps.date,
       km: nextProps.km,
@@ -23,6 +25,9 @@ class MaintenaceModal extends Component {
     });
   }
 
+  idHandler(e) {
+    this.setState({ id: e.target.value });
+  }
   regNumberHandler(e) {
     this.setState({ regNumber: e.target.value });
   }
