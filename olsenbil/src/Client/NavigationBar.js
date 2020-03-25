@@ -36,6 +36,25 @@ export default () => {
           </div>
         </div>
 
+        <div className="dropdown">
+          <span
+            className="navbar-brand"
+            //className="btn btn-primary dropdown-toggle"
+            //type="button"
+            //id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Timer
+          </span>
+          <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <Link to="/MineTimer" className="dropdown-item">
+              Timeliste
+            </Link>
+          </div>
+        </div>
+
         <div className="navbar-header">
           <Link to="/Login" className="navbar-brand">
             Logg inn
@@ -60,20 +79,3 @@ export default () => {
     </nav>
   );
 };
-
-/*
-<DropdownButton
-  alignRight
-  title="Dropdown right"
-  id="dropdown-menu-align-right"
->
-  <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-  <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-  <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-  <Dropdown.Divider />
-  <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-</DropdownButton>
-
-Maintenance
-
-*/

@@ -8,6 +8,7 @@ import LoginPage from "./components/Login/LoginPage";
 import About from "./components/About";
 import Fylling from "./components/Fylling/Fylling";
 import Timeliste from "./components/Timeliste/Timeliste";
+import MineTimer from "./components/Timeliste/MineTimer";
 import PageNotFound from "./components/PageNotFound";
 import DevelopSite from "./components/DevelopSite";
 import MaintenancePage from "./components/Maintenance/MaintenancePage";
@@ -21,6 +22,7 @@ export default (
       <Route path="About" component={About} />
       <Route path="Fylling" component={Fylling} />
       <Route path="Timeliste" component={Timeliste} />
+      <Route path="MineTimer" component={MineTimer} />
       <Route path="DevelopSite" component={DevelopSite} />
       <Route path="MaintenancePage" component={MaintenancePage} />
       <Route component={PageNotFound} />
