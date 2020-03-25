@@ -1,7 +1,8 @@
 import {
   FETCH_MINE_TIMER,
   REG_NYE_TIMER,
-  DELETE_TIMER
+  DELETE_TIMER,
+  EDIT_TIMER
 } from "../../src/Client/actions/types";
 
 const initialState = {
@@ -56,6 +57,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         Timer: testArray
+      };
+
+    case EDIT_TIMER:
+      console.log(
+        "Log av payload i EDIT_MAINTENANCE reducer" +
+          JSON.stringify(action.payload)
+      );
+      let tempArray = state.Timer;
+      tempArray[action.payload.id] = action.payload;
+      return {
+        ...state,
+        Timer: tempArray
       };
 
     default:

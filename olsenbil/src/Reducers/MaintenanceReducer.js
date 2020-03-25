@@ -1,7 +1,8 @@
 import {
   REG_MAINTENANCE,
   FETCH_MAINTENANCE,
-  DELETE_MAINTENANCE
+  DELETE_MAINTENANCE,
+  EDIT_MAINTENANCE
 } from "../Client/actions/types";
 import FyllingReducer from "./FyllingReducer";
 const initialState = {
@@ -51,17 +52,24 @@ export default function(state = initialState, action) {
       console.log(
         "Log av testArray i reducer etter slice" + JSON.stringify(testArray)
       );
-
       return {
         ...state,
         MaintenaceHistory: testArray
       };
+
+    case EDIT_MAINTENANCE:
+      console.log(
+        "Log av payload i EDIT_MAINTENANCE reducer" +
+          JSON.stringify(action.payload)
+      );
+      let tempArray = state.MaintenaceHistory;
+      tempArray[action.payload.id] = action.payload;
+      return {
+        ...state,
+        MaintenaceHistory: tempArray
+      };
+
     default:
       return state;
-
-      console.log(
-        "Log av  myMaintenace i reduser: " +
-          state.MaintenanceReducer.myMaintenace
-      );
   }
 }

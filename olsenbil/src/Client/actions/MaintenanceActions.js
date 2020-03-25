@@ -1,7 +1,8 @@
 import {
   REG_MAINTENANCE,
   FETCH_MAINTENANCE,
-  DELETE_MAINTENANCE
+  DELETE_MAINTENANCE,
+  EDIT_MAINTENANCE
 } from "../actions/types";
 
 export const RegNewMaintenance = MaintenanceData => dispatch => {
@@ -36,5 +37,19 @@ export const handleDeleteMaintenance = DelMaintenanceData => dispatch => {
   return dispatch({
     type: DELETE_MAINTENANCE,
     payload: DelMaintenanceData
+  });
+};
+
+export const handleEditMaintenance = editMaintenanceData => dispatch => {
+  console.log(
+    "Log av handleEditMaintenanc: " + JSON.stringify(editMaintenanceData)
+  );
+
+  //Http call
+  //Legg inn RegTimerDate eller response i dispatch
+
+  return dispatch({
+    type: EDIT_MAINTENANCE,
+    payload: editMaintenanceData
   });
 };

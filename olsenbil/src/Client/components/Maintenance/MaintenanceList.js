@@ -7,7 +7,8 @@ import ReactDOM from "react-dom";
 import { Modal, Button } from "react-bootstrap";
 import {
   fetchMaintenanceHistory,
-  handleDeleteMaintenance
+  handleDeleteMaintenance,
+  handleEditMaintenance
 } from "../../actions/MaintenanceActions";
 
 class MaintenanceList extends Component {
@@ -42,6 +43,7 @@ class MaintenanceList extends Component {
     const requiredItem = this.state.requiredItem;
     let tempMaintenaceArray = this.state.localMaintenaceArray;
     tempMaintenaceArray[requiredItem] = item;
+    this.props.handleEditMaintenance(tempMaintenaceArray[requiredItem]);
     this.setState({ localMaintenaceArray: tempMaintenaceArray });
   }
   deleteItem(index) {
@@ -121,14 +123,6 @@ class MaintenanceList extends Component {
   }
 
   render() {
-    /* const requiredItem = this.state.requiredItem;
-    let modalData = this.state.localMaintenaceArray[requiredItem];
-    console.log(
-      "Log av localMaintenaceArray:" +
-        JSON.stringify(this.state.localMaintenaceArray[0])
-    );
-    console.log("Log av ModalData:" + modalData);
-    console.log("Log av requiredItem:" + requiredItem);*/
     return (
       <div>
         <table className="table">
@@ -153,8 +147,8 @@ class MaintenanceList extends Component {
 
 MaintenanceList.propTypes = {
   MaintenaceHistory: PropTypes.array,
-
-  handleDeleteMaintenance: PropTypes.func.isRequired
+  handleDeleteMaintenance: PropTypes.func.isRequired,
+  handleEditMaintenance: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -164,5 +158,6 @@ function mapStateToProps(state) {
 }
 export default connect(mapStateToProps, {
   fetchMaintenanceHistory,
-  handleDeleteMaintenance
+  handleDeleteMaintenance,
+  handleEditMaintenance
 })(MaintenanceList);

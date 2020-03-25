@@ -1,18 +1,20 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
 import TextAreaGroup from "../commen/TextAreaGroup";
 
-class MaintenaceModal extends Component {
+class TimerModal extends Component {
   constructor(props) {
     super(props);
     this.handleSave = this.handleSave.bind(this);
     this.state = {
       id: "",
-      regNumber: "",
       date: "",
-      km: "",
+      timeDeparture: "",
+      timeArrival: "",
       Description: "",
-      price: "",
+      HourCount: 0,
+      outlayPayment: 0,
       errors: {}
     };
   }
@@ -20,32 +22,37 @@ class MaintenaceModal extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       id: nextProps.id,
-      regNumber: nextProps.regNumber,
       date: nextProps.date,
-      km: nextProps.km,
+      timeDeparture: nextProps.timeDeparture,
+      timeArrival: nextProps.timeArrival,
       Description: nextProps.Description,
-      price: nextProps.price
+      HourCount: nextProps.HourCount,
+      outlayPayment: nextProps.outlayPayment
     });
   }
 
   idHandler(e) {
     this.setState({ id: e.target.value });
   }
-  regNumberHandler(e) {
-    this.setState({ regNumber: e.target.value });
-  }
-
   dateHandler(e) {
     this.setState({ date: e.target.value });
   }
-  kmHandler(e) {
-    this.setState({ km: e.target.value });
+
+  timeDepartureHandler(e) {
+    this.setState({ timeDeparture: e.target.value });
+  }
+
+  timeArrivalHandler(e) {
+    this.setState({ timeArrival: e.target.value });
   }
   DescriptionHandler(e) {
     this.setState({ Description: e.target.value });
   }
-  priceHandler(e) {
-    this.setState({ price: e.target.value });
+  HourCountHandler(e) {
+    this.setState({ HourCount: e.target.value });
+  }
+  outlayPaymentHandler(e) {
+    this.setState({ outlayPayment: e.target.value });
   }
 
   handleSave() {
@@ -57,17 +64,17 @@ class MaintenaceModal extends Component {
     return (
       <div
         className="modal fade"
-        id="exampleModal"
+        id="timerModal"
         tabIndex="-1"
         role="dialog"
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="timerModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Rediger vedlikeholds opplysninger
+              <h5 className="modal-title" id="timerModalLabel">
+                Rediger opplysninger
               </h5>
               <button
                 type="button"
@@ -80,16 +87,6 @@ class MaintenaceModal extends Component {
             </div>
             <div className="modal-body">
               <TextFieldGroup
-                type="Text"
-                field="regNumber"
-                value={this.state.regNumber}
-                label="Registeringsnummer"
-                error={this.state.errors.regNumber}
-                placeholder="Reg nummer"
-                onChange={e => this.regNumberHandler(e)}
-              />
-
-              <TextFieldGroup
                 type="Date"
                 field="date"
                 value={this.state.date}
@@ -100,13 +97,47 @@ class MaintenaceModal extends Component {
               />
 
               <TextFieldGroup
-                type="Text"
-                field="km"
-                value={this.state.km}
-                label="Kilometerstand"
-                error={this.state.errors.km}
-                placeholder="Kilometer"
-                onChange={e => this.kmHandler(e)}
+                type="Time"
+                field="timeDeparture"
+                value={this.state.timeDeparture}
+                label="Avreise tidspunkt"
+                error={this.state.errors.timeDeparture}
+                placeholder="Avreise tid"
+                onChange={e => this.timeDepartureHandler(e)}
+                min="00:00"
+                max="23:59"
+              />
+
+              <TextFieldGroup
+                type="Time"
+                field="timeArrival"
+                value={this.state.timeArrival}
+                label="Hjemkomst"
+                error={this.state.errors.timeArrival}
+                placeholder="Tidspunkt for hjemkomst"
+                onChange={e => this.timeArrivalHandler(e)}
+                min="00:00"
+                max="23:59"
+              />
+
+              <TextFieldGroup
+                type="number"
+                field="HourCount"
+                value={this.state.HourCount.toString()}
+                label="Timeforbruk"
+                error={this.state.errors.HourCount}
+                placeholder="Antall timer forbrukt"
+                onChange={e => this.HourCountHandler(e)}
+              />
+
+              <TextFieldGroup
+                type="number"
+                field="outlayPayment"
+                value={this.state.outlayPayment.toString()}
+                label="Mine utlegg"
+                error={this.state.errors.outlayPayment}
+                placeholder="Sum av utlegg"
+                onChange={e => this.outlayPaymentHandler(e)}
               />
 
               <TextAreaGroup
@@ -116,16 +147,6 @@ class MaintenaceModal extends Component {
                 error={this.state.errors.Description}
                 placeholder="Beskrivelse"
                 onChange={e => this.DescriptionHandler(e)}
-              />
-
-              <TextFieldGroup
-                type="Text"
-                field="price"
-                value={this.state.price}
-                label="Pris"
-                error={this.state.errors.price}
-                placeholder="Pris"
-                onChange={e => this.priceHandler(e)}
               />
             </div>
             <div className="modal-footer">
@@ -153,5 +174,5 @@ class MaintenaceModal extends Component {
     );
   }
 }
-
-export default MaintenaceModal;
+TimerModal.propTypes = {};
+export default TimerModal;
