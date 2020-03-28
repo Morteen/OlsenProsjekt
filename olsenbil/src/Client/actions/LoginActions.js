@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const userLoginReq = userData => dispatch => {
   return (
-    fetch(`http://bilrapport.no/api/v1.0/Authentication`, {
+    fetch(`http://testapi.bilrapport.no/api/v1.0/Authentication`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData)
@@ -13,6 +13,7 @@ export const userLoginReq = userData => dispatch => {
         res => test(res)
       )
       //.then(data => localStorage.setItem("token", data.access_token))
+
       .then(data =>
         dispatch({
           type: LOGIN,

@@ -7,9 +7,13 @@ import LoginModal from "./components/Modal/LoginModal";
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
+    this.openmodal = this.openmodal.bind(this);
     this.state = {
       addModalShow: false
     };
+  }
+  openmodal(test) {
+    this.setState({ addModalShow: test });
   }
 
   render() {
@@ -95,6 +99,7 @@ class NavigationBar extends Component {
               <LoginModal
                 show={this.state.addModalShow}
                 onHide={addModalClose}
+                openmodal={this.openmodal}
               />
             </ButtonToolbar>
           </div>
