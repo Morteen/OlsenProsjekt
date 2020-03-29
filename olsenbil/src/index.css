@@ -93,6 +93,11 @@ code {
   background-repeat: no-repeat;
   background-size: auto;
 }
+#modalHeader {
+  background-image: url("./images/sky.PNG");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
 
 #loginList {
   list-style: none;

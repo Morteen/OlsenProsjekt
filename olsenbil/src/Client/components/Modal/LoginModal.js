@@ -76,7 +76,14 @@ class LoginModal extends Component {
         .userLoginReq(userCredential)
 
         .then(
-          data =>
+          () => data => {
+            if (data) {
+              JSON.stringify(data);
+            } else {
+              alert("Error");
+            }
+          }
+          /* data => 
             console.log(
               "Dette er fra regform:" +
                 JSON.stringify(data.payload.access_token)
@@ -105,56 +112,58 @@ class LoginModal extends Component {
     const { userLoginReq, accessCredentials } = this.props;
 
     return (
-      <Modal
-        {...this.props}
-        size="sm"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="customModal">
-          <form onSubmit={this.onSubmit}>
-            <TextFieldGroup
-              type="Text"
-              field="username"
-              value={this.state.username}
-              label="Brukernavn"
-              error={errors.username}
-              placeholder="Telefonnummer"
-              onChange={this.onChange}
-              className="form-control form-control-sm"
-            />
-            <ul id="loginList">
-              <li>
-                <TextFieldGroup
-                  type={this.state.hidden ? "password" : "text"}
-                  field="password"
-                  value={this.state.password}
-                  label="Passord"
-                  error={errors.password}
-                  placeholder="Passord"
-                  onChange={this.onChange}
-                />
-              </li>
-              <li>
-                <a href="#" onClick={this.toggleShow}>
-                  Vis passord
-                </a>
-              </li>
-            </ul>
-            <div id="LoginBtn" className="form-group">
-              <button
-                disabled={this.state.isLoading}
-                className="btn btn-primary btn-lg"
-              >
-                Login
-              </button>
-            </div>
-          </form>
-        </Modal.Body>
-      </Modal>
+      <div>
+        <Modal
+          {...this.props}
+          size="sm"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header id="modalHeader" closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="customModal">
+            <form onSubmit={this.onSubmit}>
+              <TextFieldGroup
+                type="Text"
+                field="username"
+                value={this.state.username}
+                label="Brukernavn"
+                error={errors.username}
+                placeholder="Telefonnummer"
+                onChange={this.onChange}
+                className="form-control form-control-sm"
+              />
+              <ul id="loginList">
+                <li>
+                  <TextFieldGroup
+                    type={this.state.hidden ? "password" : "text"}
+                    field="password"
+                    value={this.state.password}
+                    label="Passord"
+                    error={errors.password}
+                    placeholder="Passord"
+                    onChange={this.onChange}
+                  />
+                </li>
+                <li>
+                  <a href="#" onClick={this.toggleShow}>
+                    Vis passord
+                  </a>
+                </li>
+              </ul>
+              <div id="LoginBtn" className="form-group">
+                <button
+                  disabled={this.state.isLoading}
+                  className="btn btn-primary btn-lg"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </Modal.Body>
+        </Modal>
+      </div>
     );
   }
 }
@@ -168,8 +177,3 @@ const mapStateToprops = state => ({
 });
 
 export default connect(mapStateToprops, { userLoginReq })(LoginModal);
-/** <div className="input-group-append">
-                  <span className="input-group-text" id="basic-addon2">
-                    <div onClick={this.toggleShow}>Vis passord</div>
-                  </span>
-                </div> */

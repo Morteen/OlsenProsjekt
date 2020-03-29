@@ -2,31 +2,41 @@ import { LOGIN } from "./types";
 import axios from "axios";
 
 export const userLoginReq = userData => dispatch => {
-  return (
-    fetch(`http://testapi.bilrapport.no/api/v1.0/Authentication`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(userData)
-    })
-      .then(
-        res => res.json(),
-        res => test(res)
-      )
-      //.then(data => localStorage.setItem("token", data.access_token))
+  return fetch(`http://testapi.bilrapport.no/api/v1.0/Authentication`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(userData)
+  }).then(
+    res => {
+      if (res.ok) {
+        res.json().then(data =>
+          dispatch({
+            type: LOGIN,
+            payload: data
+          })
+        );
+      } else {
+        alert(res);
+      }
+    }
 
-      .then(data =>
+    //res => res.json(),
+    //res => test(res)
+  );
+  //.then(data => localStorage.setItem("token", data.access_token))
+
+  /*  .then(data =>
         dispatch({
           type: LOGIN,
           payload: data
         })
-      )
-  );
+      )*/
 };
 
 function test(response) {
   if (response.ok) {
-    {
-      // Request success
+    alert("Hurra");
+    /* // Request success
       response.json().then(result => {
         if (result.access_token) {
           // Authentication success
@@ -35,8 +45,9 @@ function test(response) {
           response.json();
           console.log("dette er error log" + response.json());
         }
-      });
-    }
+      });*/
+  } else {
+    alert(response.text);
   }
 }
 /*export const userLoginReq = userData => dispatch => {
