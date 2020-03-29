@@ -98,7 +98,6 @@ class LoginModal extends Component {
 
   handleSave(test) {
     this.props.openmodal(test);
-    alert(test);
   }
 
   render() {
@@ -115,7 +114,7 @@ class LoginModal extends Component {
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="customModal">
           <form onSubmit={this.onSubmit}>
             <TextFieldGroup
               type="Text"
@@ -127,22 +126,25 @@ class LoginModal extends Component {
               onChange={this.onChange}
               className="form-control form-control-sm"
             />
-            <TextFieldGroup
-              type={this.state.hidden ? "password" : "text"}
-              field="password"
-              value={this.state.password}
-              label="Passord"
-              error={errors.password}
-              placeholder="Passord"
-              onChange={this.onChange}
-            />
-            <div className="input-group-append">
-              <span className="input-group-text" id="basic-addon2">
-                <div onClick={this.toggleShow}>Vis passord</div>
-              </span>
-            </div>
-
-            <div className="form-group">
+            <ul id="loginList">
+              <li>
+                <TextFieldGroup
+                  type={this.state.hidden ? "password" : "text"}
+                  field="password"
+                  value={this.state.password}
+                  label="Passord"
+                  error={errors.password}
+                  placeholder="Passord"
+                  onChange={this.onChange}
+                />
+              </li>
+              <li>
+                <a href="#" onClick={this.toggleShow}>
+                  Vis passord
+                </a>
+              </li>
+            </ul>
+            <div id="LoginBtn" className="form-group">
               <button
                 disabled={this.state.isLoading}
                 className="btn btn-primary btn-lg"
@@ -152,9 +154,6 @@ class LoginModal extends Component {
             </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     );
   }
@@ -169,3 +168,8 @@ const mapStateToprops = state => ({
 });
 
 export default connect(mapStateToprops, { userLoginReq })(LoginModal);
+/** <div className="input-group-append">
+                  <span className="input-group-text" id="basic-addon2">
+                    <div onClick={this.toggleShow}>Vis passord</div>
+                  </span>
+                </div> */

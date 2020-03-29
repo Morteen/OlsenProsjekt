@@ -70,3 +70,37 @@ code {
   margin-top: 10%;
   width: auto;
 }
+#test {
+  color: red;
+  background-image: url("./images//testImage.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+.minNav {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  height: 20%;
+}
+
+.navList li {
+  display: inline;
+}
+.myForm {
+  margin-left: 1%;
+}
+.customModal {
+  background-image: url("./images/porsche.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+#loginList {
+  list-style: none;
+  display: inline;
+}
+#loginList li {
+  display: inline;
+}
+#LoginBtn {
+  margin-top: 15%;
+}
