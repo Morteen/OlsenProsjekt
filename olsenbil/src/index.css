@@ -109,3 +109,15 @@ code {
 #LoginBtn {
   margin-top: 15%;
 }
+#customModalUser {
+  background-image: url("./images/bmw.PNG");
+  /*background-repeat: no-repeat;*/
+  background-size: auto;
+}
+#about {
+  color: white;
+  background-image: url("./images/bmw.PNG");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 1000px;
+}

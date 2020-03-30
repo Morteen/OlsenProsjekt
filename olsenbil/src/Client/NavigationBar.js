@@ -3,21 +3,28 @@ import { Link } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import LoginModal from "./components/Modal/LoginModal";
+import NewUserModal from "./components/Modal/NewUserModal";
 
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
     this.openmodal = this.openmodal.bind(this);
+    this.openmodalUser = this.openmodalUser.bind(this);
     this.state = {
-      addModalShow: false
+      addModalShow: false,
+      addModalShowUser: false
     };
   }
   openmodal(test) {
     this.setState({ addModalShow: test });
   }
+  openmodalUser(test) {
+    this.setState({ addModalShowUser: test });
+  }
 
   render() {
     let addModalClose = () => this.setState({ addModalShow: false });
+    let addModalCloseUser = () => this.setState({ addModalShowUser: false });
     return (
       <nav className="minNav navbar navbar-dark bg-primary">
         <div className="container-fluid">
@@ -70,21 +77,13 @@ class NavigationBar extends Component {
             </div>
           </div>
 
-          <div className="navbar-header">
-            <Link to="/Login" className="navbar-brand">
-              Logg inn
-            </Link>
-          </div>
+          <div className="navbar-header"></div>
           <div className="navbar-header">
             <Link to="/DevelopSite" className="navbar-brand">
               DevelopSite
             </Link>
           </div>
-          <div className="navbar-header">
-            <Link to="/signup" className="navbar-brand">
-              Register deg
-            </Link>
-          </div>
+          <div className="navbar-header"></div>
           <div className="navbar-header">
             <Link to="/About" className="navbar-brand">
               Om oss
@@ -100,6 +99,17 @@ class NavigationBar extends Component {
                 show={this.state.addModalShow}
                 onHide={addModalClose}
                 openmodal={this.openmodal}
+              />{" "}
+              <Button
+                variant="primary"
+                onClick={() => this.setState({ addModalShowUser: true })}
+              >
+                Register Modal
+              </Button>
+              <NewUserModal
+                show={this.state.addModalShowUser}
+                onHide={addModalCloseUser}
+                openmodal={this.openmodalUser}
               />
             </ButtonToolbar>
           </div>

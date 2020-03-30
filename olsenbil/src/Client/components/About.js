@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class About extends Component {
   render() {
     return (
-      <div className="jumbotron">
+      <div id="about" className="jumbotron">
         Lorem ipsum dolor sit amet, an cum graece oblique delicatissimi, errem
         accusam te vis. Simul deserunt eos an. Nam ut viderer verterem
         voluptatum, quod eius postulant te pri, doming quodsi argumentum et his.

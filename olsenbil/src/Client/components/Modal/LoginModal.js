@@ -24,6 +24,7 @@ class LoginModal extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -77,10 +78,11 @@ class LoginModal extends Component {
 
         .then(
           () => data => {
-            if (data) {
-              JSON.stringify(data);
-            } else {
-              alert("Error");
+            alert(data);
+            if (data.payload.status == 401) {
+              alert("401 ");
+            } else if (data.payload.response.status == 500) {
+              alert("Server Error");
             }
           }
           /* data => 
@@ -102,6 +104,9 @@ class LoginModal extends Component {
   toggleShow() {
     this.setState({ hidden: !this.state.hidden });
   }
+  toggleModal() {
+    this.handleSave(this.state.test);
+  }
 
   handleSave(test) {
     this.props.openmodal(test);
@@ -110,16 +115,17 @@ class LoginModal extends Component {
   render() {
     const { errors } = this.state;
     const { userLoginReq, accessCredentials } = this.props;
-
+    console.log(JSON.stringify(this.props));
+    const { show, onHide } = this.props;
     return (
       <div>
         <Modal
-          {...this.props}
+          show={show}
           size="sm"
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header id="modalHeader" closeButton>
+          <Modal.Header id="modalHeader" closeButton onClick={this.toggleModal}>
             <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
           </Modal.Header>
           <Modal.Body className="customModal">

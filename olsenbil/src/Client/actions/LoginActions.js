@@ -16,7 +16,16 @@ export const userLoginReq = userData => dispatch => {
           })
         );
       } else {
-        alert(res);
+        console.log(res);
+        if (res.status === 401) {
+          alert("Alert fra loginn 500");
+          dispatch({
+            type: LOGIN,
+            payload: res.status
+          });
+        } else if (res.status == 500) {
+          alert("Alert fra loginn 500");
+        }
       }
     }
 
@@ -34,20 +43,7 @@ export const userLoginReq = userData => dispatch => {
 };
 
 function test(response) {
-  if (response.ok) {
-    alert("Hurra");
-    /* // Request success
-      response.json().then(result => {
-        if (result.access_token) {
-          // Authentication success
-          console.log("dette er sucesslog" + response.json());
-        } else {
-          response.json();
-          console.log("dette er error log" + response.json());
-        }
-      });*/
-  } else {
-    alert(response.text);
+  if (response) {
   }
 }
 /*export const userLoginReq = userData => dispatch => {
@@ -68,4 +64,4 @@ function test(response) {
     .catch(function(error) {
       console.log(error);
     });
-};*/
+}*/
