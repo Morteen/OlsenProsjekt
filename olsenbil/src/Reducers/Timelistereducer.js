@@ -8,22 +8,18 @@ import {
 const initialState = {
   Timer: [
     {
-      id: 0,
-      date: "20.01.2020",
-      timeDeparture: "14.30",
-      timeArrival: "15.30",
-      Description: "Partytur med Egil",
-      HourCount: 1,
-      outlayPayment: 1000
-    },
-    {
-      id: 1,
-      date: "21.01.2020",
-      timeDeparture: "14.30",
-      timeArrival: "15.30",
-      Description: "Kjørte svigemor til barnehagen",
-      HourCount: 1,
-      outlayPayment: 1000
+      mobile: 40042106,
+      date: "2020-02-02T00:00:00",
+      fromTime: "23:30:00",
+      toTime: "08:30:00",
+      description: "Valestrand marina. Storfjord",
+      ordinaryHours: "0",
+      fiftyProcentHours: "0",
+      hundredProcentHours: "8",
+      tripDays: 0,
+      bankedTime: "",
+      timeOffInLieu: "",
+      registeredTime: "2020-02-04T00:35:59.17"
     }
   ],
   nyTime: {}
@@ -34,7 +30,6 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_MINE_TIMER:
       return {
-        //HTTP call
         ...state,
         Timer: action.payload
       };
@@ -46,9 +41,9 @@ export default function(state = initialState, action) {
         Timer: state.Timer.concat(action.payload)
       };
     case DELETE_TIMER:
-      console.log("Deletetimer id i reducer " + JSON.stringify(action.payload));
+      console.log("Deletetimer id i reducer " + action.payload);
       let testArray = state.Timer;
-      console.log("Log av testArray i reducer" + JSON.stringify(testArray));
+      console.log("Log av testArray i reducer" + testArray);
       testArray.splice(action.payload, 1); //slice(0, action.payload);
       console.log(
         "Log av testArray i reducer etter slice" + JSON.stringify(testArray)

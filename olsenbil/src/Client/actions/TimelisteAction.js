@@ -7,13 +7,35 @@ import {
 
 export const fetchMineTimer = () => dispatch => {
   console.log("FetchTimer svarer når siden blir lastet");
-  const Timer = [];
-  return;
+  let userData = {
+    username: "40042106",
+    password: "#071362Morten",
+    dateFrom: "20.01.2019",
+    dateTo: "25.03.2020",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtb3J0ZW5vbHNlbjRAZ21haWwuY29tIiwianRpIjoiZjlmOGI1MzFkMzBjNGUxMDkwMjA5NzcxYmFlY2Q2MzQiLCJpYXQiOiIzMC4wMy4yMDIwIDE5OjI2OjA1IiwidXNlckluZm8iOiJ7XCJJZFwiOjEwMDIzLFwiRW1haWxcIjpcIm1vcnRlbm9sc2VuNEBnbWFpbC5jb21cIixcIk1vYmlsZVwiOlwiNDAwNDIxMDZcIixcIlBvc3RhbENvZGVcIjpcIjM3MzFcIn0iLCJuYmYiOjE1ODU1OTYzNjUsImV4cCI6MTU4NTU5OTk2NSwiaXNzIjoiQmlscmFwcG9ydC5ubyIsImF1ZCI6IlJlZ2lzdGVyZWQgdXNlcnMifQ.RVMnBEJWw1BTTyW6cT_O-rxjlKfMwi_7_FzmuIuUJAg"
+  };
 
-  dispatch({
-    type: FETCH_MINE_TIMER,
-    Timer: Timer
-  });
+  return fetch(
+    "https://testapi.bilrapport.no/api/v1.0/Timesheet/GetMyTimesheet/40042106/2020-02-02/2020-02-28",
+    {
+      method: "GET",
+      //mode: "no-cors", // mode: 'cors', // no-cors, *cors, same-origin, *cors, same-origin
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `bearer ${userData.token}`
+
+        // ;body:userData
+      }
+    }
+  )
+    .then(res => res.json()) //https://jsonplaceholder.typicode.com/posts
+    .then(res =>
+      dispatch({
+        type: FETCH_MINE_TIMER,
+        payload: res
+      })
+    );
 };
 
 export const RegNyeTimer = RegTimerData => dispatch => {
@@ -52,3 +74,17 @@ export const handleEditTimer = editTimerData => dispatch => {
 };
 
 //handleDeleteTimer
+/* if (response.ok) {
+    // Request success
+    response.json().then(result => {
+      console.log("yep!");
+      alert("Hurra");
+      console.log(JSON.stringify(result));
+    });
+  } else {
+    console.log(`bearer ${userData.token}`);
+    console.log("Prøver å skrive responds");
+    if (response.status === 401) {
+      //alert("401");
+    }
+  }*/

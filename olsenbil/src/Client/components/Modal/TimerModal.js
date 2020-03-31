@@ -8,51 +8,59 @@ class TimerModal extends Component {
     super(props);
     this.handleSave = this.handleSave.bind(this);
     this.state = {
-      id: "",
+      index: "",
       date: "",
-      timeDeparture: "",
-      timeArrival: "",
-      Description: "",
-      HourCount: 0,
-      outlayPayment: 0,
+      fromTime: "",
+      toTime: "",
+      description: "",
+      ordinaryHours: "",
+      fiftyProcentHours: 0,
       errors: {}
     };
   }
 
+  /* mobile={modalData.mobile}
+          date={modalData.date}
+          fromTime={modalData.fromTime}
+          toTime={modalData.toTime}
+          description={modalData.description}
+          ordinaryHours={modalData.ordinaryHours}
+          fiftyProcentHours={modalData.fiftyProcentHours}*/
+
   componentWillReceiveProps(nextProps) {
     this.setState({
-      id: nextProps.id,
+      index: nextProps.index,
       date: nextProps.date,
-      timeDeparture: nextProps.timeDeparture,
-      timeArrival: nextProps.timeArrival,
-      Description: nextProps.Description,
-      HourCount: nextProps.HourCount,
-      outlayPayment: nextProps.outlayPayment
+      fromTime: nextProps.fromTime,
+      toTime: nextProps.toTime,
+      description: nextProps.description,
+      ordinaryHours: nextProps.ordinaryHours,
+      fiftyProcentHours: nextProps.fiftyProcentHours
     });
   }
 
-  idHandler(e) {
-    this.setState({ id: e.target.value });
+  mobileHandler(e) {
+    this.setState({ mobile: e.target.value });
   }
   dateHandler(e) {
     this.setState({ date: e.target.value });
   }
 
-  timeDepartureHandler(e) {
-    this.setState({ timeDeparture: e.target.value });
+  fromTimeDepartureHandler(e) {
+    this.setState({ fromTime: e.target.value });
   }
 
-  timeArrivalHandler(e) {
-    this.setState({ timeArrival: e.target.value });
+  toTimeHandler(e) {
+    this.setState({ toTime: e.target.value });
   }
   DescriptionHandler(e) {
-    this.setState({ Description: e.target.value });
+    this.setState({ description: e.target.value });
   }
-  HourCountHandler(e) {
-    this.setState({ HourCount: e.target.value });
+  ordinaryHoursHandler(e) {
+    this.setState({ ordinaryHours: e.target.value });
   }
-  outlayPaymentHandler(e) {
-    this.setState({ outlayPayment: e.target.value });
+  fiftyProcentHoursHandler(e) {
+    this.setState({ fiftyProcentHours: e.target.value });
   }
 
   handleSave() {
@@ -98,51 +106,49 @@ class TimerModal extends Component {
 
               <TextFieldGroup
                 type="Time"
-                field="timeDeparture"
-                value={this.state.timeDeparture}
+                field="fromTime"
+                value={this.state.fromTime}
                 label="Avreise tidspunkt"
                 error={this.state.errors.timeDeparture}
                 placeholder="Avreise tid"
-                onChange={e => this.timeDepartureHandler(e)}
+                onChange={e => this.fromTimeHandler(e)}
                 min="00:00"
                 max="23:59"
               />
 
               <TextFieldGroup
-                type="Time"
-                field="timeArrival"
-                value={this.state.timeArrival}
+                type="Text"
+                field="toTime"
+                value={this.state.toTime}
                 label="Hjemkomst"
                 error={this.state.errors.timeArrival}
                 placeholder="Tidspunkt for hjemkomst"
-                onChange={e => this.timeArrivalHandler(e)}
-                min="00:00"
-                max="23:59"
+                onChange={e => this.toTimeHandler(e)}
               />
 
               <TextFieldGroup
                 type="number"
-                field="HourCount"
-                value={this.state.HourCount.toString()}
-                label="Timeforbruk"
+                field="ordinaryHours"
+                value={this.state.ordinaryHours}
+                label="Ordinære timer"
                 error={this.state.errors.HourCount}
                 placeholder="Antall timer forbrukt"
-                onChange={e => this.HourCountHandler(e)}
+                onChange={e => this.ordinaryHoursHandler(e)}
               />
 
               <TextFieldGroup
                 type="number"
-                field="outlayPayment"
-                value={this.state.outlayPayment.toString()}
-                label="Mine utlegg"
+                field="fiftyProcentHours"
+                value={this.state.fiftyProcentHours}
+                label="50 % overtid"
                 error={this.state.errors.outlayPayment}
-                placeholder="Sum av utlegg"
-                onChange={e => this.outlayPaymentHandler(e)}
+                placeholder="overtid"
+                onChange={e => this.fiftyProcentHoursHandler(e)}
               />
 
               <TextAreaGroup
-                field="Description"
-                value={this.state.Description}
+                field="description"
+                value={this.state.description}
                 label="Beskrivelse"
                 error={this.state.errors.Description}
                 placeholder="Beskrivelse"

@@ -4,10 +4,7 @@ const initialState = {
 };
 export default function(state = initialState, action) {
   console.log(
-    "Log fra loginReducer: " +
-      JSON.stringify(action.payload) +
-      " Action type: " +
-      action.type
+    "Log fra loginReducer: " + action.payload + " Action type: " + action.type
   );
   switch (action.type) {
     case LOGIN:

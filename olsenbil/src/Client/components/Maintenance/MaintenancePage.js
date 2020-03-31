@@ -50,7 +50,7 @@ export default class MaintenancePage extends Component {
           </ul>
           <div className="container-fluid">{this._renderSubComp()}</div>
         </div>
-        <div class=".col-xs-2">
+        <div className=".col-xs-2">
           <Totalsum />
         </div>
       </div>

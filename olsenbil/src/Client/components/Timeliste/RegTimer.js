@@ -26,9 +26,7 @@ class RegTimer extends Component {
   }
   componentDidMount() {
     this.props.fetchMineTimer();
-    console.log(
-      "Log av fetchMinetimer på RegTimer siden:" + this.props.Timer.length
-    );
+    console.log("Log av fetchMinetimer på RegTimer siden:" + this.props.Timer);
   }
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
