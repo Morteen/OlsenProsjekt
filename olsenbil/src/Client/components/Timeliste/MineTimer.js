@@ -69,6 +69,7 @@ class MineTimer extends Component {
           <td>{timer.ordinaryHours}</td>
           <td>{timer.fiftyProcentHours}</td>
           <td>
+            <i class="fas fa-trash"></i>
             <button
               type="button"
               className="btn btn-danger btn-sm"
