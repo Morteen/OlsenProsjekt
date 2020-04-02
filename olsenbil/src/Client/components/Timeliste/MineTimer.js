@@ -48,7 +48,7 @@ class MineTimer extends Component {
     console.log("HandelDeleterow  id: " + id);
     this.props.handleDeleteTimer(id);
     //Henter den ny Timer arrayen fra reducer
-    this.props.fetchMineTimer();
+    //this.props.fetchMineTimer(); //Må aktivers når man gjør kall utkommentert nå for å etste om sletting virker
     this.setState({ localTimerArray: this.props.Timer });
   }
   showContent() {
@@ -68,25 +68,22 @@ class MineTimer extends Component {
           <td>{timer.description}</td>
           <td>{timer.ordinaryHours}</td>
           <td>{timer.fiftyProcentHours}</td>
+          <td>{timer.hundredProcentHours}</td>
+          <td>{timer.tripDays}</td>
+          <td>{timer.bankedTime}</td>
+          <td>{timer.timeOffInLieu}</td>
           <td>
-            <i class="fas fa-trash"></i>
-            <button
-              type="button"
-              className="btn btn-danger btn-sm"
+            <i
+              className="fas fa-trash"
               onClick={() => this.handleDeleteRow(index)}
-            >
-              Delete Row
-            </button>
-          </td>
-          <td>
-            <button
-              className="btn btn-primary"
+            ></i>
+            <span>---------</span>
+            <i
               data-toggle="modal"
               data-target="#timerModal"
               onClick={() => this.replaceModalItem(index)}
-            >
-              edit
-            </button>
+              className="fas fa-edit"
+            ></i>
           </td>
         </tr>
       ));
@@ -110,6 +107,10 @@ class MineTimer extends Component {
           description={modalData.description}
           ordinaryHours={modalData.ordinaryHours}
           fiftyProcentHours={modalData.fiftyProcentHours}
+          hundredProcentHours={modalData.hundredProcentHours}
+          tripDays={modalData.tripDays}
+          bankedTime={modalData.bankedTime}
+          timeOffInLieu={modalData.timeOffInLieu}
           saveModalDetails={this.saveModalDetails}
         />
       );
@@ -128,6 +129,10 @@ class MineTimer extends Component {
               <th scope="col">Beskrivelse</th>
               <th scope="col">Ordinæretimer</th>
               <th scope="col">50% overtid</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>{this.showContent()}</tbody>
@@ -158,23 +163,3 @@ export default connect(mapStateToProps, {
   handleDeleteTimer,
   handleEditTimer
 })(MineTimer);
-
-/**mobile: 40042106,
-      date: "2020-02-02T00:00:00",
-      fromTime: "23:30:00",
-      toTime: "08:30:00",
-      description: "Valestrand marina. Storfjord",
-      ordinaryHours: "0",
-      fiftyProcentHours: "0",
-      hundredProcentHours: "8",
-      tripDays: 0,
-      bankedTime: "",
-      timeOffInLieu: "",
-      registeredTime: "2020-02-04T00:35:59.17" 
-      
-      
-      
-
-  (index => this.replaceModalItem(index),
-                console.log("replace " + index))
-      */

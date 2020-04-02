@@ -3,7 +3,13 @@ import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import isValidalidInputLogin from "../../../server/shared/Login";
 import TextFieldGroup from "../commen/TextFieldGroup";
-import { userLoginReq } from "../../actions/LoginActions";
+import { ToastContainer, toast } from "react-toastify";
+
+import {
+  userLoginReq,
+  userLoginReq1,
+  userLoginReq2
+} from "../../actions/LoginActions";
 
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 
@@ -17,7 +23,9 @@ class LoginModal extends Component {
       errors: {},
       isLoading: false,
       addModalShow: "",
-      test: false
+      test: false,
+      accessCredentials: { error: "" },
+      errorForm: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -25,11 +33,23 @@ class LoginModal extends Component {
     this.toggleShow = this.toggleShow.bind(this);
     this.handleSave = this.handleSave.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.onResponse = this.onResponse.bind(this);
+  }
+  componentDidMount() {
+    this.setState({
+      accessCredentials: this.props.accessCredentials
+    });
   }
   componentWillReceiveProps(nextProps) {
+    //alert("Will update: " + JSON.stringify(nextProps.accessCredentials));
     this.setState({
-      addModalShow: nextProps.addModalShow
+      addModalShow: nextProps.addModalShow,
+      accessCredentials: nextProps.accessCredentials
     });
+    if (nextProps.accessCredentials !== this.state.accessCredentials) {
+      this.onResponse(this.state.addModalShow, nextProps.accessCredentials);
+      console.warn("Will update: " + nextProps.accessCredentials);
+    }
   }
 
   /////
@@ -60,47 +80,25 @@ class LoginModal extends Component {
   }
   modalHandler() {
     this.setState({ addModalShow: false });
-    alert(this.props.addModalShow);
   }
 
   onSubmit(e) {
     e.preventDefault();
     //this.setState({ errors: {}, isLoading: true });
     if (this.isValid()) {
-      var md5 = require("md5");
       const userCredential = {
         userName: this.state.username,
         password: this.state.password
       };
-      this.setState({ isLoading: false }); //her skal man vent på server reponse
-      this.props
-        .userLoginReq(userCredential)
 
-        .then(
-          () => data => {
-            alert(data);
-            if (data.payload.status == 401) {
-              alert("401 ");
-            } else if (data.payload.response.status == 500) {
-              alert("Server Error");
-            }
-          }
-          /* data => 
-            console.log(
-              "Dette er fra regform:" +
-                JSON.stringify(data.payload.access_token)
-            )
-          /* data => localStorage.setItem("token", data.payload.access_token),
-          data => localStorage.setItem("expires_in", data.payload.expires_in),
-          data =>
-            localStorage.setItem("refresh_token", data.payload.refresh_token)*/
-        );
-
+      this.props.userLoginReq1(userCredential);
+      console.warn(
+        "Logg av props på " + JSON.stringify(this.props.accessCredentials)
+      );
       this.clearInput();
-
-      this.handleSave(this.state.test);
     }
   }
+
   toggleShow() {
     this.setState({ hidden: !this.state.hidden });
   }
@@ -112,10 +110,31 @@ class LoginModal extends Component {
     this.props.openmodal(test);
   }
 
+  onResponse(test, accessCredentials) {
+    console.warn(accessCredentials.error);
+    this.setState({ isLoading: true }); //Setter Login knappen til true ved response fra databasen
+    if (
+      accessCredentials.error !== 401 ||
+      accessCredentials.error !== 500 ||
+      accessCredentials.error !== ""
+    ) {
+      this.handleSave(test);
+      toast.success("Du er logget inn !");
+      this.setState({ isLoading: false }); //Setter Login knappen til true ved response fra databasen
+    } else if (accessCredentials.error === 401) {
+      this.setState({ errorForm: "Access denied 401" });
+      toast.danger("Access denied 401");
+      alert("Access denied 401");
+    } else if (accessCredentials.error === 500) {
+      this.setState({ errorForm: "Server error 500" });
+      alert("Server error 500");
+    }
+  }
   render() {
     const { errors } = this.state;
-    const { userLoginReq, accessCredentials } = this.props;
-    console.log(JSON.stringify(this.props));
+    const { formError } = this.state.errorForm;
+    const { userLoginReq, accessCredentials } = this.props.accessCredentials;
+
     const { show, onHide } = this.props;
     return (
       <div>
@@ -130,6 +149,9 @@ class LoginModal extends Component {
           </Modal.Header>
           <Modal.Body className="customModal">
             <form onSubmit={this.onSubmit}>
+              {formError && (
+                <div className="alert alert-danger">{formError}</div>
+              )}
               <TextFieldGroup
                 type="Text"
                 field="username"
@@ -169,6 +191,7 @@ class LoginModal extends Component {
             </form>
           </Modal.Body>
         </Modal>
+        <ToastContainer position={toast.POSITION.TOP_CENTER} autoClose={1500} />
       </div>
     );
   }
@@ -176,10 +199,20 @@ class LoginModal extends Component {
 
 LoginModal.propTypes = {
   userLoginReq: PropTypes.func,
+  userLoginReq1: PropTypes.func,
+
   accessCredentials: PropTypes.object
 };
+
+LoginModal.contextType = {
+  router: PropTypes.object
+};
+
 const mapStateToprops = state => ({
-  accessCredentials: state.accessCredentials
+  accessCredentials: state.loginReducer.accessCredentials
 });
 
-export default connect(mapStateToprops, { userLoginReq })(LoginModal);
+export default connect(mapStateToprops, {
+  userLoginReq,
+  userLoginReq1
+})(LoginModal);

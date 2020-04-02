@@ -88,6 +88,7 @@ class NavigationBar extends Component {
             <Link to="/About" className="navbar-brand">
               Om oss
             </Link>
+
             <ButtonToolbar>
               <Button
                 variant="primary"
@@ -99,7 +100,7 @@ class NavigationBar extends Component {
                 show={this.state.addModalShow}
                 onHide={addModalClose}
                 openmodal={this.openmodal}
-              />{" "}
+              />
               <Button
                 variant="primary"
                 onClick={() => this.setState({ addModalShowUser: true })}

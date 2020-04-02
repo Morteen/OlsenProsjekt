@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
 import TextAreaGroup from "../commen/TextAreaGroup";
 import isValidalidInputRegTimer from "../../../server/shared/validations/RegTimerValidation";
+
 import { RegNyeTimer } from "../../actions/TimelisteAction";
 import { fetchMineTimer } from "../../actions/TimelisteAction";
 class RegTimer extends Component {
@@ -47,13 +48,18 @@ class RegTimer extends Component {
 
   clearInput() {
     this.setState({
-      id: "",
+      mobile: "",
       date: "",
-      timeDeparture: "",
-      timeArrival: "",
-      Description: "",
-      HourCount: "",
-      outlayPayment: "",
+      fromTime: "",
+      toTime: "",
+      description: "",
+      ordinaryHours: "",
+      fiftyProcentHours: "",
+      hundredProcentHour: "",
+      tripDays: "",
+      bankedTime: "",
+      timeOffInLieu: "",
+      registeredTime: "",
 
       errors: {}
     });
@@ -63,13 +69,18 @@ class RegTimer extends Component {
     e.preventDefault();
     if (this.isValid()) {
       const newRegTime = {
-        id: this.props.Timer.length,
+        mobile: 40042106,
         date: this.state.date,
-        Description: this.state.Description,
-        timeDeparture: this.state.timeDeparture,
-        timeArrival: this.state.timeArrival,
-        HourCount: this.state.HourCount,
-        outlayPayment: this.state.outlayPayment
+        description: this.state.description,
+        fromTime: this.state.fromTime,
+        toTime: this.state.toTimel,
+        fiftyProcentHours: this.state.fiftyProcentHours,
+        ordinaryHours: this.state.ordinaryHours,
+        hundredProcentHours: this.state.hundredProcentHours,
+        tripDays: this.state.tripDays,
+        bankedTime: this.state.bankedTime,
+        timeOffInLieu: this.state.timeOffInLieu,
+        registeredTime: ""
       };
       this.props.RegNyeTimer(newRegTime);
       this.clearInput();
@@ -92,10 +103,10 @@ class RegTimer extends Component {
           />
           <TextFieldGroup
             type="Time"
-            field="timeDeparture"
-            value={this.state.timeDeparture}
+            field="fromTime"
+            value={this.state.fromTime}
             label="Avreise tidspunkt"
-            error={this.state.errors.timeDeparture}
+            error={this.state.errors.fromTime}
             placeholder="Avreise tid"
             onChange={this.onChange}
             min="00:00"
@@ -104,10 +115,10 @@ class RegTimer extends Component {
 
           <TextFieldGroup
             type="Time"
-            field="timeArrival"
-            value={this.state.timeArrival}
+            field="toTime"
+            value={this.state.toTime}
             label="Hjemkomst"
-            error={this.state.errors.timeArrival}
+            error={this.state.errors.toTime}
             placeholder="Tidspunkt for hjemkomst"
             onChange={this.onChange}
             min="00:00"
@@ -115,27 +126,67 @@ class RegTimer extends Component {
           />
           <TextFieldGroup
             type="number"
-            field="HourCount"
-            value={this.state.HourCount}
-            label="Timeforbruk"
-            error={this.state.errors.HourCount}
-            placeholder="Antall timer forbrukt"
+            field="ordinaryHours"
+            value={this.state.ordinaryHours}
+            label="Ordinære timer"
+            error={this.state.errors.ordinaryHours}
+            placeholder="Timer"
             onChange={this.onChange}
           />
           <TextFieldGroup
             type="number"
-            field="outlayPayment"
-            value={this.state.outlayPayment}
-            label="Mine utlegg"
-            error={this.state.errors.outlayPayment}
-            placeholder="Sum av utlegg"
+            field="fiftyProcentHours"
+            // value={this.state.fiftyProcentHours}
+            label="50% overtid"
+            error={this.state.errors.fiftyProcentHours}
+            placeholder="Overtid"
             onChange={this.onChange}
           />
+
+          <TextFieldGroup
+            type="number"
+            field="hundredProcentHours"
+            value={this.state.hundredProcentHours}
+            label="100% overtid"
+            // error={this.state.errors.hundredProcentHours}
+            placeholder="Overtid"
+            onChange={this.onChange}
+          />
+          <TextFieldGroup
+            type="number"
+            field="tripDays"
+            value={this.state.tripDays}
+            label="Antall døgn på tur"
+            error={this.state.errors.tripDays}
+            placeholder="Dager"
+            onChange={this.onChange}
+          />
+
+          <TextFieldGroup
+            type="number"
+            field="bankedTime"
+            value={this.state.bankedTime}
+            label="bankedTime"
+            // error={this.state.errors.bankedTime}
+            placeholder="bankedTime"
+            onChange={this.onChange}
+          />
+
+          <TextFieldGroup
+            type="number"
+            field="timeOffInLieu"
+            value={this.state.timeOffInLieu}
+            label="timeOffInLieu"
+            // error={this.state.errors.timeOffInLieu}
+            placeholder="timeOffInLieu"
+            onChange={this.onChange}
+          />
+
           <TextAreaGroup
-            field="Description"
-            value={this.state.Description}
+            field="description"
+            value={this.state.description}
             label="Beskrivelse"
-            error={this.state.errors.Description}
+            error={this.state.errors.description}
             placeholder="Beskrivelse"
             onChange={this.onChange}
           />
