@@ -19,7 +19,7 @@ class MineTimer extends Component {
     };
   }
   componentDidMount() {
-    this.props.fetchMineTimer();
+    //this.props.fetchMineTimer();
     this.setState({ localTimerArray: this.props.Timer });
   }
 

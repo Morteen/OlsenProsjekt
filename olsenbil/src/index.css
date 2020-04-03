@@ -121,3 +121,8 @@ code {
   background-repeat: no-repeat;
   height: 1000px;
 }
+footer {
+  background-color: #3f3f3f;
+  color: #d5d5d5;
+  padding-top: 2rem;
+}

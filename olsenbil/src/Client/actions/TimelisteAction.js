@@ -5,15 +5,15 @@ import {
   EDIT_TIMER
 } from "./types";
 
-export const fetchMineTimer = () => dispatch => {
+export const fetchMineTimer = userCred => dispatch => {
   console.log("FetchTimer svarer når siden blir lastet");
   let userData = {
     username: "40042106",
     password: "#071362Morten",
     dateFrom: "20.01.2019",
     dateTo: "25.03.2020",
-    token:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtb3J0ZW5vbHNlbjRAZ21haWwuY29tIiwianRpIjoiZmE0NGI5ZmQ2YTkwNDIyNzgwOGQ4NzlhMTUzZjRiMTMiLCJpYXQiOiIzMS4wMy4yMDIwIDEyOjI0OjQwIiwidXNlckluZm8iOiJ7XCJJZFwiOjEwMDIzLFwiRW1haWxcIjpcIm1vcnRlbm9sc2VuNEBnbWFpbC5jb21cIixcIk1vYmlsZVwiOlwiNDAwNDIxMDZcIixcIlBvc3RhbENvZGVcIjpcIjM3MzFcIn0iLCJuYmYiOjE1ODU2NTc0ODAsImV4cCI6MTU4NTY2MTA4MCwiaXNzIjoiQmlscmFwcG9ydC5ubyIsImF1ZCI6IlJlZ2lzdGVyZWQgdXNlcnMifQ.iDtxZv9CJ9fU18m8mg8HROn6w1tdgizQfd8vYnyzXiA"
+    token: userCred
+    // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtb3J0ZW5vbHNlbjRAZ21haWwuY29tIiwianRpIjoiZmE0NGI5ZmQ2YTkwNDIyNzgwOGQ4NzlhMTUzZjRiMTMiLCJpYXQiOiIzMS4wMy4yMDIwIDEyOjI0OjQwIiwidXNlckluZm8iOiJ7XCJJZFwiOjEwMDIzLFwiRW1haWxcIjpcIm1vcnRlbm9sc2VuNEBnbWFpbC5jb21cIixcIk1vYmlsZVwiOlwiNDAwNDIxMDZcIixcIlBvc3RhbENvZGVcIjpcIjM3MzFcIn0iLCJuYmYiOjE1ODU2NTc0ODAsImV4cCI6MTU4NTY2MTA4MCwiaXNzIjoiQmlscmFwcG9ydC5ubyIsImF1ZCI6IlJlZ2lzdGVyZWQgdXNlcnMifQ.iDtxZv9CJ9fU18m8mg8HROn6w1tdgizQfd8vYnyzXiA"
   };
 
   return fetch(
@@ -29,7 +29,7 @@ export const fetchMineTimer = () => dispatch => {
       }
     }
   )
-    .then(res => res.json()) //https://jsonplaceholder.typicode.com/posts
+    .then(res => res.json())
     .then(res =>
       dispatch({
         type: FETCH_MINE_TIMER,

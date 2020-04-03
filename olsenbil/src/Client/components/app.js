@@ -5,6 +5,7 @@ import NavigationBar from "../NavigationBar";
 import { Provider } from "react-redux";
 import store from "../../store";
 import FyllingStats from "../components/Fylling/FyllingStats";
+import Footer from "./Footer";
 
 export default class app extends Component {
   render() {
@@ -14,6 +15,7 @@ export default class app extends Component {
           <NavigationBar />
 
           {this.props.children}
+          <Footer />
         </div>
       </Provider>
     );
