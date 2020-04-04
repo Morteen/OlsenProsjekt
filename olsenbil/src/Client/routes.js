@@ -12,11 +12,12 @@ import MineTimer from "./components/Timeliste/MineTimer";
 import PageNotFound from "./components/PageNotFound";
 import DevelopSite from "./components/DevelopSite";
 import MaintenancePage from "./components/Maintenance/MaintenancePage";
+import VelkommenNotLoggedIN from "./components/Velkommen/VelkommenNotLoggedIN";
 
 export default (
   <Switch>
     <Route path="/" component={app}>
-      <IndexRoute component={Greeting} />;
+      <IndexRoute component={VelkommenNotLoggedIN} />;
       <Route path="signup" component={signupPage} />
       <Route path="Login" component={LoginPage} />
       <Route path="About" component={About} />
