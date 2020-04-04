@@ -14,6 +14,7 @@ export default class VelkommenCredentials extends Component {
             <hr></hr>
           </div>
         </div>
+
         <div className="container-fluid padding">
           <div className="row padding">
             <div className="col-md-4">
