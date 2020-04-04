@@ -7,6 +7,7 @@ import {
   handleEditTimer
 } from "../../actions/TimelisteAction";
 import TimerModal from "../Modal/TimerModal";
+import TotalTimer from "./TotalTimer";
 
 class MineTimer extends Component {
   constructor(props) {
@@ -120,6 +121,14 @@ class MineTimer extends Component {
   render() {
     return (
       <div>
+        <TotalTimer
+          totalHour={99}
+          fiftyProcentHours={1}
+          hundredProcentHours={7}
+          bankedTime={3}
+          timeOffInLieu={1}
+          balance={2}
+        />
         <table className="table">
           <thead>
             <tr>
