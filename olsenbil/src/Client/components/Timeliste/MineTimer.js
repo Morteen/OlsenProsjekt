@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
 import {
   fetchMineTimer,
   handleDeleteTimer,
@@ -53,7 +54,10 @@ class MineTimer extends Component {
     this.setState({ localTimerArray: this.props.Timer });
   }
   showContent() {
-    // console.log(JSON.stringify(this.state.localTimerArray));
+    console.warn(
+      "ShowContent funksjonen " +
+        JSON.stringify(this.state.localTimerArray.length)
+    );
     if (this.state.localTimerArray.length < 1) {
       return (
         <tr>
@@ -78,7 +82,7 @@ class MineTimer extends Component {
               className="fas fa-trash"
               onClick={() => this.handleDeleteRow(index)}
             ></i>
-            <span>---------</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <i
               data-toggle="modal"
               data-target="#timerModal"
@@ -117,18 +121,65 @@ class MineTimer extends Component {
       );
     }
   }
+  calculateTotalHour() {
+    if (this.state.localTimerArray.length == 0) {
+      console.warn("Totalhour lengde " + this.state.localTimerArray.length);
+      return (
+        <TotalTimer
+          totalHour={0}
+          fiftyProcentHours={0}
+          hundredProcentHours={0}
+          bankedTime={0}
+          timeOffInLieu={0}
+          balance={0}
+        />
+      );
+    } else if (this.state.localTimerArray.length >= 1) {
+      let totalHour = 0;
+      let fifty = 0;
+      let hundred = 0;
+      let banked = 0;
+      let timeOffInLieu = 0;
+      let balance = 0;
+      this.state.localTimerArray.forEach(
+        time => (totalHour = totalHour + parseInt(time.ordinaryHours))
+      );
+      this.state.localTimerArray.forEach(time =>
+        console.log("  fifty  " + time.fiftyProcentHours)
+      );
+      this.state.localTimerArray.forEach(
+        time => (fifty = fifty + parseFloat(time.fiftyProcentHours) + 0)
+      );
+      this.state.localTimerArray.forEach(
+        time => (banked = banked + parseFloat(time.bankedTime))
+      );
+      this.state.localTimerArray.forEach(
+        time => (hundred = hundred + parseFloat(time.hundredProcentHours))
+      );
+      this.state.localTimerArray.forEach(
+        time => (timeOffInLieu = timeOffInLieu + parseFloat(time.timeOffInLieu))
+      );
+
+      balance = banked - timeOffInLieu + 0;
+
+      return (
+        <TotalTimer
+          totalHour={totalHour}
+          fiftyProcentHours={fifty}
+          hundredProcentHours={hundred}
+          bankedTime={banked}
+          timeOffInLieu={timeOffInLieu}
+          balance={balance}
+        />
+      );
+    }
+  }
 
   render() {
     return (
       <div>
-        <TotalTimer
-          totalHour={99}
-          fiftyProcentHours={1}
-          hundredProcentHours={7}
-          bankedTime={3}
-          timeOffInLieu={1}
-          balance={2}
-        />
+        {this.calculateTotalHour()}
+
         <table className="table">
           <thead>
             <tr>
@@ -138,15 +189,14 @@ class MineTimer extends Component {
               <th scope="col">Beskrivelse</th>
               <th scope="col">Ordinæretimer</th>
               <th scope="col">50% overtid</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th>hundredProcentHours</th>
+              <th>tripDays</th>
+              <th>banked</th>
+              <th>timeOff</th>
             </tr>
           </thead>
           <tbody>{this.showContent()}</tbody>
         </table>
-
         {this.showmodal()}
       </div>
     );
