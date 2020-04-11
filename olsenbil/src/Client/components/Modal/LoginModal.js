@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { userLoginReq } from "../../actions/LoginActions";
 import { fetchMineTimer } from "../../actions/TimelisteAction";
+import { UserIsAuthenticated } from "../../actions/UserActions";
 
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 
@@ -22,7 +23,7 @@ class LoginModal extends Component {
       addModalShow: "",
       test: false,
       accessCredentials: { error: "" },
-      errorForm: ""
+      errorForm: "",
     };
 
     this.onChange = this.onChange.bind(this);
@@ -34,13 +35,13 @@ class LoginModal extends Component {
   }
   componentDidMount() {
     this.setState({
-      accessCredentials: this.props.accessCredentials
+      accessCredentials: this.props.accessCredentials,
     });
   }
   componentWillReceiveProps(nextProps) {
     this.setState({
       addModalShow: nextProps.addModalShow,
-      accessCredentials: nextProps.accessCredentials
+      accessCredentials: nextProps.accessCredentials,
     });
     if (nextProps.accessCredentials !== this.state.accessCredentials) {
       this.onResponse(this.state.addModalShow, nextProps.accessCredentials);
@@ -71,7 +72,7 @@ class LoginModal extends Component {
       password: "",
       hidden: true,
       errors: {},
-      isLoading: false
+      isLoading: false,
     });
   }
   modalHandler() {
@@ -84,7 +85,7 @@ class LoginModal extends Component {
     if (this.isValid()) {
       const userCredential = {
         userName: this.state.username,
-        password: this.state.password
+        password: this.state.password,
       };
 
       this.props.userLoginReq(userCredential);
@@ -115,6 +116,7 @@ class LoginModal extends Component {
     } else {
       toast.success("Du er logget inn !");
       this.props.fetchMineTimer(accessCredentials.access_token); //Henter timer fra timeliste objectet
+      this.props.UserIsAuthenticated(); //Endrer user status til logget inn
     }
 
     this.setState({ isLoading: false }); //Setter Login knappen til true ved response fra databasen
@@ -192,15 +194,16 @@ class LoginModal extends Component {
 LoginModal.propTypes = {
   userLoginReq: PropTypes.func,
   fetchMineTimer: PropTypes.func,
-
-  accessCredentials: PropTypes.object
+  UserIsAuthenticated: PropTypes.func,
+  accessCredentials: PropTypes.object,
 };
 
-const mapStateToprops = state => ({
-  accessCredentials: state.loginReducer.accessCredentials
+const mapStateToprops = (state) => ({
+  accessCredentials: state.loginReducer.accessCredentials,
 });
 
 export default connect(mapStateToprops, {
   userLoginReq,
-  fetchMineTimer
+  fetchMineTimer,
+  UserIsAuthenticated,
 })(LoginModal);

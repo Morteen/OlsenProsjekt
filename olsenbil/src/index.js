@@ -1,7 +1,9 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { Router, browserHistory } from "react-router";
+
 import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import routes from "../src/Client/routes";
@@ -22,3 +24,5 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+//  <Router history={browserHistory} routes={routes} />

@@ -2,7 +2,7 @@ import {
   FETCH_MINE_TIMER,
   REG_NYE_TIMER,
   DELETE_TIMER,
-  EDIT_TIMER
+  EDIT_TIMER,
 } from "../../src/Client/actions/types";
 
 const initialState = {
@@ -19,26 +19,26 @@ const initialState = {
       tripDays: 0,
       bankedTime: "",
       timeOffInLieu: "",
-      registeredTime: "2020-02-04T00:35:59.17"
-    }
+      registeredTime: "2020-02-04T00:35:59.17",
+    },
   ],
-  nyTime: {}
+  nyTime: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   // console.log("TimelisteReducer initialstate: ", state, action);
   switch (action.type) {
     case FETCH_MINE_TIMER:
       return {
         ...state,
-        Timer: action.payload
+        Timer: action.payload,
       };
     case REG_NYE_TIMER:
-      console.log("RegNye timer " + JSON.stringify(action.payload));
+      //  console.log("RegNye timer " + JSON.stringify(action.payload));
 
       return {
         ...state,
-        Timer: state.Timer.concat(action.payload)
+        Timer: state.Timer.concat(action.payload),
       };
     case DELETE_TIMER:
       console.log("Deletetimer id i reducer " + action.payload);
@@ -51,7 +51,7 @@ export default function(state = initialState, action) {
 
       return {
         ...state,
-        Timer: testArray
+        Timer: testArray,
       };
 
     case EDIT_TIMER:
@@ -63,12 +63,12 @@ export default function(state = initialState, action) {
       tempArray[action.payload.id] = action.payload;
       return {
         ...state,
-        Timer: tempArray
+        Timer: tempArray,
       };
 
     default:
       return {
-        Timer: state.Timer
+        Timer: state.Timer,
       };
   }
 }

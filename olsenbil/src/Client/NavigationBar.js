@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import LoginModal from "./components/Modal/LoginModal";
@@ -13,9 +15,19 @@ class NavigationBar extends Component {
     this.openmodalUser = this.openmodalUser.bind(this);
     this.state = {
       addModalShow: false,
-      addModalShowUser: false
+      addModalShowUser: false,
+      isAuth: false,
     };
   }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    if (state.isAuth !== nextProps.isAuth) {
+      return { isAuth: true };
+    }
+    // Return null to indicate no change to state.
+    return null;
+  }
+
   openmodal(test) {
     this.setState({ addModalShow: test });
   }
@@ -67,20 +79,28 @@ class NavigationBar extends Component {
                   Timeføring
                 </Link>
               </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  onClick={() => this.setState({ addModalShow: true })}
-                  href="#"
-                >
-                  <LoginModal
-                    show={this.state.addModalShow}
-                    onHide={addModalClose}
-                    openmodal={this.openmodal}
-                  />
-                  Login
-                </a>
-              </li>
+              {this.state.isAuth ? (
+                <li className="nav-item">
+                  <a href="#" className="nav-link">
+                    Logg ut
+                  </a>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <a
+                    className="nav-link"
+                    onClick={() => this.setState({ addModalShow: true })}
+                    href="#"
+                  >
+                    <LoginModal
+                      show={this.state.addModalShow}
+                      onHide={addModalClose}
+                      openmodal={this.openmodal}
+                    />
+                    Login
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -88,7 +108,17 @@ class NavigationBar extends Component {
     );
   }
 }
-export default NavigationBar;
+
+NavigationBar.propTypes = {
+  isAuth: PropTypes.bool,
+};
+
+function mapStateToProps(state) {
+  return {
+    isAuth: state.UserReducer.isAuth,
+  };
+}
+export default connect(mapStateToProps, null)(NavigationBar);
 
 /**<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 <div class="container-fluid">

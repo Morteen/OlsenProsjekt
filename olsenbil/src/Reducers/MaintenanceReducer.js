@@ -2,7 +2,7 @@ import {
   REG_MAINTENANCE,
   FETCH_MAINTENANCE,
   DELETE_MAINTENANCE,
-  EDIT_MAINTENANCE
+  EDIT_MAINTENANCE,
 } from "../Client/actions/types";
 import FyllingReducer from "./FyllingReducer";
 const initialState = {
@@ -13,29 +13,29 @@ const initialState = {
       date: "21.03.2020",
       km: "2220222",
       Description: "Skifte av registerreim",
-      price: "10000"
-    }
+      price: "10000",
+    },
   ],
   myMaintenace: {},
-  totalMaintenanceCost: ""
+  totalMaintenanceCost: "",
 };
-export default function(state = initialState, action) {
-  console.log(
+export default function (state = initialState, action) {
+  /* console.log(
     "Log fra MaintenanceReducer: " +
       JSON.stringify(action.payload) +
       " Action type: " +
       action.type
-  );
+  );*/
   switch (action.type) {
     case REG_MAINTENANCE:
       return {
         ...state,
-        MaintenaceHistory: state.MaintenaceHistory.concat(action.payload)
+        MaintenaceHistory: state.MaintenaceHistory.concat(action.payload),
       };
     case FETCH_MAINTENANCE:
       return {
         ...state,
-        MaintenaceHistory: state.MaintenaceHistory
+        MaintenaceHistory: state.MaintenaceHistory,
       };
 
     case DELETE_MAINTENANCE:
@@ -54,7 +54,7 @@ export default function(state = initialState, action) {
       );
       return {
         ...state,
-        MaintenaceHistory: testArray
+        MaintenaceHistory: testArray,
       };
 
     case EDIT_MAINTENANCE:
@@ -66,7 +66,7 @@ export default function(state = initialState, action) {
       tempArray[action.payload.id] = action.payload;
       return {
         ...state,
-        MaintenaceHistory: tempArray
+        MaintenaceHistory: tempArray,
       };
 
     default:

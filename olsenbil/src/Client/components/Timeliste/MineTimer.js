@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { History } from "react-router";
 
 import {
   fetchMineTimer,
   handleDeleteTimer,
-  handleEditTimer
+  handleEditTimer,
 } from "../../actions/TimelisteAction";
 import TimerModal from "../Modal/TimerModal";
 import TotalTimer from "./TotalTimer";
@@ -17,7 +18,8 @@ class MineTimer extends Component {
     this.saveModalDetails = this.saveModalDetails.bind(this);
     this.state = {
       localTimerArray: [],
-      requiredItem: 0
+      requiredItem: 0,
+      isAuth: false,
     };
   }
   componentDidMount() {
@@ -25,11 +27,19 @@ class MineTimer extends Component {
     this.setState({ localTimerArray: this.props.Timer });
   }
 
+  static getDerivedStateFromProps(nextProps, state) {
+    if (state.isAuth !== nextProps.isAuth) {
+      return { isAuth: true };
+    }
+    // Return null to indicate no change to state.
+    return null;
+  }
+
   ///Modal funksjoner
   replaceModalItem(index) {
     console.log("Log av replaceModalItem:" + index);
     this.setState({
-      requiredItem: index
+      requiredItem: index,
     });
   }
 
@@ -142,22 +152,23 @@ class MineTimer extends Component {
       let timeOffInLieu = 0;
       let balance = 0;
       this.state.localTimerArray.forEach(
-        time => (totalHour = totalHour + parseInt(time.ordinaryHours))
+        (time) => (totalHour = totalHour + parseInt(time.ordinaryHours))
       );
-      this.state.localTimerArray.forEach(time =>
+      this.state.localTimerArray.forEach((time) =>
         console.log("  fifty  " + time.fiftyProcentHours)
       );
       this.state.localTimerArray.forEach(
-        time => (fifty = fifty + parseFloat(time.fiftyProcentHours) + 0)
+        (time) => (fifty = fifty + parseFloat(time.fiftyProcentHours) + 0)
       );
       this.state.localTimerArray.forEach(
-        time => (banked = banked + parseFloat(time.bankedTime))
+        (time) => (banked = banked + parseFloat(time.bankedTime))
       );
       this.state.localTimerArray.forEach(
-        time => (hundred = hundred + parseFloat(time.hundredProcentHours))
+        (time) => (hundred = hundred + parseFloat(time.hundredProcentHours))
       );
       this.state.localTimerArray.forEach(
-        time => (timeOffInLieu = timeOffInLieu + parseFloat(time.timeOffInLieu))
+        (time) =>
+          (timeOffInLieu = timeOffInLieu + parseFloat(time.timeOffInLieu))
       );
 
       balance = banked - timeOffInLieu + 0;
@@ -176,7 +187,7 @@ class MineTimer extends Component {
   }
 
   render() {
-    return (
+    return this.state.isAuth ? (
       <div>
         {this.calculateTotalHour()}
 
@@ -199,6 +210,12 @@ class MineTimer extends Component {
         </table>
         {this.showmodal()}
       </div>
+    ) : (
+      <div>
+        <div>
+          <h3>Du er ikke logget inn og har ikke tilgang her </h3>
+        </div>
+      </div>
     );
   }
 }
@@ -209,16 +226,17 @@ MineTimer.propTypes = {
   handleDeleteTimer: PropTypes.func.isRequired,
   handleEditTimer: PropTypes.func.isRequired,
 
-  newRegtime: PropTypes.object
+  newRegtime: PropTypes.object,
 };
 
 function mapStateToProps(state) {
   return {
-    Timer: state.Timelistereducer.Timer
+    Timer: state.Timelistereducer.Timer,
+    isAuth: state.UserReducer.isAuth,
   };
 }
 export default connect(mapStateToProps, {
   fetchMineTimer,
   handleDeleteTimer,
-  handleEditTimer
+  handleEditTimer,
 })(MineTimer);
