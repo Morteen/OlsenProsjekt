@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import LoginModal from "./components/Modal/LoginModal";
 import LogOutModal from "./components/Modal/LogOutModal";
+import { OpenLogOutModal } from "./actions/ModalAction";
 import NewUserModal from "./components/Modal/NewUserModal";
 import logo from "../images/logo.png";
 
@@ -106,15 +107,15 @@ class NavigationBar extends Component {
                 <li className="nav-item">
                   <a
                     className="nav-link"
-                    onClick={() =>
-                      this.setState({
+                    onClick={this.props.OpenLogOutModal}
+                    /* this.setState({
                         LogOutModalShow: true,
-                      })
-                    }
+                      })*/
+
                     href="#"
                   >
                     <LogOutModal
-                      show={this.state.LogOutModalShow}
+                      // show={this.state.LogOutModalShow}
                       // onHide={LogOutModalClose}
                       openLogOutModal={this.openLogOutModal}
                     />
@@ -147,6 +148,7 @@ class NavigationBar extends Component {
 
 NavigationBar.propTypes = {
   isAuth: PropTypes.bool,
+  OpenLogOutModal: PropTypes.func,
 };
 
 function mapStateToProps(state) {
@@ -154,4 +156,4 @@ function mapStateToProps(state) {
     isAuth: state.UserReducer.isAuth,
   };
 }
-export default connect(mapStateToProps, null)(NavigationBar);
+export default connect(mapStateToProps, { OpenLogOutModal })(NavigationBar);

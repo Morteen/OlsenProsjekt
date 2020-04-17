@@ -1,4 +1,13 @@
-import { LOGOUTMODAL, LOGINMODAL } from "./types";
+import { LOGOUTMODAL, LOGINMODAL, OPENLOGOUTMODAL } from "./types";
+
+export const OpenLogOutModal = () => (dispatch) => {
+  //Åpner logoutmodalen
+  console.log("ModalAction OpenLogOutModal svarer med: true");
+  return dispatch({
+    type: OPENLOGOUTMODAL,
+    payload: true,
+  });
+};
 export const CloseLogOutModal = () => (dispatch) => {
   console.log("ModalAction svarer med: false");
   return dispatch({

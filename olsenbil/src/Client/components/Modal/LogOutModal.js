@@ -91,7 +91,7 @@ class LogOutModal extends Component {
     return (
       <div>
         <Modal
-          show={show}
+          show={this.props.LogOutModalOpen}
           onHide={this.props.CloseLogOutModal}
           size="sm"
           aria-labelledby="contained-modal-title-vcenter"

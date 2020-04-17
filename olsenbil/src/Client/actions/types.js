@@ -19,3 +19,4 @@ export const AUTH = "AUTH";
 //MODAL
 export const LOGOUTMODAL = "LOGOUTMODAL";
 export const LOGINMODAL = "LOGINMODAL";
+export const OPENLOGOUTMODAL = "OPENLOGOUTMODAL";

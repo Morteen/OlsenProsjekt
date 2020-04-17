@@ -1,7 +1,11 @@
-import { LOGOUTMODAL, LOGINMODAL } from "../Client/actions/types";
+import {
+  LOGOUTMODAL,
+  LOGINMODAL,
+  OPENLOGOUTMODAL,
+} from "../Client/actions/types";
 
 const initialState = {
-  LogOutModalOpen: true,
+  LogOutModalOpen: false,
 };
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -11,12 +15,12 @@ export default function (state = initialState, action) {
         ...state,
         LogOutModalOpen: action.payload,
       };
-    /* case LOGINMODAL:
+    case OPENLOGOUTMODAL:
       console.log("Setter isAuth til true i reducer " + action.payload);
       return {
         ...state,
-        LogInModalOpen: action.payload,
-      };*/
+        LogOutModalOpen: action.payload,
+      };
 
     default:
       return {
