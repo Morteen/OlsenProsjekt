@@ -10,7 +10,7 @@ class TotalTimer extends Component {
       hundredProcentHours: "",
       bankedTime: "",
       timeOffInLieu: "",
-      balance: ""
+      balance: "",
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -23,7 +23,7 @@ class TotalTimer extends Component {
       hundredProcentHours: nextProps.hundredProcentHours,
       bankedTime: nextProps.bankedTime,
       timeOffInLieu: nextProps.timeOffInLieu,
-      balance: nextProps.balance
+      balance: nextProps.balance,
     });
   }
 
@@ -64,7 +64,7 @@ class TotalTimer extends Component {
             </div>
             <div className="col-12">
               <hr className="light" />
-              <h7>© bilrapport.no</h7>
+              <h6>© bilrapport.no</h6>
             </div>
           </div>
         </div>

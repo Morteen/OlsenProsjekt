@@ -75,9 +75,9 @@ class LoginModal extends Component {
       isLoading: false,
     });
   }
-  modalHandler() {
+  /*modalHandler() {
     this.setState({ addModalShow: false });
-  }
+  }*/
 
   onSubmit(e) {
     e.preventDefault();
@@ -116,11 +116,11 @@ class LoginModal extends Component {
     } else {
       toast.success("Du er logget inn !");
       this.props.fetchMineTimer(accessCredentials.access_token); //Henter timer fra timeliste objectet
-      this.props.UserIsAuthenticated(); //Endrer user status til logget inn
+      this.props.UserIsAuthenticated(); //Endrer userstatus til logget inn
     }
 
     this.setState({ isLoading: false }); //Setter Login knappen til true ved response fra databasen
-    this.clearInput(); //Tømmer tekst felt i modalen
+    this.clearInput(); //Tømmer tekstfelt i modalen
     this.handleSave(test); //Lukker Login modalen
   }
 

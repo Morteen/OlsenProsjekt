@@ -4,18 +4,21 @@ export default class Figure extends Component {
   render() {
     return (
       <div>
-        <div class="container-fluid">
-          <div class="row jumbotron">
-            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
-              <p class="lead">
+        <div className="container-fluid">
+          <div className="row jumbotron">
+            <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
+              <p className="lead">
                 Denne siden er foreløpig gratis, men det er såklart noen
                 kostnader rundt den med hosting og vedlikehold. Dersom du ønsker
                 å støtte siden så vi kan holde den gratis så doner gjerne.
               </p>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
+            <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
               <a href="#">
-                <button type="button" class="btn btn-outline-secondary btn-lg">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary btn-lg"
+                >
                   Donate
                 </button>
               </a>
@@ -25,12 +28,12 @@ export default class Figure extends Component {
 
         <div className="container-fluid padding">
           <div className="row welcome text-center">
-            <div class="col-12">
+            <div className="col-12">
               <h1 className="display-4">Bilrapport.no</h1>
             </div>
             <hr />
             <div className="col-12">
-              <p class="lead">
+              <p className="lead">
                 Dette er en løsning for føring av kjøretøyskostnader. Vi
                 oppdaterer nettsidene hyppig og det kommer stadig nye moduler i
                 løsningen. Etter mange år med en enkel kode har vi sett behovet

@@ -16,3 +16,6 @@ export const DELETE_MAINTENANCE = "DELETE_MAINTENANCE";
 export const EDIT_MAINTENANCE = "EDIT_MAINTENANCE";
 //user
 export const AUTH = "AUTH";
+//MODAL
+export const LOGOUTMODAL = "LOGOUTMODAL";
+export const LOGINMODAL = "LOGINMODAL";

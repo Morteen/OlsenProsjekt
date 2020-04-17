@@ -6,3 +6,10 @@ export const UserIsAuthenticated = () => (dispatch) => {
     payload: true,
   });
 };
+export const UserIsLoggingOut = () => (dispatch) => {
+  console.log("Setter AUTH til false");
+  return dispatch({
+    type: AUTH,
+    payload: false,
+  });
+};

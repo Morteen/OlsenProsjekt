@@ -19,7 +19,7 @@ export default class VelkommenCredentials extends Component {
           <div className="row padding">
             <div className="col-md-4">
               <div className="card">
-                <img className="card-img-top" src={team1} />
+                <img alt="Haavard" className="card-img-top" src={team1} />
                 <div className="card-body">
                   <h4 className="card-title">Haavard M Olsen</h4>
                   <p className="card-text"></p>
@@ -34,7 +34,7 @@ export default class VelkommenCredentials extends Component {
             </div>
             <div className="col-md-4">
               <div className="card">
-                <img className="card-img-top" src={egil} />
+                <img alt="Egil" className="card-img-top" src={egil} />
                 <div className="card-body">
                   <h4 className="card-title">Egil Opstad</h4>
                   <p className="card-text"></p>
@@ -49,7 +49,7 @@ export default class VelkommenCredentials extends Component {
             </div>
             <div className="col-md-4">
               <div className="card">
-                <img className="card-img-top" src={team3} />
+                <img alt="Morten Olsen" className="card-img-top" src={team3} />
                 <div className="card-body">
                   <h4 className="card-title">Morten Olsen</h4>
                   <p className="card-text"></p>

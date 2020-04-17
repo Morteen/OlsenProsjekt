@@ -6,6 +6,7 @@ import Timelistereducer from "./Timelistereducer";
 import FyllingReducer from "./FyllingReducer";
 import MaintenanceReducer from "./MaintenanceReducer";
 import UserReducer from "./UserReducer";
+import ModalReducer from "./ModalReducer";
 
 export default combineReducers({
   loginReducer,
@@ -13,6 +14,7 @@ export default combineReducers({
   FyllingReducer,
   MaintenanceReducer,
   UserReducer,
+  ModalReducer,
 
   //flashMessages,
   //auth

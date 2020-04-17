@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import LoginModal from "./components/Modal/LoginModal";
+import LogOutModal from "./components/Modal/LogOutModal";
 import NewUserModal from "./components/Modal/NewUserModal";
 import logo from "../images/logo.png";
 
@@ -13,16 +14,19 @@ class NavigationBar extends Component {
     super(props);
     this.openmodal = this.openmodal.bind(this);
     this.openmodalUser = this.openmodalUser.bind(this);
+    this.openLogOutModal = this.openLogOutModal.bind(this);
     this.state = {
       addModalShow: false,
+      LogOutModalShow: false,
       addModalShowUser: false,
       isAuth: false,
+      test: false,
     };
   }
 
   static getDerivedStateFromProps(nextProps, state) {
     if (state.isAuth !== nextProps.isAuth) {
-      return { isAuth: true };
+      return { isAuth: nextProps.isAuth };
     }
     // Return null to indicate no change to state.
     return null;
@@ -35,8 +39,27 @@ class NavigationBar extends Component {
     this.setState({ addModalShowUser: test });
   }
 
+  setStateFunction(state, test) {
+    const newState = { ...state, LogOutModalShow: test };
+    //const newState = { LogOutModalShow: test };
+    console.warn("NewState i funksjonen " + JSON.stringify(newState));
+    return newState;
+  }
+
+  openLogOutModal(test) {
+    // this.setState(this.setStateFunction(this.state.LogOutModalShow, test));
+    this.setState({ LogOutModalShow: test });
+    console.warn(
+      "Warn fra  openLogOutModal Først test " +
+        test +
+        " så  State av LogOutModalShow " +
+        this.state.LogOutModalShow
+    );
+  }
+
   render() {
     let addModalClose = () => this.setState({ addModalShow: false });
+    let LogOutModalClose = () => this.setState({ LogOutModalShow: false });
     let addModalCloseUser = () => this.setState({ addModalShowUser: false });
     return (
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -81,7 +104,20 @@ class NavigationBar extends Component {
               </li>
               {this.state.isAuth ? (
                 <li className="nav-item">
-                  <a href="#" className="nav-link">
+                  <a
+                    className="nav-link"
+                    onClick={() =>
+                      this.setState({
+                        LogOutModalShow: true,
+                      })
+                    }
+                    href="#"
+                  >
+                    <LogOutModal
+                      show={this.state.LogOutModalShow}
+                      // onHide={LogOutModalClose}
+                      openLogOutModal={this.openLogOutModal}
+                    />
                     Logg ut
                   </a>
                 </li>
@@ -94,7 +130,7 @@ class NavigationBar extends Component {
                   >
                     <LoginModal
                       show={this.state.addModalShow}
-                      onHide={addModalClose}
+                      //onHide={addModalClose}
                       openmodal={this.openmodal}
                     />
                     Login
@@ -119,126 +155,3 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps, null)(NavigationBar);
-
-/**<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-<div class="container-fluid">
-	<a class="navbar-brand&quot;" href="#"><img src="img/logo.png" height="60px"></a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarResponsive">
-		<ul class="navbar-nav ml-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">Hjem</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Fylling</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Vedlikehold</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Utgifter</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Timeføring</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Administrasjon</a>
-			</li>
-		</ul>
-	</div>
-</div>
-
-</nav> */
-
-/**  <nav className="minNav navbar navbar-dark bg-primary">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <Link to="/" className="navbar-brand">
-              Bilrapport
-            </Link>
-          </div>
-          <div className="dropdown">
-            <span
-              className="navbar-brand"
-              //className="btn btn-primary dropdown-toggle"
-              //type="button"
-              //id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Våre tjenester
-            </span>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <Link to="/Timeliste" className="dropdown-item">
-                Timeliste
-              </Link>
-              <Link to="/MaintenancePage" className="dropdown-item">
-                Vedlikehold
-              </Link>
-              <Link to="/Fylling" className="dropdown-item">
-                Fylling
-              </Link>
-            </div>
-          </div>
-
-          <div className="dropdown">
-            <span
-              className="navbar-brand"
-              //className="btn btn-primary dropdown-toggle"
-              //type="button"
-              //id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Timer
-            </span>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <Link to="/MineTimer" className="dropdown-item">
-                Timeliste
-              </Link>
-            </div>
-          </div>
-
-          <div className="navbar-header"></div>
-          <div className="navbar-header">
-            <Link to="/DevelopSite" className="navbar-brand">
-              DevelopSite
-            </Link>
-          </div>
-          <div className="navbar-header"></div>
-          <div className="navbar-header">
-            <Link to="/About" className="navbar-brand">
-              Om oss
-            </Link>
-
-            <ButtonToolbar>
-              <Button
-                variant="primary"
-                onClick={() => this.setState({ addModalShow: true })}
-              >
-                Login Modal
-              </Button>
-              <LoginModal
-                show={this.state.addModalShow}
-                onHide={addModalClose}
-                openmodal={this.openmodal}
-              />
-              <Button
-                variant="primary"
-                onClick={() => this.setState({ addModalShowUser: true })}
-              >
-                Register Modal
-              </Button>
-              <NewUserModal
-                show={this.state.addModalShowUser}
-                onHide={addModalCloseUser}
-                openmodal={this.openmodalUser}
-              />
-            </ButtonToolbar>
-          </div>
-        </div>
-      </nav>*/
