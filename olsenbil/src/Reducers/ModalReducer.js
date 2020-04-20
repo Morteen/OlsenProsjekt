@@ -2,6 +2,7 @@ import {
   LOGOUTMODAL,
   LOGINMODAL,
   OPENLOGOUTMODAL,
+  CLOSELOGOUTMODAL,
 } from "../Client/actions/types";
 
 const initialState = {
@@ -9,14 +10,14 @@ const initialState = {
 };
 export default function (state = initialState, action) {
   switch (action.type) {
-    case LOGOUTMODAL:
-      console.log("ModalReducer svarer " + action.payload);
+    case CLOSELOGOUTMODAL:
+      console.log("ModalReducer CLOSELOGOUTMODAL svarer " + action.payload);
       return {
         ...state,
         LogOutModalOpen: action.payload,
       };
     case OPENLOGOUTMODAL:
-      console.log("Setter isAuth til true i reducer " + action.payload);
+      console.log("ModalReducer OPENLOGOUTMODAL " + action.payload);
       return {
         ...state,
         LogOutModalOpen: action.payload,
@@ -24,7 +25,7 @@ export default function (state = initialState, action) {
 
     default:
       return {
-        LogOutModalOpen: state.LogOutModalOpen,
+        ...state, // LogOutModalOpen: state.LogOutModalOpen,
       };
   }
 }

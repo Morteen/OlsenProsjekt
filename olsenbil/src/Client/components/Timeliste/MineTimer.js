@@ -37,7 +37,7 @@ class MineTimer extends Component {
 
   ///Modal funksjoner
   replaceModalItem(index) {
-    console.log("Log av replaceModalItem:" + index);
+    //console.log("Log av replaceModalItem:" + index);
     this.setState({
       requiredItem: index,
     });

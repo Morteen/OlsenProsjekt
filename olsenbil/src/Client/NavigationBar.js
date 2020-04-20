@@ -15,14 +15,15 @@ class NavigationBar extends Component {
     super(props);
     this.openmodal = this.openmodal.bind(this);
     this.openmodalUser = this.openmodalUser.bind(this);
-    this.openLogOutModal = this.openLogOutModal.bind(this);
+
     this.state = {
       addModalShow: false,
-      LogOutModalShow: false,
+
       addModalShowUser: false,
       isAuth: false,
       test: false,
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, state) {
@@ -32,7 +33,11 @@ class NavigationBar extends Component {
     // Return null to indicate no change to state.
     return null;
   }
-
+  handleClick() {
+    let timestamp = new Date();
+    console.log("Click happened at: " + timestamp);
+    this.props.OpenLogOutModal();
+  }
   openmodal(test) {
     this.setState({ addModalShow: test });
   }
@@ -47,20 +52,8 @@ class NavigationBar extends Component {
     return newState;
   }
 
-  openLogOutModal(test) {
-    // this.setState(this.setStateFunction(this.state.LogOutModalShow, test));
-    this.setState({ LogOutModalShow: test });
-    console.warn(
-      "Warn fra  openLogOutModal Først test " +
-        test +
-        " så  State av LogOutModalShow " +
-        this.state.LogOutModalShow
-    );
-  }
-
   render() {
     let addModalClose = () => this.setState({ addModalShow: false });
-    let LogOutModalClose = () => this.setState({ LogOutModalShow: false });
     let addModalCloseUser = () => this.setState({ addModalShowUser: false });
     return (
       <nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -103,11 +96,27 @@ class NavigationBar extends Component {
                   Timeføring
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <a
+                  className="nav-link"
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  href="#"
+                >
+                  <LogOutModal />
+                  Logg ut 1
+                </a>
+              </li>
+
               {this.state.isAuth ? (
                 <li className="nav-item">
                   <a
                     className="nav-link"
-                    onClick={this.props.OpenLogOutModal}
+                    onClick={() => {
+                      this.handleClick();
+                    }}
                     /* this.setState({
                         LogOutModalShow: true,
                       })*/
@@ -115,11 +124,11 @@ class NavigationBar extends Component {
                     href="#"
                   >
                     <LogOutModal
-                      // show={this.state.LogOutModalShow}
-                      // onHide={LogOutModalClose}
-                      openLogOutModal={this.openLogOutModal}
+                    // show={this.state.LogOutModalShow}
+                    // onHide={LogOutModalClose}
+                    //openLogOutModal={this.openLogOutModal}
                     />
-                    Logg ut
+                    Logg ut 2
                   </a>
                 </li>
               ) : (

@@ -1,4 +1,9 @@
-import { LOGOUTMODAL, LOGINMODAL, OPENLOGOUTMODAL } from "./types";
+import {
+  LOGOUTMODAL,
+  LOGINMODAL,
+  OPENLOGOUTMODAL,
+  CLOSELOGOUTMODAL,
+} from "./types";
 
 export const OpenLogOutModal = () => (dispatch) => {
   //Åpner logoutmodalen
@@ -8,17 +13,19 @@ export const OpenLogOutModal = () => (dispatch) => {
     payload: true,
   });
 };
-export const CloseLogOutModal = () => (dispatch) => {
-  console.log("ModalAction svarer med: false");
-  return dispatch({
-    type: LOGOUTMODAL,
-    payload: false,
-  });
-};
+
 export const CloseLogInModal = () => (dispatch) => {
   console.log("Setter false status til false logIn Modal");
   return dispatch({
     type: LOGINMODAL,
+    payload: false,
+  });
+};
+
+export const CloseLogOutModal = () => (dispatch) => {
+  console.log("ModalAction CloseLogOutModal svarer med: false");
+  return dispatch({
+    type: CLOSELOGOUTMODAL,
     payload: false,
   });
 };

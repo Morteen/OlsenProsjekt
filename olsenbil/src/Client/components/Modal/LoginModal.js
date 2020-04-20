@@ -45,7 +45,7 @@ class LoginModal extends Component {
     });
     if (nextProps.accessCredentials !== this.state.accessCredentials) {
       this.onResponse(this.state.addModalShow, nextProps.accessCredentials);
-      console.warn("Will update: " + nextProps.accessCredentials);
+      //console.warn("Will update: " + nextProps.accessCredentials);
     }
   }
 
@@ -58,10 +58,10 @@ class LoginModal extends Component {
 
     if (!isValid) {
       this.setState({ errors, isValid });
-      console.log(
+      /* console.log(
         "Log fra etter setState:",
         errors.username + " isValid" + isValid
-      );
+      );*/
     }
     return isValid;
   }
@@ -75,9 +75,6 @@ class LoginModal extends Component {
       isLoading: false,
     });
   }
-  /*modalHandler() {
-    this.setState({ addModalShow: false });
-  }*/
 
   onSubmit(e) {
     e.preventDefault();
