@@ -97,39 +97,13 @@ class NavigationBar extends Component {
                 </Link>
               </li>
 
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  onClick={() => {
-                    this.handleClick();
-                  }}
-                  href="#"
-                >
-                  <LogOutModal />
-                  Logg ut 1
-                </a>
-              </li>
-
               {this.state.isAuth ? (
                 <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    onClick={() => {
-                      this.handleClick();
-                    }}
-                    /* this.setState({
-                        LogOutModalShow: true,
-                      })*/
-
-                    href="#"
-                  >
-                    <LogOutModal
-                    // show={this.state.LogOutModalShow}
-                    // onHide={LogOutModalClose}
-                    //openLogOutModal={this.openLogOutModal}
-                    />
-                    Logg ut 2
+                  <a className="nav-link" onClick={this.handleClick} href="#">
+                    {" "}
+                    Logg ut
                   </a>
+                  <LogOutModal />
                 </li>
               ) : (
                 <li className="nav-item">

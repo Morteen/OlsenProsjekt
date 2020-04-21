@@ -14,12 +14,11 @@ class LogOutModal extends Component {
       isAuth: "",
       LogOutModalOpen: "",
     };
+    this.closeModAndLogOut = this.closeModAndLogOut.bind(this);
   }
 
   static getDerivedStateFromProps(nextProps, state) {
     if (state.isAuth !== nextProps.isAuth) {
-      CloseLogOutModal();
-
       return { isAuth: nextProps.isAuth };
     } else if (state.LogOutModalOpen !== nextProps.LogOutModalOpen) {
       console.log(
@@ -30,6 +29,10 @@ class LogOutModal extends Component {
     }
     // Return null to indicate no change to state.
     return null;
+  }
+  closeModAndLogOut() {
+    this.props.CloseLogOutModal();
+    this.props.UserIsLoggingOut();
   }
 
   render() {
@@ -53,10 +56,7 @@ class LogOutModal extends Component {
           <Modal.Body id="LogOutModal">
             <p>Sikker på at du vil logge ut</p>
 
-            <Button
-              variant="warning"
-              onClick={() => this.props.UserIsLoggingOut()}
-            >
+            <Button variant="warning" onClick={this.closeModAndLogOut}>
               Ja jeg vil logge ut
             </Button>
             <br></br>
