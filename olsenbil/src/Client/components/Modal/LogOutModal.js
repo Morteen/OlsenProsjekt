@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import "react-toastify/dist/ReactToastify.css";
 import { UserIsLoggingOut } from "../../actions/UserActions";
@@ -7,8 +7,12 @@ import { CloseLogOutModal } from "../../actions/ModalAction";
 import { Modal, Button } from "react-bootstrap";
 
 class LogOutModal extends Component {
-  constructor(props) {
-    super(props);
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
+  };
+
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       isAuth: "",
@@ -33,6 +37,8 @@ class LogOutModal extends Component {
   closeModAndLogOut() {
     this.props.CloseLogOutModal();
     this.props.UserIsLoggingOut();
+
+    this.context.router.replace("/");
   }
 
   render() {

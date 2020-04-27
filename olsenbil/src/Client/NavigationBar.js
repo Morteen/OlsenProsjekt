@@ -28,7 +28,6 @@ class NavigationBar extends Component {
 
   static getDerivedStateFromProps(nextProps, state) {
     if (state.isAuth !== nextProps.isAuth) {
-      alert(" Her endrer isAuth seg:  " + nextProps.isAuth);
       return { isAuth: nextProps.isAuth };
     }
 
@@ -72,42 +71,43 @@ class NavigationBar extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="#">
-                  Hjem
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Fylling
-                </a>
-              </li>
-              <li className="nav-item">
-                <Link to="/MaintenancePage" href="#" className="nav-link">
-                  Vedlikehold
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Utgifter
-                </a>
-              </li>
-              <li className="nav-item">
-                <Link to="/MineTimer" href="#" className="nav-link">
-                  Timeføring
-                </Link>
-              </li>
+            {this.state.isAuth ? (
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item active">
+                  <a className="nav-link" href="#">
+                    Hjem
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
+                    Fylling
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <Link to="/MaintenancePage" href="#" className="nav-link">
+                    Vedlikehold
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">
+                    Utgifter
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <Link to="/MineTimer" href="#" className="nav-link">
+                    Timeføring
+                  </Link>
+                </li>
 
-              {this.state.isAuth ? (
                 <li className="nav-item">
                   <a className="nav-link" onClick={this.handleClick} href="#">
-                    {" "}
                     Logg ut
                   </a>
                   <LogOutModal />
                 </li>
-              ) : (
+              </ul>
+            ) : (
+              <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <a
                     className="nav-link"
@@ -121,8 +121,8 @@ class NavigationBar extends Component {
                     Login
                   </a>
                 </li>
-              )}
-            </ul>
+              </ul>
+            )}
           </div>
         </div>
       </nav>
