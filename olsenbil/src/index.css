@@ -101,16 +101,6 @@ code {
 .myForm {
   margin-left: 1%;
 }
-.customModal {
-  background-image: url("./images/porsche.jpg");
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-#modalHeader {
-  background-image: url("./images/sky.PNG");
-  background-repeat: no-repeat;
-  background-size: auto;
-}
 
 #loginList {
   list-style: none;
@@ -212,4 +202,22 @@ figure {
 }
 #TotalcostHeading {
   text-align: center;
+}
+.LogOutModal {
+  background-color: #3f3f3f;
+  color: #d5d5d5;
+}
+.LoginModal {
+  background-color: #3f3f3f;
+  color: #d5d5d5;
+}
+.customModal {
+  background-image: url("./images/porsche.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+#modalHeader {
+  background-image: url("./images/sky.PNG");
+  background-repeat: no-repeat;
+  background-size: auto;
 }

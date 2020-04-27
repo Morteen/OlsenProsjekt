@@ -58,10 +58,6 @@ class LoginModal extends Component {
 
     if (!isValid) {
       this.setState({ errors, isValid });
-      /* console.log(
-        "Log fra etter setState:",
-        errors.username + " isValid" + isValid
-      );*/
     }
     return isValid;
   }
@@ -135,10 +131,14 @@ class LoginModal extends Component {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header id="modalHeader" closeButton onClick={this.toggleModal}>
+          <Modal.Header
+            closeButton
+            onClick={this.toggleModal}
+            className="LoginModal"
+          >
             <Modal.Title id="contained-modal-title-vcenter">Login</Modal.Title>
           </Modal.Header>
-          <Modal.Body className="customModal">
+          <Modal.Body className="LoginModal">
             <form onSubmit={this.onSubmit}>
               {formError && (
                 <div className="alert alert-danger">{formError}</div>

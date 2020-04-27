@@ -44,16 +44,12 @@ class LogOutModal extends Component {
           aria-labelledby="contained-modal-title-vcenter"
           centered
         >
-          <Modal.Header
-            id="LogOutModal"
-            // closeButton
-            //onClick={() => this.props.CloseLogOutModal}
-          >
+          <Modal.Header className="LogOutModal">
             <Modal.Title id="contained-modal-title-vcenter">
               Logg ut
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body id="LogOutModal">
+          <Modal.Body className="LogOutModal">
             <p>Sikker på at du vil logge ut</p>
 
             <Button variant="warning" onClick={this.closeModAndLogOut}>
