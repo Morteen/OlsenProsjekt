@@ -21,9 +21,9 @@ class LogOutModal extends Component {
     if (state.isAuth !== nextProps.isAuth) {
       return { isAuth: nextProps.isAuth };
     } else if (state.LogOutModalOpen !== nextProps.LogOutModalOpen) {
-      console.log(
+      /* console.log(
         "NextProps.logOutModalopen resultat :" + nextProps.LogOutModalOpen
-      );
+      );*/
 
       return { LogOutModalOpen: nextProps.LogOutModalOpen };
     }
@@ -52,13 +52,18 @@ class LogOutModal extends Component {
           <Modal.Body className="LogOutModal">
             <p>Sikker på at du vil logge ut</p>
 
-            <Button variant="warning" onClick={this.closeModAndLogOut}>
-              Ja jeg vil logge ut
+            <Button
+              variant="warning"
+              size="lg"
+              onClick={this.closeModAndLogOut}
+            >
+              Ja jeg vil logge ut!!&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
             </Button>
             <br></br>
             <hr></hr>
             <Button
               variant="primary"
+              size="lg"
               onClick={() => {
                 this.props.CloseLogOutModal();
               }}

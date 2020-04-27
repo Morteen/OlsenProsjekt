@@ -20,7 +20,7 @@ class NavigationBar extends Component {
       addModalShow: false,
 
       addModalShowUser: false,
-      isAuth: false,
+      isAuth: "",
       test: false,
     };
     this.handleClick = this.handleClick.bind(this);
@@ -28,14 +28,16 @@ class NavigationBar extends Component {
 
   static getDerivedStateFromProps(nextProps, state) {
     if (state.isAuth !== nextProps.isAuth) {
+      alert(" Her endrer isAuth seg:  " + nextProps.isAuth);
       return { isAuth: nextProps.isAuth };
     }
+
     // Return null to indicate no change to state.
     return null;
   }
   handleClick() {
-    let timestamp = new Date();
-    console.log("Click happened at: " + timestamp);
+    //let timestamp = new Date();
+    //console.log("Click happened at: " + timestamp);
     this.props.OpenLogOutModal();
   }
   openmodal(test) {
@@ -114,7 +116,6 @@ class NavigationBar extends Component {
                   >
                     <LoginModal
                       show={this.state.addModalShow}
-                      //onHide={addModalClose}
                       openmodal={this.openmodal}
                     />
                     Login

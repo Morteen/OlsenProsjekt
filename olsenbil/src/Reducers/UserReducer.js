@@ -6,7 +6,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case AUTH:
-      console.log("Setter isAuth til true i reducer " + action.payload);
+      console.log("Endrer isAuth i reducer til:  " + action.payload);
       return {
         ...state,
         isAuth: action.payload,

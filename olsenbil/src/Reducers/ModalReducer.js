@@ -11,13 +11,13 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case CLOSELOGOUTMODAL:
-      console.log("ModalReducer CLOSELOGOUTMODAL svarer " + action.payload);
+      // console.log("ModalReducer CLOSELOGOUTMODAL svarer " + action.payload);
       return {
         ...state,
         LogOutModalOpen: action.payload,
       };
     case OPENLOGOUTMODAL:
-      console.log("ModalReducer OPENLOGOUTMODAL " + action.payload);
+      // console.log("ModalReducer OPENLOGOUTMODAL " + action.payload);
       return {
         ...state,
         LogOutModalOpen: action.payload,
