@@ -89,6 +89,7 @@ class LoginModal extends Component {
     this.setState({ hidden: !this.state.hidden });
   }
   toggleModal() {
+    console.log(this.state.test);
     this.handleSave(this.state.test);
   }
 

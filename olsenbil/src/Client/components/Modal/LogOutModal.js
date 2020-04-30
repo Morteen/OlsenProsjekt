@@ -8,7 +8,7 @@ import { Modal, Button } from "react-bootstrap";
 
 class LogOutModal extends Component {
   static contextTypes = {
-    router: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired, //Lager dennefor å bruke redirect til åpnings siden
   };
 
   constructor(props, context) {
@@ -25,10 +25,6 @@ class LogOutModal extends Component {
     if (state.isAuth !== nextProps.isAuth) {
       return { isAuth: nextProps.isAuth };
     } else if (state.LogOutModalOpen !== nextProps.LogOutModalOpen) {
-      /* console.log(
-        "NextProps.logOutModalopen resultat :" + nextProps.LogOutModalOpen
-      );*/
-
       return { LogOutModalOpen: nextProps.LogOutModalOpen };
     }
     // Return null to indicate no change to state.
@@ -37,7 +33,6 @@ class LogOutModal extends Component {
   closeModAndLogOut() {
     this.props.CloseLogOutModal();
     this.props.UserIsLoggingOut();
-
     this.context.router.replace("/");
   }
 
