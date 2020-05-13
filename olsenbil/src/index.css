@@ -195,6 +195,7 @@ figure {
   background-color: #6648b1;
   border: 1px solid #563d7c;
 }
+/*Timer*/
 #totalcost {
   background-color: #3f3f3f;
   color: #d5d5d5;
@@ -203,6 +204,20 @@ figure {
 #TotalcostHeading {
   text-align: center;
 }
+
+#searchHeading {
+  margin-left: 25%;
+  padding: 2%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    "Poppins", sans-serif;
+}
+#searchBtn {
+  margin-left: 37%;
+  margin-bottom: 30%;
+}
+
+/*Modal*/
 .LogOutModal {
   background-color: #3f3f3f;
   color: #d5d5d5;

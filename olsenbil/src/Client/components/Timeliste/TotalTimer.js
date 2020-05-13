@@ -33,24 +33,19 @@ class TotalTimer extends Component {
         <h3 id="TotalcostHeading">Mine registerte timer</h3>
         <div className="container-fluid padding">
           <div className="row text-center">
-            <div className="col-md-4">
+            <div className="col-md-2">
               <hr className="light" />
-              <h6>Totaltantall timer</h6>
+              <h6>Totaltantall timer &nbsp; &nbsp; {this.state.totalHour}</h6>
               <hr className="light" />
-              <h6>50% overtid </h6>
+              <h6>50% overtid &nbsp; &nbsp; {this.state.fiftyProcentHours}</h6>
               <hr className="light" />
-              <h6>100% overtid </h6>
+              <h6>
+                100% overtid &nbsp; &nbsp; {this.state.hundredProcentHours}{" "}
+              </h6>
               <p></p>
             </div>
-            <div className="col-md-4">
-              <hr className="light" />
-              <p>{this.state.totalHour}</p>
-              <hr className="light" />
-              <p>{this.state.fiftyProcentHours} timer 50%</p>
-              <hr className="light" />
-              <p>{this.state.hundredProcentHours} timer 100%</p>
-            </div>
-            <div className="col-md-4">
+
+            <div className="col-md-2">
               <hr className="light" />
               <h6>Avspasering</h6>
               <hr className="light" />
@@ -64,7 +59,6 @@ class TotalTimer extends Component {
             </div>
             <div className="col-12">
               <hr className="light" />
-              <h6>© bilrapport.no</h6>
             </div>
           </div>
         </div>

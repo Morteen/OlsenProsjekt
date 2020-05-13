@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { History } from "react-router";
+import SearchHour from "./SearchHour";
 
 import {
   fetchMineTimer,
@@ -190,6 +191,7 @@ class MineTimer extends Component {
     return this.state.isAuth ? (
       <div>
         {this.calculateTotalHour()}
+        {<SearchHour />}
 
         <table className="table">
           <thead>
