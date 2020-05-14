@@ -109,7 +109,7 @@ class LoginModal extends Component {
       alert("Noe er galt");
     } else {
       toast.error("Du er logget inn !");
-      this.props.fetchMineTimer(accessCredentials.access_token); //Henter timer fra timeliste objectet
+      this.props.fetchMineTimer(accessCredentials.access_token); //Kaller på denne her for å fylle ut totaltimer
       this.props.UserIsAuthenticated(); //Endrer userstatus til logget inn
     }
 

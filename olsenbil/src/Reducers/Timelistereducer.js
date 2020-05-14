@@ -3,26 +3,12 @@ import {
   REG_NYE_TIMER,
   DELETE_TIMER,
   EDIT_TIMER,
+  SEARCH_HOURS,
 } from "../../src/Client/actions/types";
 
 const initialState = {
-  Timer: [
-    {
-      mobile: 40042106,
-      date: "2020-02-02T00:00:00",
-      fromTime: "23:30:00",
-      toTime: "08:30:00",
-      description: "Valestrand marina. Storfjord",
-      ordinaryHours: "0",
-      fiftyProcentHours: "0",
-      hundredProcentHours: "8",
-      tripDays: 0,
-      bankedTime: "",
-      timeOffInLieu: "",
-      registeredTime: "2020-02-04T00:35:59.17",
-    },
-  ],
-  nyTime: {},
+  Timer: [],
+  MySearchedHours: [],
 };
 
 export default function (state = initialState, action) {
@@ -64,6 +50,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         Timer: tempArray,
+      };
+    case SEARCH_HOURS:
+      console.log(
+        " MySearchedHours i reduser etter kall " +
+          JSON.stringify(action.payload)
+      );
+      return {
+        ...state,
+        MySearchedHours: action.payload,
       };
 
     default:

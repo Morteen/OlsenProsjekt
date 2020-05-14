@@ -4,6 +4,7 @@ export const FETCH_MINE_TIMER = "FETCH_MINE_TIMER";
 export const REG_NYE_TIMER = "REG_NYE_TIMER";
 export const DELETE_TIMER = "DELETE_TIMER";
 export const EDIT_TIMER = "EDIT_TIMER";
+export const SEARCH_HOURS = "SEARCH_HOURS";
 //Fylling types
 export const REG_REFULING = "REG_REFULING";
 export const REG_OILFILLING = "REG_OILFILLING";

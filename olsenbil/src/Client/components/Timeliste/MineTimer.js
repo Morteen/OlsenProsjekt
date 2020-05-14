@@ -19,18 +19,24 @@ class MineTimer extends Component {
     this.saveModalDetails = this.saveModalDetails.bind(this);
     this.state = {
       localTimerArray: [],
+      LocalSearchHourArray: [],
       requiredItem: 0,
       isAuth: false,
     };
   }
   componentDidMount() {
-    //this.props.fetchMineTimer();
     this.setState({ localTimerArray: this.props.Timer });
   }
 
   static getDerivedStateFromProps(nextProps, state) {
     if (state.isAuth !== nextProps.isAuth) {
       return { isAuth: true };
+    }
+    if (state.LocalSearchHourArray !== nextProps.MySearchedHours) {
+      return { LocalSearchHourArray: nextProps.MySearchedHours };
+    }
+    if (state.localTimerArray !== nextProps.Timer) {
+      return { localTimerArray: nextProps.Timer };
     }
     // Return null to indicate no change to state.
     return null;
@@ -46,15 +52,15 @@ class MineTimer extends Component {
 
   saveModalDetails(item) {
     const requiredItem = this.state.requiredItem;
-    let tempTimerArray = this.state.localTimerArray;
+    let tempTimerArray = this.state.LocalSearchHourArray;
     this.props.handleEditTimer(item); //Ved positv respons herfra kan resten utføres
     tempTimerArray[requiredItem] = item;
-    this.setState({ localTimerArray: tempTimerArray });
+    this.setState({ LocalSearchHourArray: tempTimerArray });
   }
   deleteItem(index) {
-    let tempTimerArray = this.state.localTimerArray;
+    let tempTimerArray = this.state.LocalSearchHourArray;
     tempTimerArray.splice(index, 1);
-    this.setState({ localTimerArray: tempTimerArray });
+    this.setState({ LocalSearchHourArray: tempTimerArray });
   }
 
   handleDeleteRow(id) {
@@ -62,23 +68,23 @@ class MineTimer extends Component {
     this.props.handleDeleteTimer(id);
     //Henter den ny Timer arrayen fra reducer
     //this.props.fetchMineTimer(); //Må aktivers når man gjør kall utkommentert nå for å etste om sletting virker
-    this.setState({ localTimerArray: this.props.Timer });
+    this.setState({ LocalSearchHourArray: this.props.MySearchedHours });
   }
   showContent() {
-    console.warn(
-      "ShowContent funksjonen " +
-        JSON.stringify(this.state.localTimerArray.length)
-    );
-    if (this.state.localTimerArray.length < 1) {
+    if (this.state.LocalSearchHourArray === undefined) {
+      return <p>Test</p>;
+    } else if (this.state.LocalSearchHourArray.length < 1) {
       return (
         <tr>
-          <td id="rowVarning">Du har ikke noen registerte timer enda</td>
+          <td id="rowVarning">
+            Du har ikke noen registerte timer i dette tidrommet
+          </td>
         </tr>
       );
     } else {
-      return this.state.localTimerArray.map((timer, index) => (
+      return this.state.LocalSearchHourArray.map((timer, index) => (
         <tr key={index}>
-          <th scope="row">{timer.date}</th>
+          <th scope="row">{timer.date.slice(0, -9)}</th>
           <td>{timer.fromTime}</td>
           <td>{timer.toTime}</td>
           <td>{timer.description}</td>
@@ -86,8 +92,6 @@ class MineTimer extends Component {
           <td>{timer.fiftyProcentHours}</td>
           <td>{timer.hundredProcentHours}</td>
           <td>{timer.tripDays}</td>
-          <td>{timer.bankedTime}</td>
-          <td>{timer.timeOffInLieu}</td>
           <td>
             <i
               className="fas fa-trash"
@@ -109,8 +113,11 @@ class MineTimer extends Component {
   showmodal() {
     const requiredItem = this.state.requiredItem;
     console.log("requiredItem " + requiredItem);
-    if (this.state.localTimerArray.length >= 1) {
-      let modalData = this.state.localTimerArray[requiredItem];
+    if (
+      this.state.LocalSearchHourArray !== undefined &&
+      this.state.LocalSearchHourArray.length >= 1
+    ) {
+      let modalData = this.state.LocalSearchHourArray[requiredItem];
 
       console.log("Log av ModalData.timeArrival:" + JSON.stringify(modalData));
       console.log("Log av requiredItem:" + requiredItem);
@@ -187,12 +194,12 @@ class MineTimer extends Component {
     }
   }
 
-  render() {
-    return this.state.isAuth ? (
-      <div>
-        {this.calculateTotalHour()}
-        {<SearchHour />}
-
+  showSearchContent() {
+    if (
+      this.state.LocalSearchHourArray !== undefined &&
+      this.state.LocalSearchHourArray.length >= 1
+    ) {
+      return (
         <table className="table">
           <thead>
             <tr>
@@ -204,13 +211,23 @@ class MineTimer extends Component {
               <th scope="col">50% overtid</th>
               <th>hundredProcentHours</th>
               <th>tripDays</th>
-              <th>banked</th>
-              <th>timeOff</th>
             </tr>
           </thead>
           <tbody>{this.showContent()}</tbody>
         </table>
-        {this.showmodal()}
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+
+  render() {
+    return this.state.isAuth ? (
+      <div>
+        {this.calculateTotalHour()}
+        {<SearchHour />}
+        {this.showSearchContent()}
+        {this.showmodal()} }}
       </div>
     ) : (
       <div>
@@ -224,6 +241,7 @@ class MineTimer extends Component {
 
 MineTimer.propTypes = {
   Timer: PropTypes.array,
+  MySearchedHours: PropTypes.array,
   fetchMineTimer: PropTypes.func.isRequired,
   handleDeleteTimer: PropTypes.func.isRequired,
   handleEditTimer: PropTypes.func.isRequired,
@@ -235,6 +253,7 @@ function mapStateToProps(state) {
   return {
     Timer: state.Timelistereducer.Timer,
     isAuth: state.UserReducer.isAuth,
+    MySearchedHours: state.Timelistereducer.MySearchedHours,
   };
 }
 export default connect(mapStateToProps, {
