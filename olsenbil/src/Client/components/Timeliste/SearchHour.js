@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import TextFieldGroup from "../commen/TextFieldGroup";
 import isValidalidInputSearchHour from "../../../server/shared/validations/SearchHourValidations";
-import { searchMyHour } from "../../actions/TimelisteAction";
+import { searchMyHour, clearMySearch } from "../../actions/TimelisteAction";
 
 class SearchHour extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class SearchHour extends Component {
       ToDate: "",
       errors: {},
       accessCredentials: { error: "" },
+      searcBtnState: false,
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -58,6 +59,9 @@ class SearchHour extends Component {
 
       this.props.searchMyHour(searchData);
       this.clearInput();
+      if (this.state.searcBtnState === false) {
+        this.setState({ searcBtnState: true });
+      }
     }
   }
   clearInput() {
@@ -66,6 +70,27 @@ class SearchHour extends Component {
       ToDate: "",
       errors: {},
     });
+  }
+
+  ClearSerach() {
+    if (this.state.searcBtnState === true) {
+      this.setState({ searcBtnState: false });
+    }
+    this.props.clearMySearch();
+  }
+  showClearBtn() {
+    return this.state.searcBtnState ? (
+      <div className="col">
+        <button
+          className="btn btn-secondary"
+          onClick={() => this.ClearSerach()}
+        >
+          Clear
+        </button>
+      </div>
+    ) : (
+      <div></div>
+    );
   }
 
   render() {
@@ -116,6 +141,8 @@ class SearchHour extends Component {
                   Search
                 </button>
               </div>
+              {this.showClearBtn()}
+
               <div className="col"></div>
             </div>
           </div>
@@ -128,8 +155,7 @@ class SearchHour extends Component {
 SearchHour.propTypes = {
   // Timer: PropTypes.array,
   searchMyHour: PropTypes.func.isRequired,
-  // handleDeleteTimer: PropTypes.func.isRequired,
-  // handleEditTimer: PropTypes.func.isRequired,
+  clearMySearch: PropTypes.func.isRequired,
 
   newRegtime: PropTypes.object,
 };
@@ -139,4 +165,5 @@ const mapStateToprops = (state) => ({
 });
 export default connect(mapStateToprops, {
   searchMyHour,
+  clearMySearch,
 })(SearchHour);

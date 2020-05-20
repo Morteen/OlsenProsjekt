@@ -4,6 +4,7 @@ import {
   DELETE_TIMER,
   EDIT_TIMER,
   SEARCH_HOURS,
+  CLEAR,
 } from "./types";
 
 export const fetchMineTimer = (userCred) => (dispatch) => {
@@ -97,4 +98,11 @@ export const searchMyHour = (searchData) => (dispatch) => {
         payload: res,
       })
     );
+};
+
+export const clearMySearch = () => (dispatch) => {
+  return dispatch({
+    type: CLEAR,
+    payload: [], //Payload fra http req
+  });
 };

@@ -4,6 +4,7 @@ import {
   DELETE_TIMER,
   EDIT_TIMER,
   SEARCH_HOURS,
+  CLEAR,
 } from "../../src/Client/actions/types";
 
 const initialState = {
@@ -28,7 +29,7 @@ export default function (state = initialState, action) {
       };
     case DELETE_TIMER:
       console.log("Deletetimer id i reducer " + action.payload);
-      let testArray = state.Timer;
+      let testArray = state.MySearchedHours;
       console.log("Log av testArray i reducer" + testArray);
       testArray.splice(action.payload, 1); //slice(0, action.payload);
       console.log(
@@ -37,7 +38,7 @@ export default function (state = initialState, action) {
 
       return {
         ...state,
-        Timer: testArray,
+        MySearchedHours: testArray,
       };
 
     case EDIT_TIMER:
@@ -45,17 +46,23 @@ export default function (state = initialState, action) {
         "Log av payload i EDIT_MAINTENANCE reducer" +
           JSON.stringify(action.payload)
       );
-      let tempArray = state.Timer;
+      let tempArray = state.MySearchedHours;
       tempArray[action.payload.id] = action.payload;
       return {
         ...state,
-        Timer: tempArray,
+        MySearchedHours: tempArray,
       };
     case SEARCH_HOURS:
       console.log(
         " MySearchedHours i reduser etter kall " +
           JSON.stringify(action.payload)
       );
+      return {
+        ...state,
+        MySearchedHours: action.payload,
+      };
+    case CLEAR:
+      //Setter søke tabellen  til en tom array når man bruker funksjonen
       return {
         ...state,
         MySearchedHours: action.payload,

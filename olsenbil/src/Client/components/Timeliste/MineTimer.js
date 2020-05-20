@@ -11,6 +11,7 @@ import {
 } from "../../actions/TimelisteAction";
 import TimerModal from "../Modal/TimerModal";
 import TotalTimer from "./TotalTimer";
+import last1 from "../../../images/last1.jpg";
 
 class MineTimer extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class MineTimer extends Component {
     this.setState({ LocalSearchHourArray: tempTimerArray });
   }
   deleteItem(index) {
+    alert();
     let tempTimerArray = this.state.LocalSearchHourArray;
     tempTimerArray.splice(index, 1);
     this.setState({ LocalSearchHourArray: tempTimerArray });
@@ -65,6 +67,7 @@ class MineTimer extends Component {
 
   handleDeleteRow(id) {
     console.log("HandelDeleterow  id: " + id);
+    alert(" handleDeleteRow");
     this.props.handleDeleteTimer(id);
     //Henter den ny Timer arrayen fra reducer
     //this.props.fetchMineTimer(); //Må aktivers når man gjør kall utkommentert nå for å etste om sletting virker
@@ -217,7 +220,11 @@ class MineTimer extends Component {
         </table>
       );
     } else {
-      return <div></div>;
+      return (
+        <div>
+          <img src={last1} height="100%" width="100%" />
+        </div>
+      );
     }
   }
 
@@ -227,7 +234,7 @@ class MineTimer extends Component {
         {this.calculateTotalHour()}
         {<SearchHour />}
         {this.showSearchContent()}
-        {this.showmodal()} }}
+        {this.showmodal()}
       </div>
     ) : (
       <div>
